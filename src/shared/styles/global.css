@@ -1,0 +1,46 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  font-family: Roboto;
+  --colors-yellow: #ffdc23;
+  --colors-twitter: #1da1f2;
+  --colors-heart: #ff508f;
+  --colors-violet: #745aff;
+  --colors-mint: #00c2b7;
+  --colors-orange: #ff9533;
+  --colors-white: #ffffff;
+  --colors-gray6: #f5f5f7;
+  --colors-gray5: #e0e0e0;
+  --colors-gray4: #a1a1a6;
+  --colors-gray3: #828282;
+  --colors-gray1: #1d1d1f;
+  --colors-black: #000000;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.pt-50-percent {
+  padding-top: 50%;
+}
+
+.max-line-3 {
+  display: -webkit-box;
+  word-wrap: break-word;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+section.emoji-mart {
+  width: 100% !important;
+}
+
+div.emoji-mart-scroll {
+  height: 400px;
+}

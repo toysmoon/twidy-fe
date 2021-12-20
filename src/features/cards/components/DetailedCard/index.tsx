@@ -1,0 +1,72 @@
+import Thumbnail from 'features/cards/components/Thumbnail';
+import useUpdateCardMutation from 'features/cards/queries/useUpdateCardMutation';
+import type Card from 'features/cards/types/Card';
+import React, { useState } from 'react';
+import Modal from 'shared/components/Modal';
+import MoreMenu from '../MoreMenu';
+import ChangeTitle from './ChangeTittle';
+import Header from './Header';
+import ViewTweet from './ViewTweet';
+
+export interface IDetailedCard {
+  card?: Card;
+  onClose: () => void;
+  isViewMode?: boolean;
+}
+
+export default function DetailedCard({
+  card,
+  onClose,
+  isViewMode,
+}: IDetailedCard) {
+  const [step, setStep] = useState(1);
+  const { mutateAsync: updateCard } = useUpdateCardMutation(card?.collectionId);
+
+  if (!card) {
+    return null;
+  }
+
+  if (step === 2) {
+    const handleDelete = () => {};
+    return (
+      <MoreMenu
+        onClose={() => setStep(1)}
+        onClick={setStep}
+        onDelete={handleDelete}
+      />
+    );
+  }
+
+  if (step === 3) {
+    const handleClose = () => setStep(2);
+    const handleSubmit = async (title: string) => {
+      await updateCard({ ...card, title });
+      onClose();
+    };
+
+    return (
+      <ChangeTitle card={card} onSave={handleSubmit} onClose={handleClose} />
+    );
+  }
+
+  const { media, author, text, url } = card;
+  const isHaveMedia = media && media.length > 0;
+  const mediaType = media[0]?.type;
+
+  return (
+    <Modal isOpen={true} onClose={onClose}>
+      <Header card={card} onClick={() => setStep(2)} isViewMode={isViewMode} />
+      <div className={'p-5 pt-0'}>
+        {isHaveMedia && (
+          <Thumbnail author={author} type={mediaType} media={media} />
+        )}
+        <p className={'pt-5 font-roboto text-lg leading-7 text-black'}>
+          {text}
+        </p>
+        <div className={'flex justify-end'}>
+          <ViewTweet link={url} />
+        </div>
+      </div>
+    </Modal>
+  );
+}

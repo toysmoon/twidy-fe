@@ -1,0 +1,76 @@
+import styled from '@emotion/styled';
+import type Card from 'features/cards/types/Card';
+import { Collection } from 'features/collections/types';
+import React, { FC, useState } from 'react';
+import Input from 'shared/components/Form/Input';
+import ArrowBack from 'shared/components/Icons/ArrowBack';
+import ModalButton from 'shared/components/Modal/ModalButton';
+import Modal from '.';
+import { ISubmitProps } from './HomeModals';
+
+export interface ISaveTweetProps {
+  isOpen: boolean;
+  card?: Card | null;
+  collection?: Collection;
+  onSave: ({ collection, card, title }: ISubmitProps) => void;
+  onClose: () => void;
+}
+
+const SaveTweet: FC<ISaveTweetProps> = ({
+  isOpen,
+  card,
+  collection,
+  onSave,
+  onClose,
+}) => {
+  if (!card || !collection) {
+    return null;
+  }
+
+  const { emoji, color } = collection;
+  const [title, setTitle] = useState('');
+  const handleSave = () => onSave({ collection, card, title });
+
+  return (
+    <Modal isOpen={isOpen} useMinHeight onClose={onClose}>
+      <div>
+        <div className="w-full h-18 bg-white rounded-t-2xl flex justify-center items-center relative">
+          <div onClick={onClose} className="absolute left-6 top-6">
+            <ArrowBack />
+          </div>
+          <div className="flex items-center">
+            <Icon bgColor={color}>{emoji}</Icon>
+            <h2 className="font-bold text-lg leading-5 text-black">
+              {collection.name}
+            </h2>
+          </div>
+        </div>
+        <div className="px-5 flex flex-col gap-5">
+          <Input
+            value={title}
+            onChange={setTitle}
+            placeholder="Add title to this tweet"
+          />
+          <div className="text-base whitespace-pre-wrap">{card?.text}</div>
+        </div>
+      </div>
+      <ModalButton onClick={handleSave} label="Save" />
+    </Modal>
+  );
+};
+
+const Icon = styled.div<{ bgColor: string }>`
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background-color: ${(p) => p.bgColor};
+`;
+
+export default SaveTweet;
