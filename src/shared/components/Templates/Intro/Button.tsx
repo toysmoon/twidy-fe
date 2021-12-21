@@ -17,7 +17,7 @@ export default function Button() {
   }, [router]);
 
   return (
-    <div className="fixed w-full h-40 bottom-0 bg-gradient-to-t from-black to-transparent flex flex-col-reverse pb-6 px-5">
+    <div className="fixed w-full max-w-xl h-40 bottom-0 bg-gradient-to-t from-black to-transparent flex flex-col-reverse pb-6 px-5">
       <button
         onClick={handleClick}
         className="w-full h-20 bg-white rounded-full flex justify-center items-center"

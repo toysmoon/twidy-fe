@@ -9,7 +9,7 @@ import Terms from './Terms';
 
 export default function Intro() {
   return (
-    <div className="fixed inset-0 overflow-scroll bg-gray1">
+    <div className="fixed top-0 bottom-0 max-w-xl w-full overflow-scroll bg-gray1">
       {circles.map((c, i) => (
         <div
           key={`circle-${i}`}
@@ -22,7 +22,7 @@ export default function Intro() {
           title={'Tidy up\nliked tweets!'}
           detail="Search, categorize and share your liked tweets through Twidy!"
         >
-          <div className="m-10 relative">
+          <div className="p-10 relative w-full flex justify-center">
             <Image
               src={'/images/intro/screen.png'}
               alt="Picture of the author"
