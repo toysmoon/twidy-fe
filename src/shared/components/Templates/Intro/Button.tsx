@@ -23,7 +23,7 @@ export default function Button() {
         className="w-full h-20 bg-white rounded-full flex justify-center items-center"
       >
         <Twitter color={colors.twitter} />
-        <label className="font-apple font-bold text-xl leading-5 text-twitter ml-3">
+        <label className="font-bold text-xl leading-5 text-twitter ml-3">
           Sign in to get started
         </label>
       </button>

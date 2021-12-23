@@ -21,7 +21,7 @@ export default function ThemeSelect({ value, onChange }: IThemeSelect) {
   const color = colorList.find((item) => item.value === value)?.color;
 
   return (
-    <div className={cn('absolute', 'bottom-0', 'left-0', 'right-0')}>
+    <div className={cn('absolute', 'bottom-0', 'w-full', 'max-w-xl')}>
       <Background color={color} />
       <div>
         <ColorWrapper color={color} className={wrapperCn}>

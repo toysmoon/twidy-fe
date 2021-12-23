@@ -26,7 +26,7 @@ const Emoji: FC<IEmojiProps> = ({ isOpen, onSelect, onClose }) => {
         </div>
         <div>
           <Picker
-            native
+            set="twitter"
             showPreview={false}
             showSkinTones={false}
             onSelect={(emoji: BaseEmoji) => onSelect(emoji.native)}

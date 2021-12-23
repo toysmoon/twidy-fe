@@ -1,8 +1,6 @@
-import styled from '@emotion/styled';
 import React, { FC, useCallback, useState } from 'react';
 import { Edit } from 'shared/components/Icons';
 import { Emoji } from 'shared/components/Modal';
-import { colors } from 'shared/styles';
 
 interface IFolderIconProps {
   icon: string;
@@ -24,53 +22,21 @@ const SelectIcon: FC<IFolderIconProps> = ({ icon, color, onChange }) => {
   );
 
   return (
-    <Wrapper>
-      <Icon color={color}>
+    <div className="flex justify-center items-center mt-10 mb-5 mx-auto">
+      <div
+        className={`w-16 h-16 relative rounded-full flex justify-center items-center text-3xl bg-${color}`}
+      >
         {icon}
-        <EditButton onClick={handleEdit}>
+        <div
+          onClick={handleEdit}
+          className="w-6 h-6 rounded-full bg-gray1 absolute -right-1 -bottom-1 flex justify-center items-center"
+        >
           <Edit />
-        </EditButton>
-      </Icon>
+        </div>
+      </div>
       <Emoji isOpen={openEmoji} onSelect={handleSelect} onClose={handleClose} />
-    </Wrapper>
+    </div>
   );
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 40px auto 20px;
-`;
-
-const Icon = styled.div`
-  width: 64px;
-  height: 64px;
-  position: relative;
-
-  border-radius: 50%;
-  background-color: ${(p) => p.color};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 32px;
-`;
-
-const EditButton = styled.div`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: ${colors.gray1};
-
-  position: absolute;
-  right: -2px;
-  bottom: -2px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export default SelectIcon;

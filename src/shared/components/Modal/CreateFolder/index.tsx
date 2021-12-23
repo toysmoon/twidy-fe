@@ -1,4 +1,6 @@
-import ColorPicker from 'features/cards/components/ColorPicker';
+import ColorPicker, {
+  COLLECTION_COLOR,
+} from 'features/cards/components/ColorPicker';
 import SelectIcon from 'features/collections/components/SelectIcon';
 import { PostCollection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
@@ -21,13 +23,13 @@ const CreateFolder: FC<ICreateFolder> = ({
 }) => {
   const [icon, setIcon] = useState('✨');
   const [folderName, setFolderName] = useState('');
-  const [color, setColor] = useState('#FF508F');
+  const [color, setColor] = useState<COLLECTION_COLOR>(COLLECTION_COLOR.HEART);
   const [isPrivate, setPrivate] = useState(false);
 
   const reset = useCallback(() => {
     setIcon('✨');
     setFolderName('');
-    setColor('#FF508F');
+    setColor(COLLECTION_COLOR.HEART);
     setPrivate(false);
   }, []);
 
