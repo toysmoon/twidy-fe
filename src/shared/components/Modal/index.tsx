@@ -3,11 +3,7 @@ import React, { FC } from 'react';
 import useModal from 'shared/hooks/useModal';
 import { colors } from 'shared/styles';
 import Portal from '../Portal';
-import CreateFolder from './CreateFolder';
-import Emoji from './Emoji';
 import ModalDim from './ModalDim';
-export { default as SaveTweet } from './SaveTweet';
-export { CreateFolder, Emoji };
 
 export interface IModalProps {
   isOpen: boolean;

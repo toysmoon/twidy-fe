@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Edit } from 'shared/components/Icons';
-import { Emoji } from 'shared/components/Modal';
+import Emoji from 'shared/components/Modal/Emoji';
 
 interface IFolderIconProps {
   icon: string;

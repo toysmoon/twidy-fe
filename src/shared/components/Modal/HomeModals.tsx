@@ -2,9 +2,12 @@ import type Card from 'features/cards/types/Card';
 import CollectionList from 'features/collections/components/Modal/CollectionList';
 import addCollectionMutation from 'features/collections/queries/addCollectionMutation';
 import { Collection, PostCollection } from 'features/collections/types';
+import dynamic from 'next/dynamic';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import useDim from 'shared/hooks/useDim';
-import { CreateFolder, SaveTweet } from '.';
+
+const CreateFolder = dynamic(() => import('./CreateFolder'));
+const SaveTweet = dynamic(() => import('./SaveTweet'));
 
 export interface ISubmitProps {
   collection: Collection;
