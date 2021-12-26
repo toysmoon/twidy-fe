@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import useModal from 'shared/hooks/useModal';
-import { colors } from 'shared/styles';
 import Portal from '../Portal';
 import ModalDim from './ModalDim';
 
@@ -18,47 +17,28 @@ const Modal: FC<IModalProps> = ({
   useMinHeight = false,
   children,
 }) => {
-  const modalClass = useModal(isOpen);
+  const modalClass = useModal(isOpen, { useMinHeight });
 
   return (
     <Portal>
       {isOpen && <ModalDim onClose={onClose} />}
-      <Container className={modalClass} useMinHeight={useMinHeight}>
+      <div className={classNames(defaultModalClass, modalClass)}>
         {children}
-      </Container>
+      </div>
     </Portal>
   );
 };
 
+const defaultModalClass = [
+  'max-w-xl',
+  'mx-auto',
+  'fixed',
+  'left-0',
+  'right-0',
+  'z-50',
+  'bg-white',
+  'rounded-t-3xl',
+  'transition-all',
+];
+
 export default Modal;
-
-const Container = styled.div<{ useMinHeight: boolean }>`
-  ${(p) => (p.useMinHeight ? 'height: 70vh' : '')};
-
-  max-width: 480px;
-  margin: 0 auto;
-
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 9999;
-
-  background: ${colors.white};
-  border-radius: 20px 20px 0px 0px;
-
-  transition: bottom 200ms ease-out, opacity 200ms ease-out;
-
-  &.open {
-    opacity: 1;
-    bottom: 0;
-  }
-
-  &.close {
-    opacity: 0.5;
-    bottom: -600px;
-  }
-
-  display: flex;
-  flex-direction: column;
-`;

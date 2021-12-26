@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import LINK from 'shared/constants/link';
-import { colors } from 'shared/styles';
 
 export enum TAB_ITEM {
   MY_LIKES = 'MY LIKES',
@@ -25,65 +24,30 @@ interface ILikeTab {
 export default function LikeTab({ isCollections }: ILikeTab) {
   const router = useRouter();
   const selectedTab = isCollections ? TAB_ITEM.SAVED : TAB_ITEM.MY_LIKES;
+  const isFirstTab = selectedTab === TAB_ITEM.MY_LIKES;
+  const tablistClass = classNames(
+    'h-10 flex justify-center items-center rounded-full p-1 from-slate-100 to-slate-400',
+    isFirstTab ? 'bg-gradient-to-r' : 'bg-gradient-to-l'
+  );
 
   return (
-    <Nav>
-      <Ul>
+    <nav className="flex justify-center my-5">
+      <ul className={tablistClass}>
         {tablist.map((tab) => (
-          <Item
+          <li
             key={`tabitem-${tab}`}
-            isSelected={selectedTab === tab}
             onClick={() => router.replace(linkByTabItem[tab])}
+            className={classNames(
+              selectedTab === tab ? 'bg-white' : 'bg-transparent',
+              'w-36 h-8 flex justify-center items-center rounded-full font-extrabold text-base leading-5 text-gray1'
+            )}
           >
             {tab}
-          </Item>
+          </li>
         ))}
-      </Ul>
-    </Nav>
+      </ul>
+    </nav>
   );
 }
 
 const tablist: TAB_ITEM[] = [TAB_ITEM.MY_LIKES, TAB_ITEM.SAVED];
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-`;
-
-const Ul = styled.ul`
-  width: 294px;
-  height: 42px;
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  list-style: none;
-
-  background: linear-gradient(
-    270deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.15) 50%
-  );
-  border-radius: 100px;
-`;
-
-const Item = styled.li<{ isSelected: boolean }>`
-  width: 143px;
-  height: 34px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 100px;
-  background-color: ${(p) => (p.isSelected ? colors.white : 'transparent')};
-
-  font-weight: 800;
-  font-size: 16px;
-  line-height: 19px;
-  color: ${colors.gray1};
-`;

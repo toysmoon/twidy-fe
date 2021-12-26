@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import type Card from 'features/cards/types/Card';
 import { Collection } from 'features/collections/types';
 import React, { FC, useState } from 'react';
@@ -39,7 +38,11 @@ const SaveTweet: FC<ISaveTweetProps> = ({
             <ArrowBack />
           </div>
           <div className="flex items-center">
-            <Icon bgColor={color}>{emoji}</Icon>
+            <div
+              className={`w-8 h-8 mr-3 flex justify-center items-center rounded-full bg-${color}`}
+            >
+              {emoji}
+            </div>
             <h2 className="font-bold text-lg leading-5 text-black">
               {collection.name}
             </h2>
@@ -58,19 +61,5 @@ const SaveTweet: FC<ISaveTweetProps> = ({
     </Modal>
   );
 };
-
-const Icon = styled.div<{ bgColor: string }>`
-  width: 32px;
-  height: 32px;
-  margin-right: 12px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 50%;
-
-  background-color: ${(p) => p.bgColor};
-`;
 
 export default SaveTweet;
