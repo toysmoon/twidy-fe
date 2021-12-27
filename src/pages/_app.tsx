@@ -14,13 +14,12 @@ import Toast from 'shared/components/Toast';
 import Dim from 'shared/components/Dim';
 import GlobalTweet from 'shared/components/GlobalTweet';
 import { userState } from 'shared/states/userState';
-import globalStyles from 'shared/styles/global';
 import 'shared/styles/global.css';
 import 'tailwindcss/tailwind.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { retry: false, refetchOnWindowFocus: false },
+    queries: { retry: false, refetchOnWindowFocus: false, suspense: true },
   },
 });
 
@@ -46,7 +45,6 @@ function Maeum({ Component, pageProps }: AppProps) {
         />
       </Head>
       <RecoilRoot initializeState={initializeState}>
-        {globalStyles}
         <Component {...nextPageProps} />
         <GlobalTweet />
         <Toast />

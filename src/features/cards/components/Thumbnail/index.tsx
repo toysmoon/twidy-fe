@@ -3,7 +3,6 @@ import React from 'react';
 import { Author, Media, MEDIA_TYPE } from 'shared/api/types';
 import Image from 'shared/components/Image';
 import Icon from './Icon';
-import { Background, ThumbName, ThumbSize, ThumbWrapper } from './style';
 
 export interface IThumbnailProps {
   type: MEDIA_TYPE;
@@ -18,19 +17,31 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
 
   if (isNotImage) {
     return (
-      <Background bg={author.miniProfileImageURLHttps}>
-        <ThumbSize />
-        <ThumbName>{getContent(type, author)}</ThumbName>
+      <div className="relative mb-5 rounded-xl bg-cover bg-center bg-src">
+        <div className="pb-50-percent" />
+        <p className="text-lg leading-5 text-white absolute top-5 left-5">
+          {getContent(type, author)}
+        </p>
         <Icon type={type} />
-      </Background>
+        <style jsx>{`
+          .bg-src {
+            background: linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.7),
+                rgba(0, 0, 0, 0.7)
+              ),
+              url(${author.miniProfileImageURLHttps});
+          }
+        `}</style>
+      </div>
     );
   }
 
   const images = media.slice(0, 4);
 
   return (
-    <ThumbWrapper>
-      <ThumbSize />
+    <div className="relative overflow-hidden">
+      <div className="pb-50-percent" />
       <div className="grid grid-cols-2 grid-rows-2 gap-0.5 absolute inset-0 rounded-md overflow-hidden">
         {images.map((image, i) => (
           <div
@@ -41,7 +52,7 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
           </div>
         ))}
       </div>
-    </ThumbWrapper>
+    </div>
   );
 }
 

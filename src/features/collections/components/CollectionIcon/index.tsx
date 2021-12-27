@@ -1,8 +1,6 @@
-import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import { colors } from 'shared/styles';
-import React from 'react';
+import classNames from 'classnames';
 import { Collection } from 'features/collections/types';
+import React from 'react';
 import { Lock } from 'shared/components/Icons';
 
 interface ICollectionIconProps {
@@ -15,55 +13,31 @@ export default function CollectionIcon({
   hasBorder = false,
 }: ICollectionIconProps) {
   const { emoji, color, isPrivate } = collections;
+  const iconClass = classNames(
+    [
+      'w-12',
+      'h-12',
+      'rounded-full',
+      'shrink-0',
+      'relative',
+      'flex',
+      'items-center',
+      'justify-center',
+    ],
+    `bg-${color}`,
+    hasBorder && 'border border-white'
+  );
 
   return (
-    <Icon bgColor={color} hasBorder={hasBorder}>
+    <div className={iconClass}>
       {emoji}
       {isPrivate && <LockIcon />}
-    </Icon>
+    </div>
   );
 }
 
 const LockIcon = () => (
-  <Ellipse>
+  <div className="absolute bottom-0 right-0 w-5 h-5 rounded-full flex items-center justify-center bg-gray1">
     <Lock />
-  </Ellipse>
+  </div>
 );
-
-const Ellipse = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: ${colors.gray1};
-`;
-
-const IconBorder = css`
-  border: solid 1px ${colors.white};
-`;
-
-const Icon = styled.div<{ bgColor: string; hasBorder: boolean }>`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  flex-shrink: 0;
-
-  background-color: ${(p) => p.bgColor};
-
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 15px;
-
-  ${(p) => p.hasBorder && IconBorder}
-`;

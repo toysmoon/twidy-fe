@@ -1,38 +1,34 @@
 import cn from 'classnames';
 import React from 'react';
 import { colors } from 'shared/styles';
-import { Background, ColorButton, ColorWrapper } from './style';
 
 interface IThemeSelect {
   value: string;
   onChange: (color: string) => void;
 }
 
-export default function ThemeSelect({ value, onChange }: IThemeSelect) {
+export default function ThemeSelect({ onChange }: IThemeSelect) {
   const wrapperCn = cn(
+    'h-24',
     'flex',
     'flex-nowrap',
     'gap-8',
     'pt-5',
     'px-6',
-    'overflow-x-auto'
+    'overflow-x-auto',
+    'hide-scrollbar'
   );
-
-  const color = colorList.find((item) => item.value === value)?.color;
 
   return (
     <div className={cn('absolute', 'bottom-0', 'w-full', 'max-w-xl')}>
-      <Background color={color} />
-      <div>
-        <ColorWrapper color={color} className={wrapperCn}>
-          {colorList.map(({ color, value }) => (
-            <ColorButton
-              key={`color-${value}`}
-              color={color}
-              onClick={() => onChange(value)}
-            />
-          ))}
-        </ColorWrapper>
+      <div className={wrapperCn}>
+        {colorList.map(({ value }) => (
+          <div
+            key={`color-${value}`}
+            onClick={() => onChange(value)}
+            className={`w-10 h-10 bg-${value} border-4 border-white rounded-full shrink-0`}
+          />
+        ))}
       </div>
     </div>
   );

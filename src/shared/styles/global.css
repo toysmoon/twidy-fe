@@ -21,6 +21,10 @@ p {
   padding-top: 50%;
 }
 
+.pb-50-percent {
+  padding-bottom: 50%;
+}
+
 .max-line-3 {
   display: -webkit-box;
   word-wrap: break-word;

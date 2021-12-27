@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
 import { Poll, TopRight, Video } from '../../../collections/components/Icons';
-import { IconWrapper } from './style';
 
 interface IIconProps {
   type: MEDIA_TYPE;
@@ -22,5 +21,9 @@ export default function Icon({ type }: IIconProps) {
     }
   }, [type]);
 
-  return <IconWrapper>{icon}</IconWrapper>;
+  return (
+    <div className=" w-14 h-14 absolute right-5 bottom-5 flex justify-center items-center rounded-full bg-white bg-opacity-50 blur-md">
+      {icon}
+    </div>
+  );
 }
