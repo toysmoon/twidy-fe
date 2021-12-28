@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import SaveLayout from 'shared/components/Templates/Layout/SaveLayout';
-import { colorList } from 'shared/hooks/useTheme';
 import useToast from 'shared/hooks/useToast';
 import { themeState } from 'shared/states/themeState';
 
@@ -17,7 +16,7 @@ export default function SettingTheme() {
   const router = useRouter();
 
   const [theme, setTheme] = useRecoilState(themeState);
-  const [color, setColor] = useState(colorList[theme]);
+  const [color, setColor] = useState(theme);
 
   const user = useUserQuery();
   const collections = useCollecitonQuery(user!.userId);
@@ -30,6 +29,8 @@ export default function SettingTheme() {
     router.back();
     toast('New theme has been applied!');
   }, [user, color]);
+
+  console.log(color);
 
   return (
     <SaveLayout onApply={handleApply} color={color}>
