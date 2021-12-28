@@ -3,10 +3,10 @@ import Image from 'shared/components/Image';
 import { sizes } from 'shared/styles';
 
 interface IAvatarProps {
-  src: string;
+  src?: string;
 }
 
-const Avatar: FC<IAvatarProps> = ({ src }) => {
+const Avatar: FC<IAvatarProps> = ({ src = '' }) => {
   return (
     <div className="w-16 h-16 rounded-full border-4 overflow-hidden">
       <Image

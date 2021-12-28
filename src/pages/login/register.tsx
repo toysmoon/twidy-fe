@@ -1,14 +1,13 @@
 import postSetting from 'features/users/api/postSetting';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 import Toggle from 'shared/components/Form/Toggle';
-import { userState } from 'shared/states/userState';
+import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
 export default function LoadingPage() {
   const router = useRouter();
-  const user = useRecoilValue(userState);
+  const user = useUserQuery();
   const [isChecked, setChecked] = useState(true);
 
   const handleClick = useCallback(async () => {

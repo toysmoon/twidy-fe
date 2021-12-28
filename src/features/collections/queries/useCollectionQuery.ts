@@ -1,15 +1,16 @@
+import useUserQuery, {
+  useUserByIdQuery,
+} from 'features/users/queries/useUserQuery';
 import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'shared/states/userState';
 import deleteCollections from '../api/deleteCollections';
 import getCollections from '../api/getCollections';
 import putCollections from '../api/putCollections';
 import { Collection } from '../types';
 
-export default function useCollecitonQuery(userId?: string) {
-  const user = useRecoilValue(userState);
-  const collectionUserId = userId ?? user?.userId;
+export default function useCollecitonQuery(userId: string) {
+  const { data: user } = useUserByIdQuery(userId);
+  const collectionUserId = user!.userId;
 
   const result = useQuery<Collection[]>(
     ['collection', collectionUserId],
@@ -28,8 +29,8 @@ export default function useCollecitonQuery(userId?: string) {
 
 export function useDeleteCollectionsMutation() {
   const queryClient = useQueryClient();
-  const user = useRecoilValue(userState);
-  const collections = useCollecitonQuery();
+  const user = useUserQuery();
+  const collections = useCollecitonQuery(user!.userId);
 
   return useMutation(
     ['collection', user?.userId],
@@ -54,7 +55,7 @@ export function useDeleteCollectionsMutation() {
 
 export function useUpdateCollectionOrderMutation() {
   const queryClient = useQueryClient();
-  const user = useRecoilValue(userState);
+  const user = useUserQuery();
 
   return useMutation(
     ['collection', user?.userId],

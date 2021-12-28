@@ -1,14 +1,13 @@
 import getSetting from 'features/users/api/getSetting';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { useRecoilValue } from 'recoil';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
-import { userState } from 'shared/states/userState';
 
 export default function LoadingPage() {
   const router = useRouter();
-  const user = useRecoilValue(userState);
+  const user = useUserQuery();
   const userId = user?.userId;
   const { data, isLoading } = useQuery(['setting', userId], () =>
     userId ? getSetting(userId) : null

@@ -60,6 +60,7 @@ export type User = {
   regDttm: string;
   modDttm: string;
   setting?: Setting;
+  code?: number;
 };
 
 export type Error = {

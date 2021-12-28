@@ -1,14 +1,10 @@
 import { useRecoilValue } from 'recoil';
-import { userState } from 'shared/states/userState';
+import { themeState } from 'shared/states/themeState';
 import { colors } from 'shared/styles';
 
 export default function useTheme() {
-  const user = useRecoilValue(userState);
-  if (!user?.setting?.theme) {
-    return colors.black;
-  }
-
-  return colorList[user?.setting?.theme];
+  const theme = useRecoilValue(themeState);
+  return colorList[theme];
 }
 
 export const colorList: Record<string, string> = {

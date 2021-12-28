@@ -1,19 +1,17 @@
 import createCollection from 'features/collections/api/postCollection';
 import { PostCollection } from 'features/collections/types';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import React, { useCallback, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { User } from 'shared/api/types';
 import CreateFolder from 'shared/components/Modal/CreateFolder';
-import { userState } from 'shared/states/userState';
 
 export default function AddCollection() {
-  const user = useRecoilValue(userState) as User;
+  const user = useUserQuery();
   const [isCreateFolderOpen, setCreateFolderOpen] = useState(false);
 
   const handleOpen = useCallback(() => setCreateFolderOpen(true), []);
   const handleClose = useCallback(() => setCreateFolderOpen(false), []);
   const handleSumbit = useCallback(async (c: PostCollection) => {
-    await createCollection(user.userId, c);
+    await createCollection(user!.userId, c);
     handleClose();
   }, []);
 

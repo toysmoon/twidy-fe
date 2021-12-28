@@ -5,27 +5,25 @@ import useCollecitonQuery, {
 } from 'features/collections/queries/useCollectionQuery';
 import { Collection } from 'features/collections/types';
 import Profile from 'features/users/components/Profile';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useRecoilValue } from 'recoil';
 import SaveLayout from 'shared/components/Templates/Layout/SaveLayout';
 import useToast from 'shared/hooks/useToast';
-import { userState } from 'shared/states/userState';
 
 export default function Folders() {
   const toast = useToast();
   const router = useRouter();
-  const user = useRecoilValue(userState);
+  const user = useUserQuery();
   const { mutateAsync: deleteCollections } = useDeleteCollectionsMutation();
   const { mutateAsync: updateOrder } = useUpdateCollectionOrderMutation();
 
-  const initialCollections = useCollecitonQuery();
+  const initialCollections = useCollecitonQuery(user!.userId);
   const [removedCollection, setRemovedCollections] = useState<Collection[]>([]);
-  const [collections, setCollections] = useState<Collection[]>(
-    initialCollections
-  );
+  const [collections, setCollections] =
+    useState<Collection[]>(initialCollections);
 
   useEffect(() => {
     setCollections(initialCollections);
@@ -77,11 +75,7 @@ export default function Folders() {
   return (
     <DndProvider backend={HTML5Backend}>
       <SaveLayout onApply={onApply}>
-        <Profile
-          src={'http://pbs.twimg.com/123'}
-          name={user.name}
-          onClick={() => {}}
-        />
+        <Profile />
         <div className="p-4 flex flex-col gap-3">
           {collections.map((c, i) => (
             <Dragable

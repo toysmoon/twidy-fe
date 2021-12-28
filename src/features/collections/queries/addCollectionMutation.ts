@@ -1,15 +1,14 @@
+import useUserQuery from 'features/users/queries/useUserQuery';
 import { useMutation, useQueryClient } from 'react-query';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'shared/states/userState';
 import postCollection from '../api/postCollection';
 import { PostCollection } from '../types';
 import useCollecitonQuery from './useCollectionQuery';
 
 export default function addCollectionMutation() {
   const queryClient = useQueryClient();
-  const user = useRecoilValue(userState);
-  const userId = user?.userId ?? '';
-  const collections = useCollecitonQuery();
+  const user = useUserQuery();
+  const userId = user!.userId;
+  const collections = useCollecitonQuery(userId);
 
   return useMutation(
     ['collection', user?.userId],

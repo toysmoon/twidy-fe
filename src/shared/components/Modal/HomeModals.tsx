@@ -1,3 +1,5 @@
+import updateCard from 'features/cards/api/updateCard';
+import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
 import type Card from 'features/cards/types/Card';
 import CollectionList from 'features/collections/components/Modal/CollectionList';
 import addCollectionMutation from 'features/collections/queries/addCollectionMutation';
@@ -17,7 +19,6 @@ export interface ISubmitProps {
 
 interface IHomeModals {
   card: Card | null;
-  onSubmit: ({ collection, card, title }: ISubmitProps) => void;
   onClose: () => void;
 }
 
@@ -28,10 +29,11 @@ enum HOME_MODAL_STEP {
   NONE,
 }
 
-const HomeModals: FC<IHomeModals> = ({ card, onSubmit, onClose }) => {
+const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
   const [step, setStep] = useState<HOME_MODAL_STEP>(HOME_MODAL_STEP.NONE);
   const [collection, setCollection] = useState<Collection>();
   const { mutateAsync: addCollection, isLoading } = addCollectionMutation();
+  const removeCardFromList = useSavedCardRemove();
 
   useDim(step !== HOME_MODAL_STEP.NONE);
 
@@ -60,11 +62,18 @@ const HomeModals: FC<IHomeModals> = ({ card, onSubmit, onClose }) => {
   }, []);
 
   const submitCard = useCallback(
-    (props) => {
-      onSubmit(props);
+    async ({ card, collection, title }: ISubmitProps) => {
+      await updateCard({
+        title,
+        collectionId: collection.collectionId,
+        cardId: card.cardId,
+      });
+
+      removeCardFromList(card.cardId);
+      onClose();
       setStep(HOME_MODAL_STEP.NONE);
     },
-    [onSubmit]
+    [onClose, removeCardFromList]
   );
 
   if (step === HOME_MODAL_STEP.NONE) {

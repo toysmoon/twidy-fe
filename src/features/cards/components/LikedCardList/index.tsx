@@ -11,22 +11,20 @@ interface LikedCardListProps {
 export default function LikedCardList({ onClickCard }: LikedCardListProps) {
   const cards = useUnclassifiedCard();
 
-  if (!cards) {
-    return (
-      <>
-        <LikedCardSkeleton />
-        <LikedCardSkeleton />
-      </>
-    );
-  }
-
-  console.log(cards);
-
   return (
     <>
-      {cards.map((item, i) => (
+      {cards?.map((item, i) => (
         <LikedCard key={i} card={item} onClick={onClickCard} />
       ))}
+    </>
+  );
+}
+
+export function CardListsSkeleton() {
+  return (
+    <>
+      <LikedCardSkeleton />
+      <LikedCardSkeleton />
     </>
   );
 }

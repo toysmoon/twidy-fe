@@ -1,13 +1,13 @@
 import CollectionList from 'features/collections/components/CollectionList';
 import { getProfileByName } from 'features/users/api/getProfile';
 import getSetting, { Setting } from 'features/users/api/getSetting';
+import ProfileView from 'features/users/components/ProfileView';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { redirectUser } from 'pages/_app';
 import React from 'react';
 import { User } from 'shared/api/types';
-import Profile from 'features/users/components/Profile';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
 export default function UserPage({
@@ -25,11 +25,7 @@ export default function UserPage({
   return (
     <EmptyLayout color={setting.theme}>
       <ProfileMeta name={user.name} theme={setting.theme} />
-      <Profile
-        src={'http://pbs.twimg.com/123'}
-        name={user.name}
-        onClick={() => {}}
-      />
+      <ProfileView user={user} />
       <CollectionList
         userId={userId}
         onClickCollection={handleClickCollection}

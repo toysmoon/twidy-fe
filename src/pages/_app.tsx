@@ -1,36 +1,41 @@
-import getSetting from 'features/users/api/getSetting';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
 import Head from 'next/head';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import 'normalize.css';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { FallbackProps } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
-import getUser from 'shared/api/auth/getUser';
-import { User } from 'shared/api/types';
-import Toast from 'shared/components/Toast';
+import Boundary from 'shared/components/Boundary';
 import Dim from 'shared/components/Dim';
 import GlobalTweet from 'shared/components/GlobalTweet';
-import { userState } from 'shared/states/userState';
+import Toast from 'shared/components/Toast';
+import { themeState } from 'shared/states/themeState';
 import 'shared/styles/global.css';
+import parseCookie from 'shared/utils/parseCookie';
 import 'tailwindcss/tailwind.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { retry: false, refetchOnWindowFocus: false, suspense: true },
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+      suspense: true,
+      useErrorBoundary: true,
+    },
   },
 });
 
 function Maeum({ Component, pageProps }: AppProps) {
-  const { user, ...nextPageProps }: { user?: User } = pageProps ?? {};
+  const { theme, ...nextPageProps }: { theme?: string } = pageProps ?? {};
 
   const initializeState = useCallback(
     ({ set }: MutableSnapshot): void => {
-      set(userState, user ?? null);
+      set(themeState, theme ?? 'black');
     },
-    [user]
+    [theme]
   );
 
   return (
@@ -45,13 +50,26 @@ function Maeum({ Component, pageProps }: AppProps) {
         />
       </Head>
       <RecoilRoot initializeState={initializeState}>
-        <Component {...nextPageProps} />
+        <Boundary reject={ErrorFallback} pending={<div />}>
+          <Component {...nextPageProps} />
+        </Boundary>
         <GlobalTweet />
         <Toast />
         <Dim />
       </RecoilRoot>
     </QueryClientProvider>
   );
+}
+
+function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/about');
+    resetErrorBoundary();
+  }, []);
+
+  return <div></div>;
 }
 
 const noLoginPages = ['/about', '/_error', '/[userName]', '/thumbnail'];
@@ -67,17 +85,10 @@ Maeum.getInitialProps = async (appContext: AppContext) => {
     return { ...appProps };
   }
 
-  try {
-    const user = await getUser(ctx);
-    const setting = await getSetting(user.userId);
+  const cookie = parseCookie(appContext.ctx.req.headers.cookie);
+  appProps.pageProps.theme = cookie.theme;
 
-    appProps.pageProps.user = { ...user, setting };
-
-    return { ...appProps };
-  } catch (e) {
-    redirectUser(ctx, '/about');
-    return {};
-  }
+  return { ...appProps };
 };
 
 export function redirectUser(

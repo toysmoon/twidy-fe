@@ -1,52 +1,31 @@
-import updateCard from 'features/cards/api/updateCard';
-import LikedCardList from 'features/cards/components/LikedCardList';
+import LikedCardList, {
+  CardListsSkeleton,
+} from 'features/cards/components/LikedCardList';
 import CardType from 'features/cards/types/Card';
-import { NextPage } from 'next';
-import React, { useCallback, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import LikeTab from 'shared/components/LikeTab';
 import Profile from 'features/users/components/Profile';
+import ProfileSkeleton from 'features/users/components/Profile/ProfileSkeleton';
+import { NextPage } from 'next';
+import React, { Suspense, useState } from 'react';
+import LikeTab from 'shared/components/LikeTab';
+import HomeModals from 'shared/components/Modal/HomeModals';
 import Layout from 'shared/components/Templates/Layout';
-import HomeModals, { ISubmitProps } from 'shared/components/Modal/HomeModals';
-import { userState } from 'shared/states/userState';
-import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
 
 const Page: NextPage<{}> = () => {
-  const user = useRecoilValue(userState);
   const [card, setCard] = useState<CardType | null>(null);
-  const removeCardFromList = useSavedCardRemove();
-
-  if (!user) {
-    return null;
-  }
-
-  const handleClick = () => {};
   const closeModal = () => setCard(null);
-
-  const submitTweet = useCallback(
-    async ({ card, collection, title }: ISubmitProps) => {
-      await updateCard({
-        title,
-        collectionId: collection.collectionId,
-        cardId: card.cardId,
-      });
-
-      removeCardFromList(card.cardId);
-      closeModal();
-    },
-    [removeCardFromList]
-  );
 
   return (
     <Layout>
-      <Profile
-        src={'http://pbs.twimg.com/123'}
-        name={user.name}
-        onClick={handleClick}
-      />
+      <Suspense fallback={<ProfileSkeleton />}>
+        <Profile />
+      </Suspense>
       <LikeTab />
-      <LikedCardList onClickCard={setCard} />
-      <HomeModals card={card} onSubmit={submitTweet} onClose={closeModal} />
+      <Suspense fallback={<CardListsSkeleton />}>
+        <LikedCardList onClickCard={setCard} />
+      </Suspense>
+      <Suspense fallback={<div />}>
+        <HomeModals card={card} onClose={closeModal} />
+      </Suspense>
     </Layout>
   );
 };
