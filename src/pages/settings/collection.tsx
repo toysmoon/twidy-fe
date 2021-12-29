@@ -20,7 +20,7 @@ export default function Folders() {
   const { mutateAsync: deleteCollections } = useDeleteCollectionsMutation();
   const { mutateAsync: updateOrder } = useUpdateCollectionOrderMutation();
 
-  const initialCollections = useCollecitonQuery(user!.userId);
+  const initialCollections = useCollecitonQuery();
   const [removedCollection, setRemovedCollections] = useState<Collection[]>([]);
   const [collections, setCollections] =
     useState<Collection[]>(initialCollections);
