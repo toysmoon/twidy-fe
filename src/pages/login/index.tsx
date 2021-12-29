@@ -1,14 +1,26 @@
 import getSetting from 'features/users/api/getSetting';
-import useUserQuery from 'features/users/queries/useUserQuery';
+import useUserQuery, {
+  useMutateUpdateProfile,
+} from 'features/users/queries/useUserQuery';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import Boundary from 'shared/components/Boundary';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
 export default function LoadingPage() {
+  return (
+    <Boundary pending={<Loading />}>
+      <CheckUser />
+    </Boundary>
+  );
+}
+
+function CheckUser() {
   const router = useRouter();
   const user = useUserQuery();
   const userId = user?.userId;
+  const { mutateAsync: patchProfile } = useMutateUpdateProfile();
   const { data, isLoading } = useQuery(['setting', userId], () =>
     userId ? getSetting(userId) : null
   );
@@ -18,13 +30,19 @@ export default function LoadingPage() {
       return;
     }
 
-    if (data) {
-      router.replace('/');
-    } else {
-      router.replace('/login/register');
-    }
+    patchProfile().then(() => {
+      if (data) {
+        router.replace('/');
+      } else {
+        router.replace('/login/register');
+      }
+    });
   }, [data, isLoading]);
 
+  return <Loading />;
+}
+
+function Loading() {
   return (
     <EmptyLayout>
       <div className="fixed top-1/3 w-full flex flex-col justify-center items-center">

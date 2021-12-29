@@ -54,6 +54,7 @@ export type Tweet = {
 export type User = {
   userId: string;
   name: string;
+  userName: string;
   session: null;
   accessToken: null;
   status: string;
@@ -61,6 +62,7 @@ export type User = {
   modDttm: string;
   setting?: Setting;
   code?: number;
+  profileImageUrl: string;
 };
 
 export type Error = {

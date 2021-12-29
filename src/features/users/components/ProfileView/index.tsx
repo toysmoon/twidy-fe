@@ -31,8 +31,13 @@ const ProfileView: FC<ProfileProps> = ({ user }) => {
       onClick={handleClick}
       className="flex flex-col items-center pt-16 pb-10"
     >
-      <Avatar src={user?.userId} />
-      <Name>{`${user?.name}'s Likes`}</Name>
+      <Avatar
+        src={
+          user?.profileImageUrl ??
+          'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
+        }
+      />
+      <Name>{`${user?.userName}'s Likes`}</Name>
       <div onClick={handleCopy} className="flex justify-center items-center">
         <p className=" text-base text-gray-400 mr-1">{url}</p>
         <Copy />

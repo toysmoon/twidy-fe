@@ -1,13 +1,8 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import getUser from 'shared/api/auth/getUser';
 import { User } from 'shared/api/types';
 import getProfile from '../api/getProfile';
-
-export function useUserByIdQuery(userId: string, initialData?: User) {
-  return useQuery(['profile', userId], () => getProfile(userId), {
-    initialData,
-  });
-}
+import patchProfile from '../api/patchProfile';
 
 export default function useUserQuery() {
   const { data: user } = useQuery(
@@ -20,4 +15,14 @@ export default function useUserQuery() {
   );
 
   return user;
+}
+
+export function useUserByIdQuery(userId: string, initialData?: User) {
+  return useQuery(['profile', userId], () => getProfile(userId), {
+    initialData,
+  });
+}
+
+export function useMutateUpdateProfile() {
+  return useMutation(patchProfile);
 }
