@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import useCollecitonQuery from 'features/collections/queries/useCollectionQuery';
 import { Collection } from 'features/collections/types';
-import useUserQuery from 'features/users/queries/useUserQuery';
 import { FC } from 'react';
 import { AddCircle } from 'shared/components/Icons';
 import Modal, { IModalProps } from 'shared/components/Modal';
@@ -18,8 +17,7 @@ const FolderList: FC<IFolderList> = ({
   onSelectFolder,
   onCreateFolder,
 }) => {
-  const user = useUserQuery();
-  const collections = useCollecitonQuery(user!.userId);
+  const collections = useCollecitonQuery();
   const headerClass = cn(
     'w-full',
     'h-16',

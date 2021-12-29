@@ -4,7 +4,6 @@ import Skeleton from 'features/collections/components/Skeleton';
 import useCollecitonQuery from 'features/collections/queries/useCollectionQuery';
 import Profile from 'features/users/components/Profile';
 import ProfileSkeleton from 'features/users/components/Profile/ProfileSkeleton';
-import useUserQuery from 'features/users/queries/useUserQuery';
 import React, { Suspense } from 'react';
 import LikeTab from 'shared/components/LikeTab';
 import Layout from '../Layout';
@@ -24,8 +23,7 @@ export default function Folders() {
 }
 
 function CollectionList() {
-  const user = useUserQuery();
-  const collections = useCollecitonQuery(user!.userId);
+  const collections = useCollecitonQuery();
 
   return (
     <div className="p-4 flex flex-col gap-3">

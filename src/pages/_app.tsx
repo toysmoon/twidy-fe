@@ -1,3 +1,4 @@
+import ThemeUpdater from 'features/settings/components/ThemeUpdater';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
@@ -14,7 +15,7 @@ import GlobalTweet from 'shared/components/GlobalTweet';
 import Toast from 'shared/components/Toast';
 import { themeState } from 'shared/states/themeState';
 import 'shared/styles/global.css';
-import parseCookie from 'shared/utils/parseCookie';
+import { parseCookie } from 'shared/utils/cookie';
 import 'tailwindcss/tailwind.css';
 
 const queryClient = new QueryClient({
@@ -52,6 +53,9 @@ function Maeum({ Component, pageProps }: AppProps) {
       <RecoilRoot initializeState={initializeState}>
         <Boundary reject={ErrorFallback} pending={<div />}>
           <Component {...nextPageProps} />
+          <Boundary pending={<div />}>
+            <ThemeUpdater />
+          </Boundary>
         </Boundary>
         <GlobalTweet />
         <Toast />

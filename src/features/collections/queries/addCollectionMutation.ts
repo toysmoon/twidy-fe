@@ -8,7 +8,7 @@ export default function addCollectionMutation() {
   const queryClient = useQueryClient();
   const user = useUserQuery();
   const userId = user!.userId;
-  const collections = useCollecitonQuery(userId);
+  const collections = useCollecitonQuery();
 
   return useMutation(
     ['collection', user?.userId],

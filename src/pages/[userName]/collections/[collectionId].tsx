@@ -2,7 +2,7 @@ import Card from 'features/cards/components/Card';
 import { useGlobalCardViewMode } from 'features/cards/hooks/useGlobalCard';
 import useCardsQuery from 'features/cards/queries/useCardsQuery';
 import CollectionTitle from 'features/collections/components/CollectionTitle';
-import useCollecitonQuery from 'features/collections/queries/useCollectionQuery';
+import { useCollecitonQueryById } from 'features/collections/queries/useCollectionQuery';
 import { getProfileByName } from 'features/users/api/getProfile';
 import getSetting, { Setting } from 'features/users/api/getSetting';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -23,7 +23,7 @@ export default function CollectionPage({
   const setting = initialData.setting as Setting;
   const userId = user.userId;
 
-  const collections = useCollecitonQuery(userId);
+  const collections = useCollecitonQueryById(userId);
   const collection = collections?.find((c) => c.collectionId === collectionId);
   const { cards } = useCardsQuery(collection?.collectionId);
 

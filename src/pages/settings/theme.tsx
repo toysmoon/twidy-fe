@@ -10,6 +10,7 @@ import { useRecoilState } from 'recoil';
 import SaveLayout from 'shared/components/Templates/Layout/SaveLayout';
 import useToast from 'shared/hooks/useToast';
 import { themeState } from 'shared/states/themeState';
+import { setCookie } from 'shared/utils/cookie';
 
 export default function SettingTheme() {
   const toast = useToast();
@@ -19,12 +20,13 @@ export default function SettingTheme() {
   const [color, setColor] = useState(theme);
 
   const user = useUserQuery();
-  const collections = useCollecitonQuery(user!.userId);
+  const collections = useCollecitonQuery();
   const { mutateAsync: updateTheme } = useMutateTheme(user!.userId);
 
   const handleApply = useCallback(async () => {
     await updateTheme(color);
 
+    setCookie('theme', color, 30);
     setTheme(color);
     router.back();
     toast('New theme has been applied!');

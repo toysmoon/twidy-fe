@@ -8,7 +8,26 @@ import getCollections from '../api/getCollections';
 import putCollections from '../api/putCollections';
 import { Collection } from '../types';
 
-export default function useCollecitonQuery(userId: string) {
+export default function useCollecitonQuery() {
+  const user = useUserQuery();
+  const collectionUserId = user!.userId;
+
+  const result = useQuery<Collection[]>(
+    ['collection', collectionUserId],
+    () => (collectionUserId ? getCollections(collectionUserId) : []),
+    { staleTime: Infinity, cacheTime: Infinity }
+  );
+
+  return useMemo(() => {
+    if (!result.data) {
+      return [];
+    }
+
+    return result.data.sort((a, b) => a.ordVal - b.ordVal);
+  }, [result.data]);
+}
+
+export function useCollecitonQueryById(userId: string) {
   const { data: user } = useUserByIdQuery(userId);
   const collectionUserId = user!.userId;
 
@@ -30,7 +49,7 @@ export default function useCollecitonQuery(userId: string) {
 export function useDeleteCollectionsMutation() {
   const queryClient = useQueryClient();
   const user = useUserQuery();
-  const collections = useCollecitonQuery(user!.userId);
+  const collections = useCollecitonQuery();
 
   return useMutation(
     ['collection', user?.userId],

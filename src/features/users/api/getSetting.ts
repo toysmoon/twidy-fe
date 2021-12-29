@@ -1,6 +1,12 @@
 import client from 'shared/api/client';
 
-export default async function getSetting(userId: string) {
+export default async function getSetting(userId?: string) {
+  if (!userId) {
+    return {
+      theme: 'black',
+    };
+  }
+
   const response = await client.get<Setting>(`/setting/${userId}`);
   return response.data;
 }

@@ -2,7 +2,7 @@ import getSetting from 'features/users/api/getSetting';
 import putSetting from 'features/users/api/putSetting';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-export function useSettingQuery(userId: string) {
+export function useSettingQuery(userId?: string) {
   return useQuery(['setting', userId], () => getSetting(userId), {
     staleTime: Infinity,
     cacheTime: Infinity,
