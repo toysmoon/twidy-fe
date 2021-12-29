@@ -53,7 +53,7 @@ function Maeum({ Component, pageProps }: AppProps) {
       <RecoilRoot initializeState={initializeState}>
         <Boundary reject={ErrorFallback} pending={<div />}>
           <Component {...nextPageProps} />
-          <Boundary pending={<div />}>
+          <Boundary pending={<div />} reject={() => <div />}>
             <ThemeUpdater />
           </Boundary>
         </Boundary>
