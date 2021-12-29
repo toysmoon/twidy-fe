@@ -53,7 +53,7 @@ function Maeum({ Component, pageProps }: AppProps) {
       <RecoilRoot initializeState={initializeState}>
         <Boundary reject={ErrorFallback} pending={<div />}>
           <Component {...nextPageProps} />
-          <Boundary pending={<div />} reject={() => <div />}>
+          <Boundary pending={<div />} reject={ThemeError}>
             <ThemeUpdater />
           </Boundary>
         </Boundary>
@@ -74,6 +74,10 @@ function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
   }, []);
 
   return <div></div>;
+}
+
+function ThemeError() {
+  return <div />;
 }
 
 const noLoginPages = ['/about', '/_error', '/[userName]', '/thumbnail'];

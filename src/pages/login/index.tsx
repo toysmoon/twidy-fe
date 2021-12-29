@@ -2,7 +2,6 @@ import getSetting from 'features/users/api/getSetting';
 import useUserQuery, {
   useMutateUpdateProfile,
 } from 'features/users/queries/useUserQuery';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Boundary from 'shared/components/Boundary';
@@ -17,11 +16,10 @@ export default function LoadingPage() {
 }
 
 function CheckUser() {
-  const router = useRouter();
   const user = useUserQuery();
-  const userId = user?.userId;
+  const userId = user!.userId;
   const { mutateAsync: patchProfile } = useMutateUpdateProfile();
-  const { data, isLoading } = useQuery(['setting', userId], () =>
+  const { data: setting, isLoading } = useQuery(['setting', userId], () =>
     userId ? getSetting(userId) : null
   );
 
@@ -30,14 +28,8 @@ function CheckUser() {
       return;
     }
 
-    patchProfile().then(() => {
-      if (data) {
-        router.replace('/');
-      } else {
-        router.replace('/login/register');
-      }
-    });
-  }, [data, isLoading]);
+    patchProfile(setting);
+  }, [setting, isLoading]);
 
   return <Loading />;
 }

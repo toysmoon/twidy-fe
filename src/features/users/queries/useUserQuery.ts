@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from 'react-query';
+import { useRouter } from 'next/router';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import getUser from 'shared/api/auth/getUser';
 import { User } from 'shared/api/types';
 import getProfile from '../api/getProfile';
@@ -24,5 +25,18 @@ export function useUserByIdQuery(userId: string, initialData?: User) {
 }
 
 export function useMutateUpdateProfile() {
-  return useMutation(patchProfile);
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation(() => patchProfile(), {
+    onSuccess: async (_, setting?: any) => {
+      await queryClient.invalidateQueries(['profile', { twidyUser: true }]);
+
+      if (setting) {
+        router.replace('/');
+      } else {
+        router.replace('/login/register');
+      }
+    },
+  });
 }
