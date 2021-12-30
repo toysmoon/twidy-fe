@@ -24,7 +24,11 @@ export default function UserPage({
 
   return (
     <EmptyLayout color={setting.theme}>
-      <ProfileMeta name={user.name} theme={setting.theme} />
+      <ProfileMeta
+        name={user.name}
+        theme={setting.theme}
+        image={user.profileImageUrl}
+      />
       <ProfileView user={user} />
       <CollectionList
         userId={userId}
@@ -47,9 +51,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return { props: { data: { user, setting } } };
 };
 
-function ProfileMeta({ name, theme }: { name: string; theme: string }) {
+type ProfileMetaProps = {
+  name: string;
+  theme: string;
+  image: string;
+};
+
+function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
   const title = `${name}'s Twidy`;
-  const imageUrl = `/api/og?name=${name}&theme=${theme}`;
+  const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${image}`;
 
   return (
     <Head>
@@ -57,7 +67,7 @@ function ProfileMeta({ name, theme }: { name: string; theme: string }) {
       <meta name="description" content={title} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="article" />
-      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image" content={imageUrl} key="image" />
     </Head>
   );
 }

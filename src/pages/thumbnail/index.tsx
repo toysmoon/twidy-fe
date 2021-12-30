@@ -5,19 +5,28 @@ export default function () {
   const { query } = useRouter();
   const name = query.name as string;
   const theme = query.theme as string;
+  const image = query.image as string;
+
+  console.log(image);
 
   return (
     <EmptyLayout color={theme}>
-      <div className="flex fixed inset-0 px-24 justify-between items-center">
-        <div>
-          <div className="flex items-center">
-            <TwidyIcon />
-            <p className="text-white text-6xl pl-5">Twidy</p>
-          </div>
-          <p className="text-white text-9xl font-extrabold">{name}</p>
+      <div className="flex flex-col fixed inset-0 justify-center items-center gap-10">
+        <div className="w-52 h-52 bg-gray6 rounded-full overflow-hidden thumbnail-image">
+          <img
+            className="w-52 h-52"
+            src="http://pbs.twimg.com/profile_images/1476201609999052801/eWHYx6b0_normal.jpg"
+          />
         </div>
-        <div className="w-52 h-52 bg-white rounded-full"></div>
+        <h1 className="font-nunito font-extrabold text-gray6 text-8xl">
+          {name}
+        </h1>
       </div>
+      <style jsx>{`
+        div.thumbnail-image {
+          border: solid 10px #fff;
+        }
+      `}</style>
     </EmptyLayout>
   );
 }

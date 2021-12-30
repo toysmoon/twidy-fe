@@ -13,7 +13,7 @@ interface ProfileProps {
 const ProfileView: FC<ProfileProps> = ({ user }) => {
   const toast = useToast();
   const router = useRouter();
-  const url = `twidy.app/${user?.name}`;
+  const url = `twidy.app/${user?.userName}`;
 
   const handleClick = useCallback(() => {
     router.push('');
@@ -37,7 +37,7 @@ const ProfileView: FC<ProfileProps> = ({ user }) => {
           'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
         }
       />
-      <Name>{`${user?.userName}'s Likes`}</Name>
+      <Name>{`${user?.name}'s Likes`}</Name>
       <div onClick={handleCopy} className="flex justify-center items-center">
         <p className=" text-base text-gray-400 mr-1">{url}</p>
         <Copy />

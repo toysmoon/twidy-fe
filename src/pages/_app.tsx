@@ -41,15 +41,7 @@ function Maeum({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Head>
-        <title>Twidy</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      <TwidyMeta />
       <RecoilRoot initializeState={initializeState}>
         <Boundary reject={ErrorFallback} pending={<div />}>
           <Component {...nextPageProps} />
@@ -78,6 +70,23 @@ function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
 
 function ThemeError() {
   return <div />;
+}
+
+function TwidyMeta() {
+  return (
+    <Head>
+      <title>Twidy</title>
+      <meta name="description" content="Tidy up your liked tweets!" />
+      <meta property="og:title" content="Twidy" />
+      <meta property="og:image" content="/images/og.png" key="image" />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap"
+        rel="stylesheet"
+      />
+    </Head>
+  );
 }
 
 const noLoginPages = ['/about', '/_error', '/[userName]', '/thumbnail'];
