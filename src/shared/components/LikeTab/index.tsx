@@ -39,7 +39,7 @@ export default function LikeTab({ isCollections }: ILikeTab) {
             onClick={() => router.replace(linkByTabItem[tab])}
             className={classNames(
               selectedTab === tab ? 'bg-white' : 'bg-transparent',
-              'w-36 h-8 flex justify-center items-center rounded-full font-extrabold text-base leading-5 text-gray1'
+              'w-36 h-8 flex justify-center items-center rounded-full font-extrabold text-base leading-5 text-primary'
             )}
           >
             {tab}

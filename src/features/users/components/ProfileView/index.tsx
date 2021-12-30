@@ -21,7 +21,7 @@ const ProfileView: FC<ProfileProps> = ({ user }) => {
   }, [toast]);
 
   return (
-    <div className="flex flex-col items-center pt-16 pb-10">
+    <div className="flex flex-col items-center py-10">
       <Avatar
         src={
           user?.profileImageUrl ??

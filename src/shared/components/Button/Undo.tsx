@@ -10,7 +10,7 @@ const Undo: FC<IUndoProps> = ({ onClick }) => {
     <button onClick={onClick} className="h-10 bg-transparent flex items-center">
       <Dislike />
       <label className="mx-2 font-bold text-lg leading-5 text-black">
-        Undo like
+        Delete
       </label>
     </button>
   );

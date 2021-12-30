@@ -16,7 +16,7 @@ const TwitterUser: FC<ITwitterUserProps> = ({
 }) => {
   return (
     <div>
-      <a className="flex">
+      <a className="flex items-center">
         <Avatar src={profileImage} />
         <Name>{name}</Name>
         <Id id={twitterId} />
