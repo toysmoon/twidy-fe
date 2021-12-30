@@ -29,7 +29,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // Generate the full URL out of the given path (GET parameter)
   const name = req.query.name as string;
   const theme = req.query.theme as string;
-  const url = getThumnailUrl(name, theme);
+  const image = req.query.image as string;
+  const url = getThumnailUrl(name, theme, image);
 
   await page.goto(url, {
     timeout: 15 * 1000,
@@ -45,8 +46,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.end(data);
 };
 
-function getThumnailUrl(name: string, theme: string) {
+function getThumnailUrl(name: string, theme: string, image: string) {
   const isDevelopment = process.env.NODE_ENV === 'development';
   const baseUrl = isDevelopment ? 'http://localhost:3000' : 'https://twidy.app';
-  return `${baseUrl}/thumbnail?name=${name}&theme=${theme}`;
+  return `${baseUrl}/thumbnail?name=${name}&theme=${theme}&image=${image}`;
 }

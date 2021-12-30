@@ -5,18 +5,13 @@ export default function () {
   const { query } = useRouter();
   const name = query.name as string;
   const theme = query.theme as string;
-  const image = query.image as string;
-
-  console.log(image);
+  const image = decodeURIComponent(query.image as string);
 
   return (
     <EmptyLayout color={theme}>
       <div className="flex flex-col fixed inset-0 justify-center items-center gap-10">
-        <div className="w-52 h-52 bg-gray6 rounded-full overflow-hidden thumbnail-image">
-          <img
-            className="w-52 h-52"
-            src="http://pbs.twimg.com/profile_images/1476201609999052801/eWHYx6b0_normal.jpg"
-          />
+        <div className="w-52 h-52 bg-gray6 rounded-full overflow-hidden box-content thumbnail-image">
+          <img className="w-52 h-52" src={image} />
         </div>
         <h1 className="font-nunito font-extrabold text-gray6 text-8xl">
           {name}

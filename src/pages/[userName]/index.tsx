@@ -59,7 +59,9 @@ type ProfileMetaProps = {
 
 function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
   const title = `${name}'s Twidy`;
-  const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${image}`;
+  const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${encodeURIComponent(
+    image
+  )}`;
 
   return (
     <Head>
