@@ -11,7 +11,7 @@ export default async function getProfile(userId: string): Promise<User> {
   return response.data;
 }
 
-export async function getProfileByName(name: string) {
-  const response = await client.get<User>(`/user`, { params: { name } });
+export async function getProfileByUserName(userName: string) {
+  const response = await client.get<User>(`/user`, { params: { userName } });
   return response.data;
 }

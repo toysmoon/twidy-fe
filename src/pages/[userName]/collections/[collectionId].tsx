@@ -3,7 +3,7 @@ import { useGlobalCardViewMode } from 'features/cards/hooks/useGlobalCard';
 import useCardsQuery from 'features/cards/queries/useCardsQuery';
 import CollectionTitle from 'features/collections/components/CollectionTitle';
 import { useCollecitonQueryById } from 'features/collections/queries/useCollectionQuery';
-import { getProfileByName } from 'features/users/api/getProfile';
+import { getProfileByUserName } from 'features/users/api/getProfile';
 import getSetting, { Setting } from 'features/users/api/getSetting';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
@@ -42,8 +42,8 @@ export default function CollectionPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const name = ctx.query.userName as string;
-  const user = await getProfileByName(name);
+  const userName = ctx.query.userName as string;
+  const user = await getProfileByUserName(userName);
   if (!user) {
     redirectUser(ctx, '/404');
     return { props: {} };

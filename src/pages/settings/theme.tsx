@@ -8,11 +8,13 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import SaveLayout from 'shared/components/Templates/Layout/SaveLayout';
+import useScrollLock from 'shared/hooks/useScrollLock';
 import useToast from 'shared/hooks/useToast';
 import { themeState } from 'shared/states/themeState';
 import { setCookie } from 'shared/utils/cookie';
 
 export default function SettingTheme() {
+  useScrollLock(true);
   const toast = useToast();
   const router = useRouter();
 
@@ -31,8 +33,6 @@ export default function SettingTheme() {
     router.back();
     toast('New theme has been applied!');
   }, [user, color]);
-
-  console.log(color);
 
   return (
     <SaveLayout onApply={handleApply} color={color}>

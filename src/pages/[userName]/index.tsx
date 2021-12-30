@@ -1,6 +1,6 @@
 import CollectionList from 'features/collections/components/CollectionList';
 import CollectionListSkeleton from 'features/collections/components/CollectionListSkeleton';
-import { getProfileByName } from 'features/users/api/getProfile';
+import { getProfileByUserName } from 'features/users/api/getProfile';
 import getSetting, { Setting } from 'features/users/api/getSetting';
 import ProfileView from 'features/users/components/ProfileView';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -44,8 +44,8 @@ export default function UserPage({
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const name = ctx.query.userName as string;
-  const user = await getProfileByName(name);
+  const userName = ctx.query.userName as string;
+  const user = await getProfileByUserName(userName);
   if (!user) {
     redirectUser(ctx, '/404');
     return { props: {} };

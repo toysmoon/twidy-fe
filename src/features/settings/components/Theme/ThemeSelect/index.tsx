@@ -20,7 +20,14 @@ export default function ThemeSelect({ onChange }: IThemeSelect) {
   );
 
   return (
-    <div className={cn('absolute', 'bottom-0', 'w-full', 'max-w-xl')}>
+    <div
+      className={cn(
+        'absolute bottom-0',
+        'w-full max-w-xl h-40',
+        'flex flex-col-reverse',
+        'bg-gradient-to-b from-transparent to-black'
+      )}
+    >
       <div className={wrapperCn}>
         {colorList.map(({ value }) => (
           <div
