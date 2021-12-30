@@ -1,23 +1,24 @@
 import AddCollection from 'features/collections/components/AddCollection';
 import CollectionItem from 'features/collections/components/CollectionItem';
-import Skeleton from 'features/collections/components/Skeleton';
+import CollectionListSkeleton from 'features/collections/components/CollectionListSkeleton';
 import useCollecitonQuery from 'features/collections/queries/useCollectionQuery';
 import Profile from 'features/users/components/Profile';
 import ProfileSkeleton from 'features/users/components/Profile/ProfileSkeleton';
-import React, { Suspense } from 'react';
+import React from 'react';
+import Boundary from 'shared/components/Boundary';
 import LikeTab from 'shared/components/LikeTab';
 import Layout from '../Layout';
 
 export default function Folders() {
   return (
     <Layout>
-      <Suspense fallback={ProfileSkeleton}>
+      <Boundary fallback={<ProfileSkeleton />}>
         <Profile />
-      </Suspense>
+      </Boundary>
       <LikeTab isCollections />
-      <Suspense fallback={Skeleton}>
+      <Boundary fallback={<CollectionListSkeleton />}>
         <CollectionList />
-      </Suspense>
+      </Boundary>
     </Layout>
   );
 }

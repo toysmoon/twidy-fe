@@ -1,4 +1,5 @@
 import CollectionList from 'features/collections/components/CollectionList';
+import CollectionListSkeleton from 'features/collections/components/CollectionListSkeleton';
 import { getProfileByName } from 'features/users/api/getProfile';
 import getSetting, { Setting } from 'features/users/api/getSetting';
 import ProfileView from 'features/users/components/ProfileView';
@@ -8,6 +9,7 @@ import { useRouter } from 'next/router';
 import { redirectUser } from 'pages/_app';
 import React from 'react';
 import { User } from 'shared/api/types';
+import Boundary from 'shared/components/Boundary';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
 export default function UserPage({
@@ -30,10 +32,12 @@ export default function UserPage({
         image={user.profileImageUrl}
       />
       <ProfileView user={user} />
-      <CollectionList
-        userId={userId}
-        onClickCollection={handleClickCollection}
-      />
+      <Boundary pending={<CollectionListSkeleton />}>
+        <CollectionList
+          userId={userId}
+          onClickCollection={handleClickCollection}
+        />
+      </Boundary>
       <TwidyFooter />
     </EmptyLayout>
   );

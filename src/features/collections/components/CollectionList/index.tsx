@@ -1,7 +1,7 @@
 import { useCollecitonQueryById } from 'features/collections/queries/useCollectionQuery';
 import React from 'react';
 import CollectionItem from '../CollectionItem';
-import Skeleton from '../Skeleton';
+import Skeleton from '../CollectionListSkeleton';
 
 interface CollectionListProps {
   userId: string;

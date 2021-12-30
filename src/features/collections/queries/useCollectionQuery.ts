@@ -1,6 +1,4 @@
-import useUserQuery, {
-  useUserByIdQuery,
-} from 'features/users/queries/useUserQuery';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import { useMemo } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import deleteCollections from '../api/deleteCollections';
@@ -28,12 +26,9 @@ export default function useCollecitonQuery() {
 }
 
 export function useCollecitonQueryById(userId: string) {
-  const { data: user } = useUserByIdQuery(userId);
-  const collectionUserId = user!.userId;
-
   const result = useQuery<Collection[]>(
-    ['collection', collectionUserId],
-    () => (collectionUserId ? getCollections(collectionUserId) : []),
+    ['collection', userId],
+    () => getCollections(userId),
     { staleTime: Infinity, cacheTime: Infinity }
   );
 

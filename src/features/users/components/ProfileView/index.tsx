@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { FC, useCallback } from 'react';
 import { User } from 'shared/api/types';
 import { Copy } from 'shared/components/Icons';
@@ -12,12 +11,7 @@ interface ProfileProps {
 
 const ProfileView: FC<ProfileProps> = ({ user }) => {
   const toast = useToast();
-  const router = useRouter();
   const url = `twidy.app/${user?.userName}`;
-
-  const handleClick = useCallback(() => {
-    router.push('');
-  }, [router, user]);
 
   const handleCopy = useCallback(async () => {
     try {
@@ -27,10 +21,7 @@ const ProfileView: FC<ProfileProps> = ({ user }) => {
   }, [toast]);
 
   return (
-    <div
-      onClick={handleClick}
-      className="flex flex-col items-center pt-16 pb-10"
-    >
+    <div className="flex flex-col items-center pt-16 pb-10">
       <Avatar
         src={
           user?.profileImageUrl ??

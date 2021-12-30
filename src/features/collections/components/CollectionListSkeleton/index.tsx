@@ -1,6 +1,6 @@
 import { containerDefaultClass } from '../CollectionItem';
 
-export default function Skeleton() {
+export default function CollectionListSkeleton() {
   return (
     <div className="flex p-4 flex-col gap-3">
       <div className={containerDefaultClass.join(' ')}>
