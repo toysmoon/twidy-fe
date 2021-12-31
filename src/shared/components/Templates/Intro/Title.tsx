@@ -1,14 +1,11 @@
-import { ReactNode } from 'react';
-
 interface ISection {
   title: string;
   detail: string;
-  children: ReactNode;
 }
 
-export default function Section({ title, detail, children }: ISection) {
+export default function Title({ title, detail }: ISection) {
   return (
-    <section>
+    <section className="flex flex-col justify-center items-center mt-16 pt-5">
       <div className="w-full">
         <h2 className="font-nunito font-black text-5xl my-5 text-center whitespace-pre-line text-white">
           {title}
@@ -17,7 +14,6 @@ export default function Section({ title, detail, children }: ISection) {
           {detail}
         </p>
       </div>
-      {children}
     </section>
   );
 }

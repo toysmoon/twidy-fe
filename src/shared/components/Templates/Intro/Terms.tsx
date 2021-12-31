@@ -6,7 +6,7 @@ export default function Terms() {
   const detailClass = 'font-roboto text-xs flex items-center text-gray3 my-1';
 
   return (
-    <div className="w-full py-5 pr-6 pl-5 box-border border-t border-t-gray3 mb-24">
+    <div className="w-full py-5 px-8 box-border border-t border-t-gray3">
       <div className="flex justify-between items-center mb-6">
         <div>
           <p className="font-roboto font-bold text-sm leading-4 text-white">

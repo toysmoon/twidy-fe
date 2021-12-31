@@ -9,7 +9,9 @@ module.exports = {
       spacing: {
         '1px': '1px',
         18: '4.5rem',
+        19: '4.75rem',
         26: '6.5rem',
+        50: '12.5rem',
       },
       colors: {
         primary: 'var(--colors-primary)',
