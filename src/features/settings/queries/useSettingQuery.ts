@@ -19,3 +19,15 @@ export function useMutateTheme(userId: string) {
     },
   });
 }
+
+export function useMutateAutoDelete(userId?: string) {
+  const queryClient = useQueryClient();
+  const { data: setting } = useSettingQuery(userId);
+
+  return useMutation(
+    (autoDelete: boolean) => putSetting({ ...setting, autoDelete }),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['setting', userId]),
+    }
+  );
+}
