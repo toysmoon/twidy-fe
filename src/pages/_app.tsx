@@ -44,9 +44,7 @@ function Maeum({ Component, pageProps }: AppProps) {
       <TwidyMeta />
       <RecoilRoot initializeState={initializeState}>
         <Boundary pending={<div />} reject={ErrorFallback}>
-          <Boundary pending={<div />} reject={DefaultError}>
-            <Component {...nextPageProps} />
-          </Boundary>
+          <Component {...nextPageProps} />
           <Boundary pending={<div />} reject={DefaultError}>
             <ThemeUpdater />
           </Boundary>
@@ -59,13 +57,15 @@ function Maeum({ Component, pageProps }: AppProps) {
   );
 }
 
-function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   const router = useRouter();
 
   useEffect(() => {
+    console.log('error:');
+    console.log(error);
     router.replace('/about');
     resetErrorBoundary();
-  }, []);
+  }, [error]);
 
   return <div></div>;
 }

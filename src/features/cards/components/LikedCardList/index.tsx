@@ -11,8 +11,6 @@ interface LikedCardListProps {
 export default function LikedCardList({ onClickCard }: LikedCardListProps) {
   const cards = useUnclassifiedCard();
 
-  console.log(cards);
-
   return (
     <>
       {cards?.map((item, i) => (
