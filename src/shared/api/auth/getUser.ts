@@ -16,7 +16,7 @@ export default async function getUser(ctx?: NextPageContext): Promise<User> {
 
   const error = response.data as UserError;
   if (error.data) {
-    throw error.data;
+    throw error;
   }
 
   const result = response.data as User;
