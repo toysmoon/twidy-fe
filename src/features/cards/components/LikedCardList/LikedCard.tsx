@@ -14,6 +14,7 @@ interface ICardProps {
 
 export default function LikedCard({ card, onClick }: ICardProps) {
   const { author, text, media } = card;
+  const isHaveMedia = media && media.length > 0;
 
   const handleUndo = useCallback(() => {
     dislikeTweet(card.tweetId);
@@ -25,12 +26,12 @@ export default function LikedCard({ card, onClick }: ICardProps) {
     <div className="p-5 my-3 mx-4 relative bg-white rounded-2xl">
       <article>
         <TwitterUser
-          profileImage={author.miniProfileImageURLHttps}
-          twitterId={author.screenName}
+          profileImage={author.profile_image_url}
+          twitterId={author.username}
           name={author.name}
         />
         <Text>{text}</Text>
-        {media.length > 0 && <CardThumbnail images={media} />}
+        {isHaveMedia && <CardThumbnail images={media} />}
       </article>
       <div className="flex justify-between mt-5">
         <Undo onClick={handleUndo} />

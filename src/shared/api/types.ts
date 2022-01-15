@@ -15,9 +15,11 @@ export type TweetResponse = {
 };
 
 export type Author = {
+  id: string;
   name: string;
-  screenName: string;
-  miniProfileImageURLHttps: string;
+  description: string;
+  profile_image_url: string;
+  username: string;
 };
 
 export enum MEDIA_TYPE {
@@ -30,10 +32,12 @@ export enum MEDIA_TYPE {
 }
 
 export type Media = {
-  displayURL?: string;
-  expandedURL?: string;
-  mediaURLHttps: string;
+  width: string;
+  height: string;
+  media_key: string;
+  preview_image_url?: string;
   type: MEDIA_TYPE;
+  url: string;
 };
 
 export type Tweet = {

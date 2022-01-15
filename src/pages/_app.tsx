@@ -43,9 +43,11 @@ function Maeum({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <TwidyMeta />
       <RecoilRoot initializeState={initializeState}>
-        <Boundary reject={ErrorFallback} pending={<div />}>
-          <Component {...nextPageProps} />
-          <Boundary pending={<div />} reject={ThemeError}>
+        <Boundary pending={<div />} reject={ErrorFallback}>
+          <Boundary pending={<div />} reject={DefaultError}>
+            <Component {...nextPageProps} />
+          </Boundary>
+          <Boundary pending={<div />} reject={DefaultError}>
             <ThemeUpdater />
           </Boundary>
         </Boundary>
@@ -68,7 +70,7 @@ function ErrorFallback({ resetErrorBoundary }: FallbackProps) {
   return <div></div>;
 }
 
-function ThemeError() {
+function DefaultError() {
   return <div />;
 }
 

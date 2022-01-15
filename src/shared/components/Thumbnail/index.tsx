@@ -1,24 +1,21 @@
-import { Media } from 'shared/api/types';
 import { FC } from 'react';
+import { Media, MEDIA_TYPE } from 'shared/api/types';
 import ImageThumbnail from './ImageThumbnail';
-import LinkThumbnail from './LinkThumbnail';
 
 interface ICardThumbProps {
-  link?: string;
-  title?: string;
   images: Media[];
 }
 
-const CardThumbnail: FC<ICardThumbProps> = ({ link, title, images }) => {
+const CardThumbnail: FC<ICardThumbProps> = ({ images }) => {
   const [image] = images;
 
-  if (typeof link === 'string' && typeof title === 'string') {
-    return (
-      <LinkThumbnail title={title} link={link} image={image.mediaURLHttps} />
-    );
+  if (image.type === MEDIA_TYPE.photo && image.url) {
+    return <ImageThumbnail image={image.url} />;
+  } else if (image.preview_image_url) {
+    return <ImageThumbnail image={image.preview_image_url} />;
   }
 
-  return <ImageThumbnail image={image.mediaURLHttps} />;
+  return null;
 };
 
 export default CardThumbnail;

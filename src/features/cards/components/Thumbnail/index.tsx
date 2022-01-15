@@ -30,7 +30,7 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
                 rgba(0, 0, 0, 0.7),
                 rgba(0, 0, 0, 0.7)
               ),
-              url(${author.miniProfileImageURLHttps});
+              url(${author.profile_image_url});
           }
         `}</style>
       </div>
@@ -48,7 +48,7 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
             key={`thumb-image-${i}`}
             className={cn(getGridClass(images.length, i), 'relative')}
           >
-            <Image src={image.mediaURLHttps} layout="fill" objectFit="cover" />
+            <Image src={image.url} layout="fill" objectFit="cover" />
           </div>
         ))}
       </div>
@@ -59,13 +59,13 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
 function getContent(type: MEDIA_TYPE, author: Author) {
   switch (type) {
     case MEDIA_TYPE.video:
-      return `${author.screenName}'s video on Twitter`;
+      return `${author.name}'s video on Twitter`;
     case MEDIA_TYPE.poll:
       return `View poll on Twitter`;
     case MEDIA_TYPE.place:
       return `View map on Twitter`;
     case MEDIA_TYPE.quote:
-      return `${author.screenName}'s quoted tweet on Twitter`;
+      return `${author.name}'s quoted tweet on Twitter`;
   }
 }
 
