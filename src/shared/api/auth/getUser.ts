@@ -2,7 +2,7 @@ import { NextPageContext } from 'next';
 import client from '../client';
 import { User } from '../types';
 
-type UserError = {
+export type UserError = {
   code: number;
   msg: string;
   data: string;

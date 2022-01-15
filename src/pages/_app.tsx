@@ -58,12 +58,15 @@ function Maeum({ Component, pageProps }: AppProps) {
 }
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  const e = error as any;
   const router = useRouter();
 
   useEffect(() => {
-    console.log('error:');
-    console.log(error);
-    router.replace('/about');
+    if (e.code === -100) {
+      router.replace('/about');
+    } else {
+    }
+
     resetErrorBoundary();
   }, [error]);
 
