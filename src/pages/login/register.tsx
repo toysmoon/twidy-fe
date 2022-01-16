@@ -50,7 +50,7 @@ export default function LoadingPage() {
             onClick={handleClick}
             className="w-full h-16 bg-white rounded-full mt-6 mb-4 font-bold"
           >
-            Get to Start
+            Start organizing your likes
           </button>
           <p className="text-gray-500 text-xs pb-4">
             By logging in you accept the Privacy and Terms.

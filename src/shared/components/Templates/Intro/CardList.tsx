@@ -22,7 +22,7 @@ function Card({ color, title, detail, icon }: ICard) {
   return (
     <div className={classNames('p-7 rounded-3xl bg-white', 'flex')}>
       <div
-        className={`w-12 h-12 relative bg-${color} rounded-full p-3 mr-4 shrink-0`}
+        className={`w-12 h-12 relative ${color} rounded-full p-3 mr-4 shrink-0`}
       >
         <div className="relative w-full h-full">
           <Image src={icon} layout={'fill'} quality={100} />

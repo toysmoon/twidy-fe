@@ -10,7 +10,7 @@ const useModal = (
 ) => {
   return classNames(
     isOpen ? 'bottom-0 opacity-100' : '-bottom-full opacity-0',
-    useMinHeight && 'min-height-70'
+    useMinHeight && 'min-height-50'
   );
 };
 

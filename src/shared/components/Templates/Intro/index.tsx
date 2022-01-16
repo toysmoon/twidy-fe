@@ -40,18 +40,18 @@ const cardList = [
     title: 'Categorize',
     detail: 'Categorize your messy tweets in your own collection.',
     icon: '/images/intro/categorize.png',
-    color: 'twitter',
+    color: 'bg-twitter',
   },
   {
     title: 'Search',
     detail: 'Easily search your liked or collected tweets.',
     icon: '/images/intro/search.png',
-    color: 'orange',
+    color: 'bg-orange',
   },
   {
     title: 'Share',
     detail: 'Share your own collection to your followers.',
     icon: '/images/intro/share.png',
-    color: 'mint',
+    color: 'bg-mint',
   },
 ];

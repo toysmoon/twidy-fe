@@ -8,7 +8,7 @@ interface IAvatarProps {
 
 const Avatar: FC<IAvatarProps> = ({ src = '' }) => {
   return (
-    <div className="w-16 h-16 rounded-full border-4 overflow-hidden">
+    <div className="w-12 h-12 rounded-full border-4 overflow-hidden">
       <Image
         src={src}
         width={sizes.profileAvatar}
