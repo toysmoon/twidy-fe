@@ -13,17 +13,15 @@ export function useUnclassifiedQuery() {
   );
 }
 
-export function useGetLikesMutation(refresh: boolean) {
+export function useGetLikesMutation() {
   const queryClient = useQueryClient();
   return useMutation(getLikes, {
     onSuccess: () => {
-      if (refresh) {
-        return queryClient.invalidateQueries([
-          'cards',
-          'list',
-          { unclassifed: true },
-        ]);
-      }
+      return queryClient.invalidateQueries([
+        'cards',
+        'list',
+        { unclassifed: true },
+      ]);
     },
   });
 }
@@ -54,16 +52,14 @@ export function useSavedCardRemove() {
 
 export function useUnclassifiedCard() {
   const { data, isLoading } = useUnclassifiedQuery();
-  const isEmptyList = data?.length === 0;
-  const { mutate } = useGetLikesMutation(isEmptyList);
+  const { mutate } = useGetLikesMutation();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (isLoading) {
       return;
     }
-
     mutate();
-  }, [isEmptyList]);
+  }, [isLoading, mutate]);
 
   return data;
 }

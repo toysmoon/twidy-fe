@@ -8,7 +8,7 @@ interface SaveTweetProps {
 
 export default async function updateCard(props: SaveTweetProps) {
   const { cardId, collectionId, title } = props;
-  const response = await client.put<null>(`/card`, {
+  const response = await client.patch<null>(`/card`, {
     cardId,
     collectionId,
     title,
