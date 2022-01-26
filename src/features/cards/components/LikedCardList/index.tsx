@@ -11,7 +11,7 @@ interface LikedCardListProps {
 export default function LikedCardList({ onClickCard }: LikedCardListProps) {
   const cards = useUnclassifiedCard();
 
-  if (cards!.length === 0 || true) {
+  if (cards!.length === 0) {
     return (
       <div className="mt-20">
         <p className="text-center text-white opacity-50 text-lg">

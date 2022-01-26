@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { Collection } from 'features/collections/types';
 import React from 'react';
 import { Lock } from 'shared/components/Icons';
+import TwitterEmoji from 'shared/components/TwitterEmoji';
 
 interface ICollectionIconProps {
   collections: Collection;
@@ -30,7 +31,7 @@ export default function CollectionIcon({
 
   return (
     <div className={iconClass}>
-      {emoji}
+      <TwitterEmoji value={emoji} />
       {isPrivate && <LockIcon />}
     </div>
   );

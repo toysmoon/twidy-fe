@@ -22,12 +22,12 @@ export default function CollectionTweet({
       onClick={open}
       className="bg-white rounded-3xl p-5 m-4 box-border relative"
     >
-      <p className="font-roboto font-bold text-base leading-5">
+      <div className="font-roboto font-bold text-base leading-5 flex">
         {title ?? ''}
         <div className="font-normal ml-1 text-gray3">
           {getDisplayDate(regDttm)}
         </div>
-      </p>
+      </div>
       <Content text={text} media={media} />
       {!isViewMode && (
         <MoreButton onClick={() => {}} classNames="absolute top-6 right-6" />

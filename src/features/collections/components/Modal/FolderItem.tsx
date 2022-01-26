@@ -1,6 +1,7 @@
 import { Collection } from 'features/collections/types';
 import React, { FC } from 'react';
 import { ArrowRight, Lock } from 'shared/components/Icons';
+import TwitterEmoji from 'shared/components/TwitterEmoji';
 
 interface IFolderProps {
   folder: Collection;
@@ -21,7 +22,7 @@ const FolderItem: FC<IFolderProps> = ({ folder, onClick }) => {
       <div
         className={`w-8 h-8 shrink-0 rounded-full relative flex justify-center items-center text-base bg-${color}`}
       >
-        {emoji}
+        <TwitterEmoji value={emoji} />
         {isPrivate && <LockIcon />}
       </div>
       <p className="w-full font-bold text-lg leading-5 text-black mx-3">

@@ -4,9 +4,15 @@ export interface IInputProps {
   value: string;
   onChange: (newValue: string) => void;
   placeholder?: string;
+  maxLength?: number;
 }
 
-const Input: FC<IInputProps> = ({ value, onChange, placeholder }) => {
+const Input: FC<IInputProps> = ({
+  value,
+  onChange,
+  placeholder,
+  maxLength,
+}) => {
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value),
     []
@@ -18,6 +24,7 @@ const Input: FC<IInputProps> = ({ value, onChange, placeholder }) => {
       onChange={handleChange}
       value={value}
       placeholder={placeholder}
+      maxLength={maxLength}
       className="w-full h-14 py-4 px-5 rounded-xl bg-gray6 focus:outline-none text-base placeholder:text-gary4"
     />
   );
