@@ -2,6 +2,7 @@ import Thumbnail from 'features/cards/components/Thumbnail';
 import useUpdateCardMutation from 'features/cards/queries/useUpdateCardMutation';
 import type Card from 'features/cards/types/Card';
 import React, { useState } from 'react';
+import { MEDIA_TYPE } from 'shared/api/types';
 import Modal from 'shared/components/Modal';
 import MoreMenu from '../MoreMenu';
 import ChangeTitle from './ChangeTittle';
@@ -51,7 +52,7 @@ export default function DetailedCard({
 
   const { media, author, text, url } = card;
   const isHaveMedia = media && media.length > 0;
-  const mediaType = media[0]?.type;
+  const mediaType = media?.[0]?.type ?? MEDIA_TYPE.photo;
 
   return (
     <Modal isOpen={true} onClose={onClose}>

@@ -5,7 +5,7 @@ type Card = {
   text: string;
   url: string;
   author: Author;
-  media: Media[];
+  media?: Media[];
   status: string;
   regDttm: string;
   modDttm: string;

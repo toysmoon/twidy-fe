@@ -4,11 +4,11 @@ import Thumbnail from './Thumbnail';
 
 interface IContentProps {
   text: string;
-  media: Media[];
+  media?: Media[];
 }
 
 export default function Content({ text, media }: IContentProps) {
-  const isHasDedia = media.length > 0;
+  const isHasDedia = media && media.length > 0;
 
   return (
     <div className="flex gap-4 mt-3">
