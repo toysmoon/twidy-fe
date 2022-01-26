@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { Edit } from 'shared/components/Icons';
 import Emoji from 'shared/components/Modal/Emoji';
+import TwitterEmoji from 'shared/components/TwitterEmoji';
 
 interface IFolderIconProps {
   icon: string;
@@ -26,7 +27,7 @@ const SelectIcon: FC<IFolderIconProps> = ({ icon, color, onChange }) => {
       <div
         className={`w-16 h-16 relative rounded-full flex justify-center items-center text-3xl bg-${color}`}
       >
-        {icon}
+        <TwitterEmoji value={icon} size={32} />
         <div
           onClick={handleEdit}
           className="w-6 h-6 rounded-full bg-gray1 absolute -right-1 -bottom-1 flex justify-center items-center"

@@ -5,6 +5,7 @@ import Input from 'shared/components/Form/Input';
 import ArrowBack from 'shared/components/Icons/ArrowBack';
 import ModalButton from 'shared/components/Modal/ModalButton';
 import Modal from '.';
+import TwitterEmoji from '../TwitterEmoji';
 import { ISubmitProps } from './HomeModals';
 
 export interface ISaveTweetProps {
@@ -41,7 +42,7 @@ const SaveTweet: FC<ISaveTweetProps> = ({
             <div
               className={`w-8 h-8 mr-3 flex justify-center items-center rounded-full bg-${color}`}
             >
-              {emoji}
+              <TwitterEmoji value={emoji} />
             </div>
             <h2 className="font-bold text-lg leading-5 text-black">
               {collection.name}
