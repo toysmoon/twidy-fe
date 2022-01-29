@@ -3,7 +3,8 @@ import useScrollLock from 'shared/hooks/useScrollLock';
 import { dimState } from 'shared/states/dimState';
 
 export default function Dim() {
-  const isOpen = useRecoilValue(dimState);
+  const dimCount = useRecoilValue(dimState);
+  const isOpen = dimCount > 0;
   useScrollLock(isOpen);
 
   if (!isOpen) {
