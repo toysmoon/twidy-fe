@@ -1,4 +1,5 @@
 import dislikeTweet from 'features/cards/api/dislikeTweet';
+import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
 import type CardType from 'features/cards/types/Card';
 import React, { useCallback } from 'react';
 import Save from 'shared/components/Button/Save';
@@ -15,9 +16,11 @@ interface ICardProps {
 export default function LikedCard({ card, onClick }: ICardProps) {
   const { author, text, media, url } = card;
   const isHaveMedia = media && media.length > 0;
+  const removeCardFromList = useSavedCardRemove();
 
-  const handleUndo = useCallback(() => {
-    dislikeTweet(card.tweetId);
+  const handleUndo = useCallback(async () => {
+    await dislikeTweet(card.tweetId);
+    removeCardFromList(card.tweetId);
   }, [card]);
 
   const handleClick = useCallback(() => onClick(card), [card, onClick]);

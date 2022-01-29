@@ -32,12 +32,12 @@ export function useSavedCardRemove() {
   const cards = useUnclassifiedCard();
 
   return useCallback(
-    (cardId: number) => {
+    (tweetId: string) => {
       if (!cards) {
         return;
       }
 
-      const index = cards.findIndex((c) => c.cardId === cardId);
+      const index = cards.findIndex((c) => c.tweetId === tweetId);
       if (index === -1) {
         return;
       }

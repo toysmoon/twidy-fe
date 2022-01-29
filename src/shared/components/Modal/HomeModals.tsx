@@ -75,7 +75,7 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
       });
       toast('This tweet has been saved!');
 
-      removeCardFromList(card.cardId);
+      removeCardFromList(card.tweetId);
       onClose();
       setStep(HOME_MODAL_STEP.NONE);
     },
