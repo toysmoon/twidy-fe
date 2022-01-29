@@ -16,6 +16,7 @@ export default function CollectionPage({
   data: initialData,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   useGlobalCardViewMode();
+
   const router = useRouter();
   const collectionId = Number(router.query.collectionId);
 

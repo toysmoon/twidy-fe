@@ -10,7 +10,7 @@ export default function useGlobalCard(card: Card) {
 
   return useCallback(() => {
     setCard({ ...globalCard, open: true, card });
-  }, [card]);
+  }, [globalCard, card]);
 }
 
 export function useGlobalCardViewMode() {

@@ -48,7 +48,11 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
             key={`thumb-image-${i}`}
             className={cn(getGridClass(images.length, i), 'relative')}
           >
-            <Image src={image.url} layout="fill" objectFit="cover" />
+            <Image
+              src={image.url ?? image.preview_image_url}
+              layout="fill"
+              objectFit="cover"
+            />
           </div>
         ))}
       </div>
