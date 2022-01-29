@@ -35,7 +35,7 @@ export default function LikedCard({ card, onClick }: ICardProps) {
           url={url}
         />
         <Text>{text}</Text>
-        {isHaveMedia && <CardThumbnail images={media} />}
+        {isHaveMedia && <CardThumbnail images={media} tweetUrl={card.url} />}
       </article>
       <div className="flex justify-between mt-5">
         <Undo onClick={handleUndo} />
