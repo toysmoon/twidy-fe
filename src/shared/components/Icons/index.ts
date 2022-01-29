@@ -10,6 +10,7 @@ import Delete from './Delete';
 import Menu from './Menu';
 import Search from './Search';
 import More from './More';
+import ArrowCircle from './ArrowCircle';
 
 export interface IIconProps {
   width?: number;
@@ -24,6 +25,7 @@ export {
   Dislike,
   AddCircle,
   ArrowRight,
+  ArrowCircle,
   Lock,
   Logo,
   Edit,

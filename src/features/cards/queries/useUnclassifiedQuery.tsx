@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import getLikes from '../api/getLikes';
 import getUnclassifiedCards from '../api/getUnclassifiedCards';
@@ -15,6 +15,7 @@ export function useUnclassifiedQuery() {
 
 export function useGetLikesMutation() {
   const queryClient = useQueryClient();
+
   return useMutation(getLikes, {
     onSuccess: () => {
       return queryClient.invalidateQueries([
@@ -51,15 +52,6 @@ export function useSavedCardRemove() {
 }
 
 export function useUnclassifiedCard() {
-  const { data, isLoading } = useUnclassifiedQuery();
-  const { mutate } = useGetLikesMutation();
-
-  useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-    mutate();
-  }, [isLoading, mutate]);
-
+  const { data } = useUnclassifiedQuery();
   return data;
 }
