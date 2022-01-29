@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import getLikes from '../api/getLikes';
+import { useQuery, useQueryClient } from 'react-query';
 import getUnclassifiedCards from '../api/getUnclassifiedCards';
 
 export function useUnclassifiedQuery() {
@@ -13,45 +12,32 @@ export function useUnclassifiedQuery() {
   );
 }
 
-export function useGetLikesMutation() {
+export function useRefreshCardList() {
   const queryClient = useQueryClient();
 
-  return useMutation(getLikes, {
-    onSuccess: () => {
-      return queryClient.invalidateQueries([
-        'cards',
-        'list',
-        { unclassifed: true },
-      ]);
-    },
-  });
+  return useCallback(
+    () =>
+      queryClient.invalidateQueries(['cards', 'list', { unclassifed: true }]),
+    [queryClient]
+  );
 }
 
 export function useSavedCardRemove() {
   const queryClient = useQueryClient();
-  const cards = useUnclassifiedCard();
+  const { data: cards } = useUnclassifiedQuery();
 
   return useCallback(
     (tweetId: string) => {
-      if (!cards) {
-        return;
-      }
-
-      const index = cards.findIndex((c) => c.tweetId === tweetId);
+      const index = cards!.findIndex((c) => c.tweetId === tweetId);
       if (index === -1) {
         return;
       }
 
       queryClient.setQueryData(
         ['cards', 'list', { unclassifed: true }],
-        [...cards.slice(0, index), ...cards.slice(index + 1)]
+        [...cards!.slice(0, index), ...cards!.slice(index + 1)]
       );
     },
     [queryClient, cards]
   );
-}
-
-export function useUnclassifiedCard() {
-  const { data } = useUnclassifiedQuery();
-  return data;
 }

@@ -1,15 +1,20 @@
-import { useUnclassifiedCard } from 'features/cards/queries/useUnclassifiedQuery';
+import { useUnclassifiedQuery } from 'features/cards/queries/useUnclassifiedQuery';
 import Card from 'features/cards/types/Card';
 import React from 'react';
 import LikedCard from './LikedCard';
 import LikedCardSkeleton from './LikedCardSkeleton';
+import LoadNewTweets from './LoadNewTweets';
 
 interface LikedCardListProps {
   onClickCard: (c: Card) => void;
 }
 
 export default function LikedCardList({ onClickCard }: LikedCardListProps) {
-  const cards = useUnclassifiedCard();
+  const { data: cards, isRefetching } = useUnclassifiedQuery();
+
+  if (isRefetching) {
+    return <CardListsSkeleton />;
+  }
 
   if (cards!.length === 0) {
     return (
@@ -28,9 +33,10 @@ export default function LikedCardList({ onClickCard }: LikedCardListProps) {
 
   return (
     <>
-      {cards?.map((item, i) => (
+      {cards!.map((item, i) => (
         <LikedCard key={i} card={item} onClick={onClickCard} />
       ))}
+      {cards!.length < 16 && <LoadNewTweets />}
     </>
   );
 }

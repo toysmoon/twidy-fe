@@ -21,7 +21,7 @@ export default function UserPage({
   const userId = user.userId;
 
   const handleClickCollection = (collectionId: number) => {
-    router.push(`/${user.name}/collections/${collectionId}`);
+    router.push(`/${router.query.userName}/collections/${collectionId}`);
   };
 
   return (
@@ -100,8 +100,8 @@ function FooterIcon() {
       fill="none"
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M1.14203 6.71036C0.974402 4.79439 2.39171 3.10531 4.30768 2.93769L6.55644 2.74095C7.41685 2.66567 8.26879 2.95907 8.90039 3.54818L9.83559 4.42047L15.7531 3.90276C17.9085 3.71418 19.8088 5.30866 19.9973 7.46412L20.5854 14.1856C20.774 16.3411 19.1795 18.2413 17.024 18.4299L6.18288 19.3784C4.02742 19.567 2.1272 17.9725 1.93862 15.817L1.35056 9.0955L1.34781 9.0625L1.14203 6.71036ZM11.3522 15.543C2.55929 11.4513 7.85599 5.97402 10.7993 9.22397C13.0147 5.52266 19.1821 9.99701 11.3522 15.543Z"
         fill="white"
       />

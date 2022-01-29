@@ -43,6 +43,8 @@ export default function CollectionPage({
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const userName = ctx.query.userName as string;
+  console.log(userName);
+
   const user = await getProfileByUserName(userName);
   if (!user) {
     redirectUser(ctx, '/404');
