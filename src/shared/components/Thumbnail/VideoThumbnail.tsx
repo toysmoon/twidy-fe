@@ -19,7 +19,7 @@ const VideoThumbnail: FC<ICardThumbProps> = ({ image, tweetUrl }) => {
           <Image src={image} layout="fill" objectFit="cover" />
         </div>
         <div className="absolute inset-0 flex justify-center items-center">
-          <div className="w-14 h-14 bg-white bg-opacity-50 rounded-full flex justify-center items-center">
+          <div className="w-14 h-14 bg-black bg-opacity-50 rounded-full flex justify-center items-center">
             <Video />
           </div>
         </div>

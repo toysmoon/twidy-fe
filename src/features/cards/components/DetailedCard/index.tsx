@@ -1,5 +1,6 @@
 import Thumbnail from 'features/cards/components/Thumbnail';
 import useUpdateCardMutation, {
+  useDeleteCardMutation,
   useMoveCardMutation,
 } from 'features/cards/queries/useUpdateCardMutation';
 import type Card from 'features/cards/types/Card';
@@ -31,13 +32,19 @@ export default function DetailedCard({
   const [step, setStep] = useState(1);
   const { mutateAsync: updateCard } = useUpdateCardMutation(card?.collectionId);
   const { mutateAsync: moveCard } = useMoveCardMutation(collectionId);
+  const { mutateAsync: deleteCard } = useDeleteCardMutation(collectionId);
 
   if (!card) {
     return null;
   }
 
   if (step === 2) {
-    const handleDelete = () => {};
+    const handleDelete = async () => {
+      await deleteCard(card.cardId);
+      toast('Your changes have been applied!');
+      onClose();
+    };
+
     return (
       <MoreMenu
         onClose={() => setStep(1)}
