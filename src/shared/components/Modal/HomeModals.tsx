@@ -1,9 +1,11 @@
+import dislikeTweet from 'features/cards/api/dislikeTweet';
 import postCard from 'features/cards/api/postCard';
 import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
 import type Card from 'features/cards/types/Card';
 import CollectionList from 'features/collections/components/Modal/CollectionList';
 import addCollectionMutation from 'features/collections/queries/addCollectionMutation';
 import { Collection, PostCollection } from 'features/collections/types';
+import { useSettingQuery } from 'features/settings/queries/useSettingQuery';
 import useUserQuery from 'features/users/queries/useUserQuery';
 import dynamic from 'next/dynamic';
 import React, { FC, useCallback, useEffect, useState } from 'react';
@@ -33,6 +35,7 @@ enum HOME_MODAL_STEP {
 
 const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
   const user = useUserQuery();
+  const { data: setting } = useSettingQuery(user!.userId);
   const toast = useToast();
   const [step, setStep] = useState<HOME_MODAL_STEP>(HOME_MODAL_STEP.NONE);
   const [collection, setCollection] = useState<Collection>();
@@ -73,13 +76,18 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
         tweetId: card.tweetId,
         userId: user!.userId,
       });
+
+      if (setting!.autoDelete) {
+        dislikeTweet(card.tweetId);
+      }
+
       toast('This tweet has been saved!');
 
       removeCardFromList(card.tweetId);
       onClose();
       setStep(HOME_MODAL_STEP.NONE);
     },
-    [user, onClose, removeCardFromList]
+    [user, setting, onClose, removeCardFromList]
   );
 
   if (step === HOME_MODAL_STEP.NONE) {
