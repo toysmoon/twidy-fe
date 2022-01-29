@@ -83,7 +83,7 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
   return (
     <>
       <CollectionList
-        isOpen={true}
+        isOpen={step === HOME_MODAL_STEP.SELECT_COLLECTION}
         onSelectFolder={handleSelectFolder}
         onCreateFolder={handleCreateCollection}
         onClose={onClose}

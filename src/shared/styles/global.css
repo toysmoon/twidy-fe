@@ -56,6 +56,10 @@ div.emoji-mart-scroll {
   min-height: 50vh;
 }
 
+.-bottom-full {
+  bottom: -100%;
+}
+
 @keyframes rainbow-button {
   0%,
   100% {
