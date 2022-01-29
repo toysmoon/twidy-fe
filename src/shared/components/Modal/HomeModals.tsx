@@ -7,6 +7,7 @@ import { Collection, PostCollection } from 'features/collections/types';
 import dynamic from 'next/dynamic';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import useDim from 'shared/hooks/useDim';
+import useToast from 'shared/hooks/useToast';
 
 const CreateFolder = dynamic(() => import('./CreateFolder'));
 const SaveTweet = dynamic(() => import('./SaveTweet'));
@@ -30,6 +31,7 @@ enum HOME_MODAL_STEP {
 }
 
 const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
+  const toast = useToast();
   const [step, setStep] = useState<HOME_MODAL_STEP>(HOME_MODAL_STEP.NONE);
   const [collection, setCollection] = useState<Collection>();
   const { mutateAsync: addCollection, isLoading } = addCollectionMutation();
@@ -68,6 +70,7 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
         collectionId: collection.collectionId,
         cardId: card.cardId,
       });
+      toast('This tweet has been saved!');
 
       removeCardFromList(card.cardId);
       onClose();
