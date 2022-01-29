@@ -1,17 +1,16 @@
-import createCollection from 'features/collections/api/postCollection';
+import addCollectionMutation from 'features/collections/queries/addCollectionMutation';
 import { PostCollection } from 'features/collections/types';
-import useUserQuery from 'features/users/queries/useUserQuery';
 import React, { useCallback, useState } from 'react';
 import CreateFolder from 'shared/components/Modal/CreateFolder';
 
 export default function AddCollection() {
-  const user = useUserQuery();
   const [isCreateFolderOpen, setCreateFolderOpen] = useState(false);
+  const { mutateAsync: addCollection, isLoading } = addCollectionMutation();
 
   const handleOpen = useCallback(() => setCreateFolderOpen(true), []);
   const handleClose = useCallback(() => setCreateFolderOpen(false), []);
   const handleSumbit = useCallback(async (c: PostCollection) => {
-    await createCollection(user!.userId, c);
+    await addCollection(c);
     handleClose();
   }, []);
 
@@ -25,6 +24,7 @@ export default function AddCollection() {
       </div>
       <CreateFolder
         isOpen={isCreateFolderOpen}
+        isLoading={isLoading}
         onSelectFolder={handleSumbit}
         onClose={handleClose}
       />

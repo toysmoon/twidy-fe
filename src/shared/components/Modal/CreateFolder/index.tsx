@@ -11,7 +11,7 @@ import Modal, { IModalProps } from '../';
 
 interface ICreateFolder extends IModalProps {
   tweet?: string;
-  onSelectFolder: (pc: PostCollection) => void;
+  onSelectFolder: (pc: PostCollection) => Promise<void>;
 }
 
 const CreateFolder: FC<ICreateFolder> = ({
@@ -33,8 +33,8 @@ const CreateFolder: FC<ICreateFolder> = ({
     setPrivate(false);
   }, []);
 
-  const handleSumbit = useCallback(() => {
-    onSelectFolder({ name: folderName, color, emoji: icon, isPrivate });
+  const handleSumbit = useCallback(async () => {
+    await onSelectFolder({ name: folderName, color, emoji: icon, isPrivate });
     reset();
   }, [icon, color, isPrivate, folderName]);
 
@@ -45,7 +45,7 @@ const CreateFolder: FC<ICreateFolder> = ({
         <Input
           value={folderName}
           onChange={setFolderName}
-          placeholder="Type folder name"
+          placeholder="Type collection name"
         />
         <ColorPicker color={color} onChange={setColor} />
         {tweet && (
