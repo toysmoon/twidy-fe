@@ -64,10 +64,8 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   useEffect(() => {
     if (e.code === -100) {
       router.replace('/about');
-    } else {
+      resetErrorBoundary();
     }
-
-    resetErrorBoundary();
   }, [error]);
 
   return <div></div>;

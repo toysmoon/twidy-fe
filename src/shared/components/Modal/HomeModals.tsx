@@ -1,9 +1,10 @@
-import updateCard from 'features/cards/api/updateCard';
+import postCard from 'features/cards/api/postCard';
 import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
 import type Card from 'features/cards/types/Card';
 import CollectionList from 'features/collections/components/Modal/CollectionList';
 import addCollectionMutation from 'features/collections/queries/addCollectionMutation';
 import { Collection, PostCollection } from 'features/collections/types';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import dynamic from 'next/dynamic';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import useDim from 'shared/hooks/useDim';
@@ -31,6 +32,7 @@ enum HOME_MODAL_STEP {
 }
 
 const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
+  const user = useUserQuery();
   const toast = useToast();
   const [step, setStep] = useState<HOME_MODAL_STEP>(HOME_MODAL_STEP.NONE);
   const [collection, setCollection] = useState<Collection>();
@@ -65,10 +67,11 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
 
   const submitCard = useCallback(
     async ({ card, collection, title }: ISubmitProps) => {
-      await updateCard({
+      await postCard({
         title,
         collectionId: collection.collectionId,
-        cardId: card.cardId,
+        tweetId: card.tweetId,
+        userId: user!.userId,
       });
       toast('This tweet has been saved!');
 
@@ -76,7 +79,7 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
       onClose();
       setStep(HOME_MODAL_STEP.NONE);
     },
-    [onClose, removeCardFromList]
+    [user, onClose, removeCardFromList]
   );
 
   if (step === HOME_MODAL_STEP.NONE) {
