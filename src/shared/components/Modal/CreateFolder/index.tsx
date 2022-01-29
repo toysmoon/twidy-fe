@@ -7,6 +7,7 @@ import React, { FC, useCallback, useState } from 'react';
 import Input from 'shared/components/Form/Input';
 import PrivateInput from 'shared/components/Form/Input/PrivateInput';
 import ModalButton from 'shared/components/Modal/ModalButton';
+import useToast from 'shared/hooks/useToast';
 import Modal, { IModalProps } from '../';
 
 interface ICreateFolder extends IModalProps {
@@ -21,6 +22,7 @@ const CreateFolder: FC<ICreateFolder> = ({
   tweet = '',
   onSelectFolder,
 }) => {
+  const toast = useToast();
   const [icon, setIcon] = useState('✨');
   const [folderName, setFolderName] = useState('');
   const [color, setColor] = useState<COLLECTION_COLOR>(COLLECTION_COLOR.HEART);
@@ -35,8 +37,9 @@ const CreateFolder: FC<ICreateFolder> = ({
 
   const handleSumbit = useCallback(async () => {
     await onSelectFolder({ name: folderName, color, emoji: icon, isPrivate });
+    toast('New collection has been created!');
     reset();
-  }, [icon, color, isPrivate, folderName]);
+  }, [icon, color, isPrivate, folderName, toast]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} useMinHeight>
