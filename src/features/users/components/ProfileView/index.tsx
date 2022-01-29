@@ -29,8 +29,11 @@ const ProfileView: FC<ProfileProps> = ({ user }) => {
         }
       />
       <Name>{`${user?.name}'s Likes`}</Name>
-      <div onClick={handleCopy} className="flex justify-center items-center">
-        <p className=" text-base text-gray-400 mr-1">{url}</p>
+      <div
+        onClick={handleCopy}
+        className="flex justify-center items-center opacity-50"
+      >
+        <p className=" text-base text-white mr-1">{url}</p>
         <Copy />
       </div>
     </div>

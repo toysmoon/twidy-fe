@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
 import Modal from 'shared/components/Modal';
+import useToast from 'shared/hooks/useToast';
 import MoreMenu from '../MoreMenu';
 import ChangeTitle from './ChangeTittle';
 import Header from './Header';
@@ -24,6 +25,7 @@ export default function DetailedCard({
   onClose,
   isViewMode,
 }: IDetailedCard) {
+  const toast = useToast();
   const router = useRouter();
   const collectionId = Number(router.query.collectionId);
   const [step, setStep] = useState(1);
@@ -49,6 +51,7 @@ export default function DetailedCard({
     const handleClose = () => setStep(2);
     const handleSubmit = async (title: string) => {
       await updateCard({ ...card, title });
+      toast('Your changes have been applied!');
       onClose();
     };
 
@@ -63,6 +66,7 @@ export default function DetailedCard({
         collectionId={collectionId}
         onSubmit={async (cId) => {
           await moveCard({ ...card, collectionId: cId });
+          toast('Your changes have been applied!');
           onClose();
         }}
         onClose={() => setStep(2)}

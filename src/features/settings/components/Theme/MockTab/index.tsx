@@ -4,7 +4,7 @@ import React from 'react';
 export default function MockTab() {
   return (
     <nav className="flex justify-center my-5">
-      <ul className="h-10 flex justify-center items-center rounded-full p-1 from-slate-100 to-slate-400 bg-gradient-to-r">
+      <ul className="h-10 flex justify-center items-center rounded-full p-1 bg-tab">
         {tablist.map((tab, i) => (
           <li
             key={`tabitem-${tab}`}

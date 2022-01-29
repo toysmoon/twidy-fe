@@ -24,10 +24,8 @@ interface ILikeTab {
 export default function LikeTab({ isCollections }: ILikeTab) {
   const router = useRouter();
   const selectedTab = isCollections ? TAB_ITEM.SAVED : TAB_ITEM.MY_LIKES;
-  const isFirstTab = selectedTab === TAB_ITEM.MY_LIKES;
   const tablistClass = classNames(
-    'h-10 flex justify-center items-center rounded-full p-1 from-slate-100 to-slate-400',
-    isFirstTab ? 'bg-gradient-to-r' : 'bg-gradient-to-l'
+    'h-10 flex justify-center items-center rounded-full p-1 bg-tab'
   );
 
   return (

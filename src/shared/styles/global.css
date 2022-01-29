@@ -60,6 +60,14 @@ div.emoji-mart-scroll {
   bottom: -100%;
 }
 
+.bg-tab {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.15) 50%
+  );
+}
+
 @keyframes rainbow-button {
   0%,
   100% {
