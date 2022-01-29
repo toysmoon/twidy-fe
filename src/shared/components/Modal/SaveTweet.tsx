@@ -56,7 +56,9 @@ const SaveTweet: FC<ISaveTweetProps> = ({
             placeholder="Add title to this tweet"
             maxLength={20}
           />
-          <div className="text-base whitespace-pre-wrap">{card?.text}</div>
+          <div className="text-base whitespace-pre-wrap pb-32">
+            {card?.text}
+          </div>
         </div>
       </div>
       <ModalButton onClick={handleSave} label="Save" />
