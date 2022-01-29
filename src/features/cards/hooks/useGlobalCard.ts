@@ -10,6 +10,7 @@ export default function useGlobalCard(card: Card) {
 
   useEffect(() => {
     setDim(globalCard.open);
+    return () => setDim(false);
   }, [globalCard]);
 
   return useCallback(() => {

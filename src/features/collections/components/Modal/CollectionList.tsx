@@ -7,6 +7,7 @@ import Modal, { IModalProps } from 'shared/components/Modal';
 import FolderItem from './FolderItem';
 
 interface IFolderList extends IModalProps {
+  filterCollection?: (collection: Collection) => boolean;
   onSelectFolder: (f: Collection) => void;
   onCreateFolder: () => void;
 }
@@ -16,6 +17,7 @@ const FolderList: FC<IFolderList> = ({
   onClose,
   onSelectFolder,
   onCreateFolder,
+  filterCollection = () => true,
 }) => {
   const collections = useCollecitonQuery();
   const headerClass = cn(
@@ -42,7 +44,7 @@ const FolderList: FC<IFolderList> = ({
         </div>
       </div>
       <ul className={cn('m-0 p-0')}>
-        {collections.map((c) => (
+        {collections.filter(filterCollection).map((c) => (
           <FolderItem
             key={c.collectionId}
             folder={c}

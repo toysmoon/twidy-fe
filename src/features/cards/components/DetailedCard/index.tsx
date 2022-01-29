@@ -1,12 +1,16 @@
 import Thumbnail from 'features/cards/components/Thumbnail';
-import useUpdateCardMutation from 'features/cards/queries/useUpdateCardMutation';
+import useUpdateCardMutation, {
+  useMoveCardMutation,
+} from 'features/cards/queries/useUpdateCardMutation';
 import type Card from 'features/cards/types/Card';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
 import Modal from 'shared/components/Modal';
 import MoreMenu from '../MoreMenu';
 import ChangeTitle from './ChangeTittle';
 import Header from './Header';
+import MoveTweet from './MoveTweet';
 import ViewTweet from './ViewTweet';
 
 export interface IDetailedCard {
@@ -20,8 +24,11 @@ export default function DetailedCard({
   onClose,
   isViewMode,
 }: IDetailedCard) {
+  const router = useRouter();
+  const collectionId = Number(router.query.collectionId);
   const [step, setStep] = useState(1);
   const { mutateAsync: updateCard } = useUpdateCardMutation(card?.collectionId);
+  const { mutateAsync: moveCard } = useMoveCardMutation(collectionId);
 
   if (!card) {
     return null;
@@ -47,6 +54,19 @@ export default function DetailedCard({
 
     return (
       <ChangeTitle card={card} onSave={handleSubmit} onClose={handleClose} />
+    );
+  }
+
+  if (step === 4) {
+    return (
+      <MoveTweet
+        collectionId={collectionId}
+        onSubmit={async (cId) => {
+          await moveCard({ ...card, collectionId: cId });
+          onClose();
+        }}
+        onClose={() => setStep(2)}
+      />
     );
   }
 

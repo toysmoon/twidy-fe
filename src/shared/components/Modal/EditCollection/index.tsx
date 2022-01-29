@@ -23,7 +23,9 @@ const EditCollection: FC<ICreateFolder> = ({
 }) => {
   const [icon, setIcon] = useState(collection.emoji);
   const [name, setName] = useState(collection.name);
-  const [color, setColor] = useState<COLLECTION_COLOR>(COLLECTION_COLOR.HEART);
+  const [color, setColor] = useState<COLLECTION_COLOR>(
+    collection.color as COLLECTION_COLOR
+  );
   const [isPrivate, setPrivate] = useState(false);
 
   const handleSumbit = useCallback(() => {

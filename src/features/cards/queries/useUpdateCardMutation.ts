@@ -17,3 +17,19 @@ export default function useUpdateCardMutation(collectionId?: number) {
     },
   });
 }
+
+export function useMoveCardMutation(collectionId?: number) {
+  const queryClient = useQueryClient();
+  const { cards } = useCardsQuery(collectionId);
+
+  return useMutation((card: Card) => updateCard(card), {
+    onSuccess: (_, card) => {
+      const i = cards.findIndex((c) => c.cardId === card.cardId);
+      queryClient.setQueryData(
+        ['cards', collectionId],
+        [...cards.slice(0, i), ...cards.slice(i + 1)]
+      );
+      queryClient.invalidateQueries(['collection']);
+    },
+  });
+}
