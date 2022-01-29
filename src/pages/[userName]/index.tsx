@@ -80,7 +80,7 @@ function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
 
 function TwidyFooter() {
   return (
-    <div className="w-full flex justify-center items-center flex-col pt-10">
+    <div className="w-full flex justify-center items-center flex-col py-10">
       <p className="text-white font-bold">This page is made by</p>
       <div className="flex items-center pt-2">
         <FooterIcon />
