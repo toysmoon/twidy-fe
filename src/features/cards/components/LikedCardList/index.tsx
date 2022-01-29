@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
-import LikedCard from './LikedCard';
+import { useUnclassifiedCard } from 'features/cards/queries/useUnclassifiedQuery';
 import Card from 'features/cards/types/Card';
+import React from 'react';
+import LikedCard from './LikedCard';
 import LikedCardSkeleton from './LikedCardSkeleton';
-import {
-  useGetLikesMutation,
-  useUnclassifiedCard,
-} from 'features/cards/queries/useUnclassifiedQuery';
-import FetchingStatus from './FetchingStatus';
 
 interface LikedCardListProps {
   onClickCard: (c: Card) => void;
@@ -14,13 +10,8 @@ interface LikedCardListProps {
 
 export default function LikedCardList({ onClickCard }: LikedCardListProps) {
   const cards = useUnclassifiedCard();
-  const { isLoading: isFetching, mutate } = useGetLikesMutation();
 
-  useEffect(() => {
-    mutate();
-  }, []);
-
-  if (cards!.length === 0 && !isFetching) {
+  if (cards!.length === 0) {
     return (
       <div className="mt-20">
         <p className="text-center text-white opacity-50 text-lg">
@@ -37,7 +28,6 @@ export default function LikedCardList({ onClickCard }: LikedCardListProps) {
 
   return (
     <>
-      {isFetching && <FetchingStatus />}
       {cards?.map((item, i) => (
         <LikedCard key={i} card={item} onClick={onClickCard} />
       ))}

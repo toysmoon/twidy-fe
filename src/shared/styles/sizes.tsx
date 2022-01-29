@@ -1,5 +1,5 @@
 const sizes = {
-  twitterAvatar: '20px',
+  twitterAvatar: '32px',
   profileAvatar: '64px',
 };
 

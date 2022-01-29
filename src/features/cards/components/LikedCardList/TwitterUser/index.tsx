@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Twitter from 'shared/components/Icons/Twitter';
 import Avatar from './Avatar';
 import Id from './Id';
 import Name from './Name';
@@ -7,19 +8,26 @@ interface ITwitterUserProps {
   profileImage: string;
   name: string;
   twitterId: string;
+  url: string;
 }
 
 const TwitterUser: FC<ITwitterUserProps> = ({
   profileImage,
   twitterId,
   name,
+  url,
 }) => {
   return (
-    <div>
-      <a className="flex items-center">
+    <div className="flex justify-between items-center">
+      <div className="flex">
         <Avatar src={profileImage} />
-        <Name>{name}</Name>
-        <Id id={twitterId} />
+        <div className="flex flex-col justify-between ml-2">
+          <Name>{name}</Name>
+          <Id id={twitterId} />
+        </div>
+      </div>
+      <a href={url} target="_blank">
+        <Twitter color="#1DA1F2" />
       </a>
     </div>
   );

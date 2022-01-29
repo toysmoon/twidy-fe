@@ -5,7 +5,7 @@ interface IIdProps {
 }
 
 const Id: FC<IIdProps> = ({ id }) => (
-  <span className="text-sm leading-4 text-gray3">{`@${id}`}</span>
+  <span className="text-xs leading-4 text-gray3">{`@${id}`}</span>
 );
 
 export default React.memo(Id);

@@ -13,7 +13,7 @@ interface ICardProps {
 }
 
 export default function LikedCard({ card, onClick }: ICardProps) {
-  const { author, text, media } = card;
+  const { author, text, media, url } = card;
   const isHaveMedia = media && media.length > 0;
 
   const handleUndo = useCallback(() => {
@@ -29,6 +29,7 @@ export default function LikedCard({ card, onClick }: ICardProps) {
           profileImage={author.profile_image_url}
           twitterId={author.username}
           name={author.name}
+          url={url}
         />
         <Text>{text}</Text>
         {isHaveMedia && <CardThumbnail images={media} />}

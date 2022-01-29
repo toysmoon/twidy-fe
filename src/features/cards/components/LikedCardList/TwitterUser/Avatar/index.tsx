@@ -8,7 +8,7 @@ interface IAvatarProps {
 
 const Avatar: FC<IAvatarProps> = ({ src }) => {
   return (
-    <div className="w-5 h-5 rounded-full overflow-hidden">
+    <div className="w-8 h-8 rounded-full overflow-hidden">
       <Image
         src={src}
         width={sizes.twitterAvatar}
