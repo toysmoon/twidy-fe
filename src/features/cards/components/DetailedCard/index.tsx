@@ -75,19 +75,25 @@ export default function DetailedCard({
   const mediaType = media?.[0]?.type ?? MEDIA_TYPE.photo;
 
   return (
-    <Modal isOpen={true} onClose={onClose}>
-      <Header card={card} onClick={() => setStep(2)} isViewMode={isViewMode} />
-      <div className={'p-5 pt-0'}>
-        {isHaveMedia && (
-          <Thumbnail author={author} type={mediaType} media={media} />
-        )}
-        <p className={'pt-5 font-roboto text-lg leading-7 text-black'}>
-          {text}
-        </p>
-        <div className={'flex justify-end'}>
-          <ViewTweet link={url} />
+    <>
+      <Modal isOpen={true} onClose={onClose}>
+        <Header
+          card={card}
+          onClick={() => setStep(2)}
+          isViewMode={isViewMode}
+        />
+        <div className={'p-5 pt-0'}>
+          {isHaveMedia && (
+            <Thumbnail author={author} type={mediaType} media={media} />
+          )}
+          <p className={'pt-5 font-roboto text-lg leading-7 text-black'}>
+            {text}
+          </p>
+          <div className={'flex justify-end'}>
+            <ViewTweet link={url} />
+          </div>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 }

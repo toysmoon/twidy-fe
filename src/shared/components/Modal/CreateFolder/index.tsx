@@ -7,6 +7,7 @@ import React, { FC, useCallback, useState } from 'react';
 import Input from 'shared/components/Form/Input';
 import PrivateInput from 'shared/components/Form/Input/PrivateInput';
 import ModalButton from 'shared/components/Modal/ModalButton';
+import useDim from 'shared/hooks/useDim';
 import useToast from 'shared/hooks/useToast';
 import Modal, { IModalProps } from '../';
 
@@ -22,6 +23,7 @@ const CreateFolder: FC<ICreateFolder> = ({
   tweet = '',
   onSelectFolder,
 }) => {
+  useDim(isOpen);
   const toast = useToast();
   const [icon, setIcon] = useState('✨');
   const [folderName, setFolderName] = useState('');

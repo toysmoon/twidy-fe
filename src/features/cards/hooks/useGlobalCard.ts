@@ -1,17 +1,12 @@
+import type Card from 'features/cards/types/Card';
 import { useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import type Card from 'features/cards/types/Card';
+import useDim from 'shared/hooks/useDim';
 import { cardState } from '../states/tweetState';
-import { dimState } from 'shared/states/dimState';
 
 export default function useGlobalCard(card: Card) {
-  const [, setDim] = useRecoilState(dimState);
   const [globalCard, setCard] = useRecoilState(cardState);
-
-  useEffect(() => {
-    setDim(globalCard.open);
-    return () => setDim(false);
-  }, [globalCard]);
+  useDim(globalCard.open);
 
   return useCallback(() => {
     setCard({ ...globalCard, open: true, card });

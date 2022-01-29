@@ -7,6 +7,7 @@ import React, { FC, useCallback, useState } from 'react';
 import Input from 'shared/components/Form/Input';
 import PrivateInput from 'shared/components/Form/Input/PrivateInput';
 import ModalButton from 'shared/components/Modal/ModalButton';
+import useDim from 'shared/hooks/useDim';
 import Modal, { IModalProps } from '../';
 
 interface ICreateFolder extends IModalProps {
@@ -21,6 +22,7 @@ const EditCollection: FC<ICreateFolder> = ({
   collection,
   onSubmit,
 }) => {
+  useDim(isOpen);
   const [icon, setIcon] = useState(collection.emoji);
   const [name, setName] = useState(collection.name);
   const [color, setColor] = useState<COLLECTION_COLOR>(
