@@ -6,7 +6,7 @@ export default function FetchingStatus() {
       <div className="animate-spin">
         <ArrowCircle />
       </div>
-      fetching new tweets
+      fetching new tweets..
     </div>
   );
 }

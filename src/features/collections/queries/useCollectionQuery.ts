@@ -92,3 +92,33 @@ export function useUpdateCollectionOrderMutation() {
     }
   );
 }
+
+export function useUpdateCollection() {
+  const user = useUserQuery();
+  const queryClient = useQueryClient();
+  const collections = useCollecitonQuery();
+
+  return useMutation(
+    ['collection', user?.userId],
+    (collection: Collection) => putCollections([collection]),
+    {
+      onSuccess: (_, collection) => {
+        const index = collections.findIndex(
+          (c) => c.collectionId === collection.collectionId
+        );
+
+        queryClient.setQueryData(
+          ['collection', user?.userId],
+          [
+            ...collections.slice(0, index),
+            collection,
+            ...collections.slice(index + 1),
+          ]
+        );
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries(['collection', user?.userId]);
+      },
+    }
+  );
+}

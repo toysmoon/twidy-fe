@@ -8,7 +8,7 @@ type CollectionResonse = {
 
 export default async function putCollections(collections: Collection[]) {
   const requests = collections.map((collection) =>
-    client.put<CollectionResonse>('/collection', collection)
+    client.patch<CollectionResonse>('/collection', collection)
   );
 
   return await Promise.all(requests);
