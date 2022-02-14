@@ -30,7 +30,11 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
                 rgba(0, 0, 0, 0.7),
                 rgba(0, 0, 0, 0.7)
               ),
-              url(${author.profile_image_url});
+              url(${media[0]?.url ??
+              media[0]?.preview_image_url ??
+              author.profile_image_url});
+            background-position: center;
+            background-size: cover;
           }
         `}</style>
       </div>

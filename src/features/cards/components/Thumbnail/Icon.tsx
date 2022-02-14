@@ -22,7 +22,7 @@ export default function Icon({ type }: IIconProps) {
   }, [type]);
 
   return (
-    <div className=" w-14 h-14 absolute right-5 bottom-5 flex justify-center items-center rounded-full bg-white bg-opacity-50 blur-md">
+    <div className=" w-14 h-14 absolute right-5 bottom-5 flex justify-center items-center rounded-full bg-white bg-opacity-50">
       {icon}
     </div>
   );
