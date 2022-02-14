@@ -7,6 +7,8 @@ export function useUnclassifiedQuery() {
     ['cards', 'list', { unclassifed: true }],
     getUnclassifiedCards,
     {
+      staleTime: Infinity,
+      cacheTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );

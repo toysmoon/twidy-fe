@@ -43,7 +43,7 @@ const FolderList: FC<IFolderList> = ({
           <AddCircle />
         </div>
       </div>
-      <ul className={cn('m-0 p-0')}>
+      <ul className={cn('m-0 p-0 modal-body-height-50')}>
         {collections.filter(filterCollection).map((c) => (
           <FolderItem
             key={c.collectionId}
