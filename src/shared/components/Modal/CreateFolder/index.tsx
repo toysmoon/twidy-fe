@@ -19,7 +19,7 @@ interface ICreateFolder extends IModalProps {
 const CreateFolder: FC<ICreateFolder> = ({
   isOpen,
   isLoading,
-  onClose,
+  onClose = () => {},
   tweet = '',
   onSelectFolder,
 }) => {
@@ -43,8 +43,13 @@ const CreateFolder: FC<ICreateFolder> = ({
     reset();
   }, [icon, color, isPrivate, folderName, toast]);
 
+  const handleClose = useCallback(async () => {
+    reset();
+    onClose();
+  }, [onClose, reset]);
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} useMinHeight>
+    <Modal isOpen={isOpen} onClose={handleClose} useMinHeight>
       <div className="px-5">
         <SelectIcon icon={icon} onChange={setIcon} color={color} />
         <Input

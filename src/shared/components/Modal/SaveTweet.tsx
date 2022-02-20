@@ -1,6 +1,6 @@
 import type Card from 'features/cards/types/Card';
 import { Collection } from 'features/collections/types';
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import Input from 'shared/components/Form/Input';
 import ArrowBack from 'shared/components/Icons/ArrowBack';
 import ModalButton from 'shared/components/Modal/ModalButton';
@@ -30,12 +30,16 @@ const SaveTweet: FC<ISaveTweetProps> = ({
   const { emoji, color } = collection;
   const [title, setTitle] = useState('');
   const handleSave = () => onSave({ collection, card, title });
+  const handleClose = useCallback(() => {
+    setTitle('');
+    onClose();
+  }, [onClose, setTitle]);
 
   return (
-    <Modal isOpen={isOpen} useMinHeight onClose={onClose}>
+    <Modal isOpen={isOpen} useMinHeight onClose={handleClose}>
       <div>
         <div className="w-full h-18 bg-white rounded-t-2xl flex justify-center items-center relative">
-          <div onClick={onClose} className="absolute left-6 top-6">
+          <div onClick={handleClose} className="absolute left-6 top-6">
             <ArrowBack />
           </div>
           <div className="flex items-center">
