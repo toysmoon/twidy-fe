@@ -15,8 +15,12 @@ export default function Terms() {
           <p className={detailClass}>South Korea’s tweeter bums</p>
         </div>
         <div className="flex gap-3">
-          <Twitter />
-          <Mail />
+          <a href="https://twitter.com/twidy_official" target="_blank">
+            <Twitter color="#828282" />
+          </a>
+          <a href="mailto:twidy.official@gmail.com">
+            <Mail color="#828282" />
+          </a>
         </div>
       </div>
       <p className={detailClass}>
