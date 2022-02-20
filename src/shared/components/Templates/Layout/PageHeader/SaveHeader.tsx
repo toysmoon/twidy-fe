@@ -6,15 +6,16 @@ import HeaderButton from '../HeaderButton';
 
 export interface ISaveProps {
   onApply: () => void;
+  isLoading?: boolean;
 }
 
-export default function SaveHeader({ onApply }: ISaveProps) {
+export default function SaveHeader({ onApply, isLoading }: ISaveProps) {
   const router = useRouter();
 
   return (
     <div className="h-14 pt-3 px-4 flex justify-between items-center">
       <ArrowBack onClick={router.back} color={colors.white} />
-      <HeaderButton label="Apply" onClick={onApply} />
+      <HeaderButton label="Apply" onClick={onApply} disabled={isLoading} />
     </div>
   );
 }

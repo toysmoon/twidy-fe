@@ -4,12 +4,18 @@ import SaveHeader, { ISaveProps } from './PageHeader/SaveHeader';
 
 interface ISaveLayout extends ISaveProps {
   color?: string;
+  isLoading?: boolean;
 }
 
-const SaveLayout: FC<ISaveLayout> = ({ children, onApply, color }) => {
+const SaveLayout: FC<ISaveLayout> = ({
+  children,
+  onApply,
+  color,
+  isLoading = false,
+}) => {
   return (
     <Container color={color}>
-      <SaveHeader onApply={onApply} />
+      <SaveHeader onApply={onApply} isLoading={isLoading} />
       {children}
     </Container>
   );

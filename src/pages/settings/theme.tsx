@@ -23,7 +23,7 @@ export default function SettingTheme() {
 
   const user = useUserQuery();
   const collections = useCollecitonQuery();
-  const { mutateAsync: updateTheme } = useMutateTheme(user!.userId);
+  const { mutateAsync: updateTheme, isLoading } = useMutateTheme(user!.userId);
 
   const handleApply = useCallback(async () => {
     await updateTheme(color);
@@ -35,7 +35,7 @@ export default function SettingTheme() {
   }, [user, color]);
 
   return (
-    <SaveLayout onApply={handleApply} color={color}>
+    <SaveLayout onApply={handleApply} color={color} isLoading={isLoading}>
       <Profile />
       <MockTab />
       <div className="p-4 flex flex-col gap-3">
