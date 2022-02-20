@@ -55,6 +55,7 @@ const CreateFolder: FC<ICreateFolder> = ({
         <Input
           value={folderName}
           onChange={setFolderName}
+          maxLength={50}
           placeholder="Type collection name"
         />
         <ColorPicker color={color} onChange={setColor} />

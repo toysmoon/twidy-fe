@@ -58,7 +58,7 @@ const SaveTweet: FC<ISaveTweetProps> = ({
             value={title}
             onChange={setTitle}
             placeholder="Add title to this tweet"
-            maxLength={20}
+            maxLength={50}
           />
           <div className="text-base whitespace-pre-wrap pb-32">
             {card?.text}
