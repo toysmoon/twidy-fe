@@ -4,12 +4,12 @@ import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 function useScrollLock(enabled: boolean = false) {
   useEffect(() => {
     if (enabled) {
-      disablePageScroll();
+      disablePageScroll(document.documentElement);
     } else {
-      enablePageScroll();
+      enablePageScroll(document.documentElement);
     }
 
-    return () => enablePageScroll();
+    return () => enablePageScroll(document.documentElement);
   }, [enabled]);
 }
 
