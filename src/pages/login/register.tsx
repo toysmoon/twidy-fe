@@ -39,7 +39,14 @@ export default function LoadingPage() {
           <div className="px-2 w-full flex justify-between">
             <div>
               <p className="text-sm text-white">Sync twidy with Twitter</p>
-              <p className="text-xs text-gray-500">What is synchronization?</p>
+              <a
+                href="https://sungjungjo.notion.site/About-Twidy-7c5c2a6b765c421ebb7137d4e8a70362"
+                target="_blank"
+              >
+                <p className="text-xs text-gray-500">
+                  What is synchronization?
+                </p>
+              </a>
             </div>
             <Toggle
               isChecked={isChecked}
