@@ -9,7 +9,7 @@ interface IFolderProps {
 }
 
 const LockIcon = () => (
-  <div className="absolute bottom-0 right-2 w-5 h-5 rounded-full flex justify-center items-center bg-gray1">
+  <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex justify-center items-center bg-gray1">
     <Lock />
   </div>
 );
