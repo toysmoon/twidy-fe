@@ -12,7 +12,7 @@ export default function useCollecitonQuery() {
 
   const result = useQuery<Collection[]>(
     ['collection', collectionUserId],
-    () => (collectionUserId ? getCollections(collectionUserId) : []),
+    () => (collectionUserId ? getCollections(collectionUserId, true) : []),
     { staleTime: Infinity, cacheTime: Infinity }
   );
 
@@ -26,9 +26,12 @@ export default function useCollecitonQuery() {
 }
 
 export function useCollecitonQueryById(userId: string) {
+  const user = useUserQuery();
+  const isPrivate = user?.userId === userId;
+
   const result = useQuery<Collection[]>(
     ['collection', userId],
-    () => getCollections(userId, false),
+    () => getCollections(userId, isPrivate),
     { staleTime: Infinity, cacheTime: Infinity }
   );
 

@@ -19,8 +19,8 @@ export default function LikedCard({ card, onClick }: ICardProps) {
   const removeCardFromList = useSavedCardRemove();
 
   const handleUndo = useCallback(async () => {
-    await dislikeTweet(card.tweetId);
     removeCardFromList(card.tweetId);
+    await dislikeTweet(card.tweetId);
   }, [card]);
 
   const handleClick = useCallback(() => onClick(card), [card, onClick]);
