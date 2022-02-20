@@ -28,7 +28,7 @@ export default function useCollecitonQuery() {
 export function useCollecitonQueryById(userId: string) {
   const result = useQuery<Collection[]>(
     ['collection', userId],
-    () => getCollections(userId),
+    () => getCollections(userId, false),
     { staleTime: Infinity, cacheTime: Infinity }
   );
 
