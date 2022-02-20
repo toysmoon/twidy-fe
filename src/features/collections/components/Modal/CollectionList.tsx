@@ -43,15 +43,17 @@ const FolderList: FC<IFolderList> = ({
           <AddCircle />
         </div>
       </div>
-      <ul className={cn('m-0 p-0 modal-body-height-50')}>
-        {collections.filter(filterCollection).map((c) => (
-          <FolderItem
-            key={c.collectionId}
-            folder={c}
-            onClick={() => onSelectFolder(c)}
-          />
-        ))}
-      </ul>
+      <div className="relative modal-body-height-50">
+        <ul>
+          {collections.filter(filterCollection).map((c) => (
+            <FolderItem
+              key={c.collectionId}
+              folder={c}
+              onClick={() => onSelectFolder(c)}
+            />
+          ))}
+        </ul>
+      </div>
     </Modal>
   );
 };
