@@ -13,7 +13,7 @@ export default function Intro() {
 
   const handleClick = useCallback(async () => {
     const result = await login();
-    if (result.code === 0) {
+    if (result.code === 0 || result.code === -101) {
       router.push('/login');
     } else {
       router.push(result.data);
