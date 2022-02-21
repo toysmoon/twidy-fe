@@ -17,7 +17,7 @@ export default function LoadingPage() {
 
 function CheckUser() {
   const user = useUserQuery();
-  const userId = user!.userId;
+  const userId = user?.userId;
   const { mutateAsync: patchProfile } = useMutateUpdateProfile();
   const { data: setting, isLoading } = useQuery(['setting', userId], () =>
     userId ? getSetting(userId) : null

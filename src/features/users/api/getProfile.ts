@@ -1,10 +1,18 @@
 import client from 'shared/api/client';
 import { User } from 'shared/api/types';
 
-export default async function getProfile(userId: string): Promise<User> {
-  const response = await client.get<User>(`/user`, { params: { userId } });
+type UserResponse = {
+  code: 0 | -101 | -100;
+  data: User | string;
+  msg: string;
+};
 
-  if (response.data.code) {
+export default async function getProfile(userId: string): Promise<User> {
+  const { data: response } = await client.get<UserResponse>(`/user`, {
+    params: { userId },
+  });
+
+  if (typeof response.data === 'string') {
     throw response;
   }
 

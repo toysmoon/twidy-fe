@@ -1,5 +1,5 @@
-import postSetting from 'features/users/api/postSetting';
-import useUserQuery from 'features/users/queries/useUserQuery';
+import { useMutateSetting } from 'features/settings/queries/useSettingQuery';
+import registerUser from 'features/users/api/registerUser';
 import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
 import Toggle from 'shared/components/Form/Toggle';
@@ -7,13 +7,14 @@ import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
 export default function LoadingPage() {
   const router = useRouter();
-  const user = useUserQuery();
   const [isChecked, setChecked] = useState(true);
+  const { mutateAsync: postSetting } = useMutateSetting();
 
   const handleClick = useCallback(async () => {
     try {
+      const user = await registerUser();
       await postSetting({
-        userId: user?.userId,
+        userId: user.data.userId,
         language: 'en',
         theme: 'black',
         autoDelete: isChecked,
@@ -24,7 +25,7 @@ export default function LoadingPage() {
     } finally {
       router.replace('/');
     }
-  }, [isChecked, router, user]);
+  }, [isChecked, router, postSetting]);
 
   return (
     <EmptyLayout>
@@ -43,7 +44,7 @@ export default function LoadingPage() {
                 href="https://sungjungjo.notion.site/About-Twidy-7c5c2a6b765c421ebb7137d4e8a70362"
                 target="_blank"
               >
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-white opacity-50">
                   What is synchronization?
                 </p>
               </a>
@@ -59,7 +60,7 @@ export default function LoadingPage() {
           >
             Get to start
           </button>
-          <p className="text-gray-500 text-xs pb-4">
+          <p className="text-white opacity-50 text-xs pb-4">
             By logging in you accept the Privacy and Terms.
           </p>
         </div>

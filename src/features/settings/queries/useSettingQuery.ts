@@ -1,4 +1,4 @@
-import getSetting from 'features/users/api/getSetting';
+import getSetting, { Setting } from 'features/users/api/getSetting';
 import putSetting from 'features/users/api/putSetting';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
@@ -7,6 +7,20 @@ export function useSettingQuery(userId?: string) {
     staleTime: Infinity,
     cacheTime: Infinity,
   });
+}
+
+export function useMutateSetting() {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (setting: Partial<Setting>) => putSetting({ ...setting }),
+    {
+      onSuccess: (setting) => {
+        queryClient.invalidateQueries(['setting', setting.userId]);
+        return queryClient.invalidateQueries(['profile', { twidyUser: true }]);
+      },
+    }
+  );
 }
 
 export function useMutateTheme(userId: string) {

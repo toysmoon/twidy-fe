@@ -2,23 +2,21 @@ import { NextPageContext } from 'next';
 import client from '../client';
 import { User } from '../types';
 
-export type UserError = {
-  code: number;
+type UserResponse = {
+  code: 0 | -101 | -100;
+  data: User | string;
   msg: string;
-  data: string;
 };
 
 export default async function getUser(ctx?: NextPageContext): Promise<User> {
   const cookie = ctx?.req?.headers?.cookie ?? {};
-  const response = await client.get<User | UserError>('/auth/user', {
+  const { data: response } = await client.get<UserResponse>('/auth/user', {
     headers: { cookie },
   });
 
-  const error = response.data as UserError;
-  if (error.data) {
-    throw error;
+  if (typeof response.data === 'string') {
+    throw response;
   }
 
-  const result = response.data as User;
-  return result;
+  return response.data;
 }
