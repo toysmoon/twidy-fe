@@ -12,6 +12,7 @@ import { MutableSnapshot, RecoilRoot } from 'recoil';
 import Boundary from 'shared/components/Boundary';
 import Dim from 'shared/components/Dim';
 import GlobalTweet from 'shared/components/GlobalTweet';
+import GoogleForm from 'shared/components/GoogleForm';
 import Toast from 'shared/components/Toast';
 import { themeState } from 'shared/states/themeState';
 import 'shared/styles/global.css';
@@ -52,6 +53,7 @@ function Maeum({ Component, pageProps }: AppProps) {
         <GlobalTweet />
         <Toast />
         <Dim />
+        <GoogleForm />
       </RecoilRoot>
     </QueryClientProvider>
   );
