@@ -38,12 +38,12 @@ export default function SettingTheme() {
           right={<p className="text-white leading-5">{`@${user?.userName}`}</p>}
         />
         <SettingItem
-          title="UNDO LIKE ON"
+          title="SYNC TWIDY WITH TWITTER"
           description={
             <>
-              When saving a tweet in twidy,
+              When you save a tweet on twidy,
               <br />
-              undo like from your twitter account
+              the liked for that tweet is automatically turned off
             </>
           }
           right={

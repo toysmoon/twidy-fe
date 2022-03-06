@@ -5,7 +5,7 @@ interface IUserMenu {
 }
 
 const menus = [
-  { title: '🗂 Align coleection', path: '/settings/collection' },
+  { title: '🗂 Align collection', path: '/settings/collection' },
   { title: '🎨 Color theme', path: '/settings/theme' },
   { title: '👤 My account', path: '/settings' },
 ];
