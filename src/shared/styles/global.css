@@ -48,6 +48,10 @@ div.emoji-mart-scroll {
   display: none;
 }
 
+.max-height-70 {
+  max-height: 70vh;
+}
+
 .min-height-70 {
   min-height: 70vh;
 }
