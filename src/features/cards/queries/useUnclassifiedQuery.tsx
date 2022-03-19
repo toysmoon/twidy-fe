@@ -39,6 +39,8 @@ export function useSavedCardRemove() {
         ['cards', 'list', { unclassifed: true }],
         [...cards!.slice(0, index), ...cards!.slice(index + 1)]
       );
+
+      queryClient.invalidateQueries(['collection']);
     },
     [queryClient, cards]
   );

@@ -10,7 +10,6 @@ import { FallbackProps } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import Boundary from 'shared/components/Boundary';
-import Dim from 'shared/components/Dim';
 import GlobalTweet from 'shared/components/GlobalTweet';
 import GoogleForm from 'shared/components/GoogleForm';
 import Toast from 'shared/components/Toast';
@@ -52,7 +51,6 @@ function Maeum({ Component, pageProps }: AppProps) {
         </Boundary>
         <GlobalTweet />
         <Toast />
-        <Dim />
         <GoogleForm />
       </RecoilRoot>
     </QueryClientProvider>
