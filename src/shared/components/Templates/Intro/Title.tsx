@@ -10,7 +10,7 @@ export default function Title({ title, detail }: ISection) {
         <h2 className="font-nunito font-black text-5xl my-5 text-center whitespace-pre-line text-white">
           {title}
         </h2>
-        <p className="font-roboto text-base leading-5 text-gray4 px-12 text-center">
+        <p className="font-pretendard text-base leading-5 text-gray4 px-12 text-center">
           {detail}
         </p>
       </div>

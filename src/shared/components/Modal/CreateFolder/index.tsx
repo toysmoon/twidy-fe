@@ -60,7 +60,7 @@ const CreateFolder: FC<ICreateFolder> = ({
         />
         <ColorPicker color={color} onChange={setColor} />
         {tweet && (
-          <p className="my-8 mx-5 font-roboto text-base leading-5 max-line-3 max-h-16">
+          <p className="my-8 mx-5 font-pretendard text-base leading-5 max-line-3 max-h-16">
             {tweet}
           </p>
         )}

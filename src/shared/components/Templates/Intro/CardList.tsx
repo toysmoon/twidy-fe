@@ -32,7 +32,9 @@ function Card({ color, title, detail, icon }: ICard) {
         <p className="font-nunito font-extrabold text-xl leading-7 mb-1 text-gray1">
           {title}
         </p>
-        <p className="font-roboto text-base text-gray3 leading-5">{detail}</p>
+        <p className="font-pretendard text-base text-gray3 leading-5">
+          {detail}
+        </p>
       </div>
     </div>
   );

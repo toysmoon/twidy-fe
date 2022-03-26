@@ -14,7 +14,7 @@ export default function Header({ card, onClick, isViewMode }: IHeaderProps) {
 
   return (
     <div className={'flex justify-between items-center p-5 relative'}>
-      <p className="font-roboto font-bold text-2xl leading-7 text-gray1">
+      <p className="font-pretendard font-bold text-2xl leading-7 text-gray1">
         {title}
         <span className="font-normal text-lg ml-1 text-gray3">
           {getDisplayDate(regDttm)}

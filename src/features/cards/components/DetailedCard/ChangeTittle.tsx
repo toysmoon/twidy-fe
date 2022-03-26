@@ -23,7 +23,7 @@ const ChangeTitle: FC<IChangeTitleProps> = ({ card, onSave, onClose }) => {
             onChange={setTitle}
             placeholder="Add title to this tweet"
           />
-          <div className="font-roboto leading-5 whitespace-pre-wrap">
+          <div className="font-pretendard leading-5 whitespace-pre-wrap">
             {card.text}
           </div>
         </div>

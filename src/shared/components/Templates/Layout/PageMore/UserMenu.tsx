@@ -21,7 +21,7 @@ export default function UserMenu({ onClose }: IUserMenu) {
           <li
             onClick={() => router.push(path)}
             key={title}
-            className="h-14 px-5 whitespace-nowrap flex items-center font-roboto font-bold text-base leading-5 uppercase text-gray1"
+            className="h-14 px-5 whitespace-nowrap flex items-center font-pretendard font-bold text-base leading-5 uppercase text-gray1"
           >
             {title}
           </li>

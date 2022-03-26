@@ -16,7 +16,7 @@ const Toast: FC<IToastProps> = () => {
     'bg-gray5',
     'w-full',
     'h-20',
-    'font-roboto',
+    'font-pretendard',
     'font-bold',
     'text-lg',
     'leading-5',

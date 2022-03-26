@@ -33,7 +33,7 @@ const FolderList: FC<IFolderList> = ({
     'border-none'
   );
 
-  const titleClass = cn('font-roboto', 'font-bold text-xl leading-6');
+  const titleClass = cn('font-pretendard', 'font-bold text-xl leading-6');
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} useMinHeight>

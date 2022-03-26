@@ -2,7 +2,7 @@ module.exports = {
   content: ['./src/**/*.tsx'],
   theme: {
     fontFamily: {
-      roboto: ['Roboto'],
+      pretendard: ['Pretendard Variable', 'Pretendard', 'Roboto'],
       nunito: ['Nunito'],
     },
     extend: {

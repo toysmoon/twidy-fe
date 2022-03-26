@@ -12,7 +12,7 @@ export default function Content({ text, media }: IContentProps) {
 
   return (
     <div className="flex gap-4 mt-3">
-      <p className="font-roboto text-base leading-5">{text}</p>
+      <p className="font-pretendard text-base leading-5">{text}</p>
       {isHasDedia && <Thumbnail media={media} />}
     </div>
   );

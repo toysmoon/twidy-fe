@@ -15,7 +15,7 @@ export default function AddCollection() {
   }, []);
 
   const containerClass =
-    'font-roboto font-bold text-lg leading-6 text-white w-full h-20 box-border border-dashed border-2 border-gray-300 cursor-pointer rounded-2xl flex justify-center items-center';
+    'font-pretendard font-bold text-lg leading-6 text-white w-full h-20 box-border border-dashed border-2 border-gray-300 cursor-pointer rounded-2xl flex justify-center items-center';
 
   return (
     <>

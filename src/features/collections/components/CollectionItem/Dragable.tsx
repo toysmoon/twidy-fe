@@ -46,8 +46,10 @@ export default function Dragable({
     <div ref={ref} data-handler-id={handlerId} className={containerClass}>
       <CollectionIcon collections={data} />
       <div className="px-3 w-full">
-        <p className="font-roboto font-bold text-lg leading-5 m-0">{name}</p>
-        <p className="font-roboto text-sm leading-4 text-gray3 m-0">{`${count} tweets`}</p>
+        <p className="font-pretendard font-bold text-lg leading-5 m-0">
+          {name}
+        </p>
+        <p className="font-pretendard text-sm leading-4 text-gray3 m-0">{`${count} tweets`}</p>
       </div>
       <div onClick={handleDelete} className={iconClass}>
         <Delete />

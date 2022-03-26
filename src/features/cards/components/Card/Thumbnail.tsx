@@ -21,7 +21,7 @@ export default function Thumbnail({ media }: IMediaProps) {
         objectFit="cover"
       />
       {isMutlimedia && (
-        <div className="absolute right-2 bottom-2 rounded-lg font-roboto text-xs text-white">{`+${
+        <div className="absolute right-2 bottom-2 rounded-lg font-pretendard text-xs text-white">{`+${
           media.length - 1
         }`}</div>
       )}

@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   min-height: 100%;
-  font-family: Roboto;
+  font-family: Pretendard Variable, Pretendard, Roboto;
   --colors-yellow: #ffdc23;
   --colors-heart: #ff508f;
   --colors-orange: #ff9f1c;
@@ -95,4 +95,11 @@ div.emoji-mart-scroll {
   80% {
     background-color: #745aff;
   }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: Nunito;
 }

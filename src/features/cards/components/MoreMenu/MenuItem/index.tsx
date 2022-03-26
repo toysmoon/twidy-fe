@@ -15,7 +15,7 @@ export default function MenuItem({
   onClick,
 }: IMenuItem) {
   const labelClass = cn(
-    'font-roboto text-lg leading-5',
+    'font-pretendard text-lg leading-5',
     isWarning ? 'text-red' : 'text-black'
   );
 

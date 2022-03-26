@@ -12,7 +12,7 @@ export default function ViewTweet({ link }: IViewTweet) {
       href={link}
       target="_blank"
     >
-      <span className="pr-2 font-roboto font-bold leading-5 text-white">
+      <span className="pr-2 font-pretendard font-bold leading-5 text-white">
         View tweet
       </span>
       <div className={'pb-0.5'}>

@@ -97,7 +97,7 @@ export default function DetailedCard({
           {isHaveMedia && (
             <Thumbnail author={author} type={mediaType} media={media} />
           )}
-          <p className={'pt-5 font-roboto text-lg leading-7 text-black'}>
+          <p className={'pt-5 font-pretendard text-lg leading-7 text-black'}>
             {text}
           </p>
           <div className={'flex justify-end'}>
