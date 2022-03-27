@@ -1,9 +1,9 @@
-import dislikeTweet from 'features/cards/api/dislikeTweet';
+import skipCard from 'features/cards/api/skipCard';
 import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
 import type CardType from 'features/cards/types/Card';
 import React, { useCallback } from 'react';
-import Save from 'shared/components/Button/Save';
-import Undo from 'shared/components/Button/Undo';
+import Button from 'shared/components/Button';
+import Skip from 'shared/components/Button/Skip';
 import CardThumbnail from 'shared/components/Thumbnail';
 import Text from './Text';
 import TwitterUser from './TwitterUser';
@@ -18,9 +18,9 @@ export default function LikedCard({ card, onClick }: ICardProps) {
   const isHaveMedia = media && media.length > 0;
   const removeCardFromList = useSavedCardRemove();
 
-  const handleUndo = useCallback(async () => {
+  const handleSkip = useCallback(async () => {
     removeCardFromList(card.tweetId);
-    await dislikeTweet(card.tweetId);
+    await skipCard(card.tweetId);
   }, [card, removeCardFromList]);
 
   const handleClick = useCallback(() => onClick(card), [card, onClick]);
@@ -37,9 +37,9 @@ export default function LikedCard({ card, onClick }: ICardProps) {
         <Text>{text}</Text>
         {isHaveMedia && <CardThumbnail images={media} tweetUrl={card.url} />}
       </article>
-      <div className="flex justify-between mt-5">
-        <Undo onClick={handleUndo} />
-        <Save onClick={handleClick} />
+      <div className="flex justify-between items-center mt-5">
+        <Skip onClick={handleSkip} />
+        <Button label="SAVE" onClick={handleClick} />
       </div>
     </div>
   );

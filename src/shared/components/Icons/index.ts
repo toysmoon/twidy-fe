@@ -11,6 +11,7 @@ import Menu from './Menu';
 import Search from './Search';
 import More from './More';
 import ArrowCircle from './ArrowCircle';
+import SkipIcon from './SkipIcon';
 
 export interface IIconProps {
   width?: number;
@@ -34,4 +35,5 @@ export {
   Menu,
   Search,
   More,
+  SkipIcon,
 };
