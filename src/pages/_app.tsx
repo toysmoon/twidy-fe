@@ -39,7 +39,7 @@ function Maeum({ Component, pageProps }: AppProps) {
     [theme]
   );
 
-  console.log('Maeum');
+  console.log('Maeum Context');
 
   return (
     <QueryClientProvider client={queryClient}>
