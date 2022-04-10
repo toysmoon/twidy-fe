@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build-and-push-image:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,3 +25,18 @@ jobs:
         with:
           push: true
           tags: toysmoon/twidy_fe:latest
+          
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: [ self-hosted, label-twidy-fe ]
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker run
+        run: |
+          docker ps -q --filter "name=twidy_fe" | grep -q . && docker stop twidy_fe && docker rm -fv twidy_fe
+          docker run -d -p 3000:3000 --name twidy_fe --restart always toysmoon/twidy_fe:latest
