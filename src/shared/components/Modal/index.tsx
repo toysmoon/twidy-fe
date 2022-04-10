@@ -1,21 +1,23 @@
 import classNames from 'classnames';
-import React, { FC } from 'react';
+import React, { ReactNode } from 'react';
 import useModal from 'shared/hooks/useModal';
 import Portal from '../Portal';
+import ModalHeader from './ModalHeader';
 
 export interface IModalProps {
   isOpen: boolean;
   isLoading?: boolean;
   useMinHeight?: boolean;
   onClose?: () => void;
+  children?: ReactNode;
 }
 
-const Modal: FC<IModalProps> = ({
+const Modal = ({
   isOpen,
   onClose,
   useMinHeight = false,
   children,
-}) => {
+}: IModalProps) => {
   const modalClass = useModal(isOpen, { useMinHeight });
 
   if (!isOpen) {
@@ -71,3 +73,5 @@ const defaultModalClass = [
 ];
 
 export default Modal;
+
+Modal.Header = ModalHeader;

@@ -10,25 +10,22 @@ const Toast: FC<IToastProps> = () => {
   const toastClass = [
     'fixed',
     'top-0',
-    'flex',
-    'justify-center',
-    'items-center',
-    'bg-gray5',
     'w-full',
-    'h-20',
-    'font-pretendard',
-    'font-bold',
-    'text-lg',
-    'leading-5',
-    'text-gray1',
-    'transition-opacity',
-    'transition-transform',
+    'p-5',
+    'transition-all',
+    'duration-500',
   ];
 
-  const displayClass = toast.open ? 'opacity-1' : 'opacity-0 -translate-y-20';
+  const displayClass = toast.open
+    ? 'opacity-100'
+    : 'opacity-20 -translate-y-20';
 
   return (
-    <div className={classNames(toastClass, displayClass)}>{toast.message}</div>
+    <div className={classNames(toastClass, displayClass)}>
+      <div className="bg-white w-full h-14 shadow-toast rounded-xl flex justify-center items-center text-base text-gray1">
+        {toast.message}
+      </div>
+    </div>
   );
 };
 

@@ -6,7 +6,6 @@ import { PostCollection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
 import Input from 'shared/components/Form/Input';
 import PrivateInput from 'shared/components/Form/Input/PrivateInput';
-import ModalButton from 'shared/components/Modal/ModalButton';
 import useDim from 'shared/hooks/useDim';
 import useToast from 'shared/hooks/useToast';
 import Modal, { IModalProps } from '../';
@@ -50,13 +49,19 @@ const CreateFolder: FC<ICreateFolder> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} useMinHeight>
+      <Modal.Header.TypeB
+        left="New Collection"
+        right="SAVE"
+        loading={isLoading}
+        onClick={handleSumbit}
+      />
       <div className="px-5">
         <SelectIcon icon={icon} onChange={setIcon} color={color} />
         <Input
           value={folderName}
           onChange={setFolderName}
           maxLength={50}
-          placeholder="Type collection name"
+          placeholder="Collection name"
         />
         <ColorPicker color={color} onChange={setColor} />
         {tweet && (
@@ -65,15 +70,8 @@ const CreateFolder: FC<ICreateFolder> = ({
           </p>
         )}
       </div>
-      <div className="w-full h-52 relative">
-        <div className="w-full h-1px bg-gray6" />
-        <PrivateInput isPrivate={isPrivate} onChange={setPrivate} />
-        <ModalButton
-          onClick={handleSumbit}
-          label="Create collection"
-          isLoading={isLoading}
-        />
-      </div>
+      <div className="w-full h-1px bg-gray6" />
+      <PrivateInput isPrivate={isPrivate} onChange={setPrivate} />
     </Modal>
   );
 };

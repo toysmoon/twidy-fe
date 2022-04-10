@@ -14,7 +14,7 @@ const useToast = () => {
   useEffect(() => {
     timeoutkey && clearTimeout(timeoutkey);
     setTimeoutkey(
-      setTimeout(() => setTosat({ open: false, message: '' }), 1500)
+      setTimeout(() => setTosat({ open: false, message: '' }), 3000)
     );
   }, [toast]);
 

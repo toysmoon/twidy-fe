@@ -23,7 +23,7 @@ const SelectIcon: FC<IFolderIconProps> = ({ icon, color, onChange }) => {
   );
 
   return (
-    <div className="flex justify-center items-center mt-10 mb-5 mx-auto">
+    <div className="flex justify-center items-center mt-4 mb-6 mx-auto">
       <div
         className={`w-16 h-16 relative rounded-full flex justify-center items-center text-3xl bg-${color}`}
       >

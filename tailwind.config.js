@@ -6,12 +6,16 @@ module.exports = {
       nunito: ['Nunito'],
     },
     extend: {
+      boxShadow: {
+        toast: '0px 4px 20px rgba(0, 0, 0, 0.2);',
+      },
       spacing: {
         '1px': '1px',
         18: '4.5rem',
         19: '4.75rem',
         26: '6.5rem',
         50: '12.5rem',
+        'modal-header': '68px',
       },
       colors: {
         primary: 'var(--colors-primary)',
