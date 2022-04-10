@@ -78,7 +78,7 @@ function DefaultError() {
 function TwidyMeta() {
   return (
     <Head>
-      <title>Twidy</title>
+      <title>Twidyyyy</title>
       <meta name="description" content="Tidy up your liked tweets!" />
       <meta property="og:title" content="Twidy" />
       <meta property="og:image" content="/images/og.png" key="image" />
