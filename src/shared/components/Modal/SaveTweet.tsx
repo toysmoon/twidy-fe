@@ -3,8 +3,6 @@ import type Card from 'features/cards/types/Card';
 import { Collection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
 import Input from 'shared/components/Form/Input';
-import ArrowBack from 'shared/components/Icons/ArrowBack';
-import ModalButton from 'shared/components/Modal/ModalButton';
 import Modal from '.';
 import TwitterEmoji from '../TwitterEmoji';
 import { ISubmitProps } from './HomeModals';
