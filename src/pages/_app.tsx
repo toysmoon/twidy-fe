@@ -39,8 +39,6 @@ function Maeum({ Component, pageProps }: AppProps) {
     [theme]
   );
 
-  console.log('Maeum Context2');
-
   return (
     <QueryClientProvider client={queryClient}>
       <TwidyMeta />

@@ -66,6 +66,7 @@ export enum COLLECTION_COLOR {
   TWITTER = 'twitter',
   VIOLET = 'violet',
   BLACK = 'black',
+  ORANGE = 'orange',
   GRAY = 'gray5',
 }
 

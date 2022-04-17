@@ -1,9 +1,8 @@
-import ColorPicker, {
-  COLLECTION_COLOR,
-} from 'features/cards/components/ColorPicker';
+import { COLLECTION_COLOR } from 'features/cards/components/ColorPicker';
 import SelectIcon from 'features/collections/components/SelectIcon';
 import { PostCollection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
+import ColorInput from 'shared/components/ColorInput';
 import Input from 'shared/components/Form/Input';
 import PrivateInput from 'shared/components/Form/Input/PrivateInput';
 import useDim from 'shared/hooks/useDim';
@@ -63,15 +62,17 @@ const CreateFolder: FC<ICreateFolder> = ({
           maxLength={50}
           placeholder="Collection name"
         />
-        <ColorPicker color={color} onChange={setColor} />
-        {tweet && (
-          <p className="my-8 mx-5 font-pretendard text-base leading-5 max-line-3 max-h-16">
-            {tweet}
-          </p>
-        )}
+        <div className="h-4 w-full" />
+        <ColorInput value={color} onChange={setColor} />
+        <div className="my-2 w-full border border-gray6" />
+        <PrivateInput isPrivate={isPrivate} onChange={setPrivate} />
+        <div className="my-4 rounded-xl border border-gray6 p-4">
+          {tweet && (
+            <p className="text-base leading-5 max-line-3 max-h-16">{tweet}</p>
+          )}
+        </div>
       </div>
       <div className="w-full h-1px bg-gray6" />
-      <PrivateInput isPrivate={isPrivate} onChange={setPrivate} />
     </Modal>
   );
 };
