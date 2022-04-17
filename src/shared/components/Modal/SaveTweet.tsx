@@ -1,3 +1,4 @@
+import QuotedCard from 'features/cards/components/QuotedCard';
 import type Card from 'features/cards/types/Card';
 import { Collection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
@@ -37,35 +38,30 @@ const SaveTweet: FC<ISaveTweetProps> = ({
 
   return (
     <Modal isOpen={isOpen} useMinHeight onClose={handleClose}>
-      <div>
-        <div className="w-full h-18 bg-white rounded-t-2xl flex justify-center items-center relative">
-          <div onClick={handleClose} className="absolute left-6 top-6">
-            <ArrowBack />
-          </div>
-          <div className="flex items-center">
+      <Modal.Header.TypeC
+        left={
+          <div className="flex gap-1 items-center">
             <div
-              className={`w-8 h-8 mr-3 flex justify-center items-center rounded-full bg-${color}`}
+              className={`w-6 h-6 bg-${color} rounded-full flex items-center justify-center`}
             >
-              <TwitterEmoji value={emoji} />
+              <TwitterEmoji value={emoji} size={14} />
             </div>
-            <h2 className="font-bold text-lg leading-5 text-black">
-              {collection.name}
-            </h2>
+            <p className="font-bold text-lg">{collection.name}</p>
           </div>
-        </div>
-        <div className="px-5 flex flex-col gap-5">
-          <Input
-            value={title}
-            onChange={setTitle}
-            placeholder="Add title to this tweet"
-            maxLength={50}
-          />
-          <div className="text-base whitespace-pre-wrap pb-32">
-            {card?.text}
-          </div>
-        </div>
+        }
+        right="Save"
+        onClick={handleSave}
+        onCancel={handleClose}
+      />
+      <div className="px-5 flex flex-col gap-5 pb-10">
+        <Input
+          value={title}
+          onChange={setTitle}
+          placeholder="Add title to this tweet"
+          maxLength={50}
+        />
+        <QuotedCard card={card} />
       </div>
-      <ModalButton onClick={handleSave} label="Save" />
     </Modal>
   );
 };

@@ -106,7 +106,7 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
         isLoading={isLoading}
         isOpen={step === HOME_MODAL_STEP.CREATE_COLLECTION}
         onSelectFolder={submitCreateFolder}
-        tweet={card?.text}
+        card={card}
         onClose={goToSelectCollection}
       />
       <SaveTweet

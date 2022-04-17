@@ -33,6 +33,7 @@ export default function MoveTweet({
         onClose={onClose}
       />
       <CreateFolder
+        card={null}
         isLoading={isLoading}
         isOpen={!isCollectionSelect}
         onSelectFolder={submitCreateFolder}

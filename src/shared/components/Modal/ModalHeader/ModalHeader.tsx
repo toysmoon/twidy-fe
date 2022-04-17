@@ -30,7 +30,11 @@ ModalHeader.TypeB = function ({
 }: ModalHeaderTypeBProps) {
   return (
     <div className={cn(headerClass, 'justify-between')}>
-      {typeof left === 'string' ? <h2 className={titleClass}>{left}</h2> : left}
+      {typeof left === 'string' ? (
+        <p className="font-bold text-lg">{left}</p>
+      ) : (
+        left
+      )}
       {right && <Button loading={loading} label={right} onClick={onClick} />}
     </div>
   );
@@ -52,9 +56,13 @@ ModalHeader.TypeC = function ({
   return (
     <ModalHeader.TypeB
       left={
-        <div className="flex gap-1">
+        <div className="flex gap-1 items-center">
           <ArrowBack onClick={onCancel} />
-          {left}
+          {typeof left === 'string' ? (
+            <p className="font-bold text-lg">{left}</p>
+          ) : (
+            left
+          )}
         </div>
       }
       {...props}

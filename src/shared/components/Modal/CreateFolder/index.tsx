@@ -1,4 +1,6 @@
 import { COLLECTION_COLOR } from 'features/cards/components/ColorPicker';
+import QuotedCard from 'features/cards/components/QuotedCard';
+import Card from 'features/cards/types/Card';
 import SelectIcon from 'features/collections/components/SelectIcon';
 import { PostCollection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
@@ -10,7 +12,7 @@ import useToast from 'shared/hooks/useToast';
 import Modal, { IModalProps } from '../';
 
 interface ICreateFolder extends IModalProps {
-  tweet?: string;
+  card: Card | null;
   onSelectFolder: (pc: PostCollection) => Promise<void>;
 }
 
@@ -18,7 +20,7 @@ const CreateFolder: FC<ICreateFolder> = ({
   isOpen,
   isLoading,
   onClose = () => {},
-  tweet = '',
+  card,
   onSelectFolder,
 }) => {
   useDim(isOpen);
@@ -48,11 +50,12 @@ const CreateFolder: FC<ICreateFolder> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} useMinHeight>
-      <Modal.Header.TypeB
+      <Modal.Header.TypeC
         left="New Collection"
-        right="SAVE"
+        right="Create"
         loading={isLoading}
         onClick={handleSumbit}
+        onCancel={handleClose}
       />
       <div className="px-5">
         <SelectIcon icon={icon} onChange={setIcon} color={color} />
@@ -66,11 +69,7 @@ const CreateFolder: FC<ICreateFolder> = ({
         <ColorInput value={color} onChange={setColor} />
         <div className="my-2 w-full border border-gray6" />
         <PrivateInput isPrivate={isPrivate} onChange={setPrivate} />
-        <div className="my-4 rounded-xl border border-gray6 p-4">
-          {tweet && (
-            <p className="text-base leading-5 max-line-3 max-h-16">{tweet}</p>
-          )}
-        </div>
+        <div className="my-4">{card && <QuotedCard card={card} />}</div>
       </div>
       <div className="w-full h-1px bg-gray6" />
     </Modal>

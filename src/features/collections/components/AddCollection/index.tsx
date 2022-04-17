@@ -23,6 +23,7 @@ export default function AddCollection() {
         {'+ New collection'}
       </div>
       <CreateFolder
+        card={null}
         isOpen={isCreateFolderOpen}
         isLoading={isLoading}
         onSelectFolder={handleSumbit}
