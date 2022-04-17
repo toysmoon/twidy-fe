@@ -39,5 +39,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Docker run
         run: |
+          docker pull toysmoon/twidy_fe:lastest
           docker ps -q --filter "name=twidy_fe" | grep -q . && docker stop twidy_fe && docker rm -fv twidy_fe
           docker run -d -p 3000:3000 --name twidy_fe --restart always toysmoon/twidy_fe:latest
