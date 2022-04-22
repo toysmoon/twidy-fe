@@ -51,7 +51,7 @@ const SaveTweet: FC<ISaveTweetProps> = ({
         onClick={handleSave}
         onCancel={handleClose}
       />
-      <div className="px-5 flex flex-col gap-5 pb-10">
+      <div className="px-5 flex flex-col gap-4 pb-10">
         <Input
           value={title}
           onChange={setTitle}
