@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Spinner } from '../Icons';
 
 interface IButtonProps {
   type?: 'basic' | 'ghost' | 'disabled';
@@ -19,7 +20,9 @@ const Button: FC<IButtonProps> = ({
         onClick={onClick}
         className={`px-5 py-2 h-9 rounded-full text-white font-nunito font-extrabold text-base ${buttonColor[type]}`}
       >
-        'loading...'
+        <div className="animate-spin">
+          <Spinner />
+        </div>
       </button>
     );
   }

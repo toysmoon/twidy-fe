@@ -54,5 +54,5 @@ export const containerDefaultClass = [
   'rounded-2xl',
   'flex',
   'items-center',
-  'p-5',
+  'p-4',
 ];

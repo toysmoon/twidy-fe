@@ -12,6 +12,7 @@ import Search from './Search';
 import More from './More';
 import ArrowCircle from './ArrowCircle';
 import SkipIcon from './SkipIcon';
+import Spinner from './Spinner';
 
 export interface IIconProps {
   width?: number;
@@ -36,4 +37,5 @@ export {
   Search,
   More,
   SkipIcon,
+  Spinner,
 };
