@@ -19,10 +19,13 @@ const Page: NextPage<{}> = () => {
       <Suspense fallback={<ProfileSkeleton />}>
         <Profile />
       </Suspense>
+
       <LikeTab />
+
       <Suspense fallback={<CardListsSkeleton />}>
         <LikedCardList onClickCard={setCard} />
       </Suspense>
+
       <Suspense fallback={<div />}>
         <HomeModals card={card} onClose={closeModal} />
       </Suspense>
