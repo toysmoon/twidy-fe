@@ -9,11 +9,12 @@ import React, { useState } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
 import Modal from 'shared/components/Modal';
 import useToast from 'shared/hooks/useToast';
+import Twit from '../LikedCardList/Twit';
+import TwitterUser from '../LikedCardList/TwitterUser';
 import MoreMenu from '../MoreMenu';
 import ChangeTitle from './ChangeTittle';
 import Header from './Header';
 import MoveTweet from './MoveTweet';
-import ViewTweet from './ViewTweet';
 
 export interface IDetailedCard {
   card?: Card;
@@ -21,11 +22,7 @@ export interface IDetailedCard {
   isViewMode?: boolean;
 }
 
-export default function DetailedCard({
-  card,
-  onClose,
-  isViewMode,
-}: IDetailedCard) {
+export default function DetailedCard({ card, onClose, isViewMode }: IDetailedCard) {
   const toast = useToast();
   const router = useRouter();
   const collectionId = Number(router.query.collectionId);
@@ -45,13 +42,7 @@ export default function DetailedCard({
       onClose();
     };
 
-    return (
-      <MoreMenu
-        onClose={() => setStep(1)}
-        onClick={setStep}
-        onDelete={handleDelete}
-      />
-    );
+    return <MoreMenu onClose={() => setStep(1)} onClick={setStep} onDelete={handleDelete} />;
   }
 
   if (step === 3) {
@@ -62,16 +53,14 @@ export default function DetailedCard({
       onClose();
     };
 
-    return (
-      <ChangeTitle card={card} onSave={handleSubmit} onClose={handleClose} />
-    );
+    return <ChangeTitle card={card} onSave={handleSubmit} onClose={handleClose} />;
   }
 
   if (step === 4) {
     return (
       <MoveTweet
         collectionId={collectionId}
-        onSubmit={async (cId) => {
+        onSubmit={async cId => {
           await moveCard({ ...card, collectionId: cId });
           toast('Your changes have been applied!');
           onClose();
@@ -88,22 +77,17 @@ export default function DetailedCard({
   return (
     <>
       <Modal isOpen={true} onClose={onClose}>
-        <Header
-          card={card}
-          onClick={() => setStep(2)}
-          isViewMode={isViewMode}
-        />
-        <div className={'p-5 pt-0'}>
-          {isHaveMedia && (
-            <Thumbnail author={author} type={mediaType} media={media} />
-          )}
-          <p className={'pt-5 font-pretendard text-lg leading-7 text-black'}>
-            {text}
-          </p>
-          <div className={'flex justify-end'}>
-            <ViewTweet link={url} />
-          </div>
-        </div>
+        <Header card={card} onClick={() => setStep(2)} isViewMode={isViewMode} />
+        <article className={'m-5 mt-0 p-4 border rounded-xl border-gray6'}>
+          <TwitterUser
+            profileImage={author.profile_image_url}
+            twitterId={author.username}
+            name={author.name}
+            url={url}
+          />
+          <Twit>{text}</Twit>
+          {isHaveMedia && <Thumbnail author={author} type={mediaType} media={media} />}
+        </article>
       </Modal>
     </>
   );

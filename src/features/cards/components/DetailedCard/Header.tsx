@@ -1,7 +1,7 @@
 import type Card from 'features/cards/types/Card';
 import React from 'react';
-import { More } from 'shared/components/Icons';
 import getDisplayDate from 'shared/utils/getDisplayDate';
+import MoreButton from '../MoreButton';
 
 export interface IHeaderProps {
   card: Card;
@@ -13,18 +13,12 @@ export default function Header({ card, onClick, isViewMode }: IHeaderProps) {
   const { title, regDttm } = card;
 
   return (
-    <div className={'flex justify-between items-center p-5 relative'}>
-      <p className="font-pretendard font-bold text-2xl leading-7 text-gray1">
-        {title}
-        <span className="font-normal text-lg ml-1 text-gray3">
-          {getDisplayDate(regDttm)}
-        </span>
-      </p>
-      {!isViewMode && (
-        <div className={'right-0'} onClick={onClick}>
-          <More color={'#262F56'} size={27} />
-        </div>
-      )}
+    <div className="flex justify-between items-center p-5 pb-4">
+      <div className="flex flex-col">
+        <span className="text-xs text-gray4">{getDisplayDate(regDttm)}</span>
+        <span className="text-black text-sm font-bold">{title ?? ''}</span>
+      </div>
+      {!isViewMode && <MoreButton onClick={onClick} classNames="block" />}
     </div>
   );
 }

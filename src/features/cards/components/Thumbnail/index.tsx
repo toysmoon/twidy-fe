@@ -13,26 +13,18 @@ export interface IThumbnailProps {
 const imageTypes = [MEDIA_TYPE.gif, MEDIA_TYPE.photo];
 
 export default function Thumbnail({ type, author, media }: IThumbnailProps) {
-  const isNotImage = imageTypes.every((iType) => iType !== type);
+  const isNotImage = imageTypes.every(iType => iType !== type);
 
   if (isNotImage) {
     return (
-      <div className="relative mb-5 rounded-xl bg-cover bg-center bg-src">
+      <div className="relative mt-4 rounded-xl bg-cover bg-center bg-src">
         <div className="pb-50-percent" />
-        <p className="text-lg leading-5 text-white absolute top-5 left-5">
-          {getContent(type, author)}
-        </p>
+        <p className="text-lg leading-5 text-white absolute top-5 left-5">{getContent(type, author)}</p>
         <Icon type={type} />
         <style jsx>{`
           .bg-src {
-            background: linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.7),
-                rgba(0, 0, 0, 0.7)
-              ),
-              url(${media[0]?.url ??
-              media[0]?.preview_image_url ??
-              author.profile_image_url});
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url(${media[0]?.url ?? media[0]?.preview_image_url ?? author.profile_image_url});
             background-position: center;
             background-size: cover;
           }
@@ -44,19 +36,12 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
   const images = media.slice(0, 4);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative mt-4 overflow-hidden">
       <div className="pb-50-percent" />
       <div className="grid grid-cols-2 grid-rows-2 gap-0.5 absolute inset-0 rounded-md overflow-hidden">
         {images.map((image, i) => (
-          <div
-            key={`thumb-image-${i}`}
-            className={cn(getGridClass(images.length, i), 'relative')}
-          >
-            <Image
-              src={image.url ?? image.preview_image_url}
-              layout="fill"
-              objectFit="cover"
-            />
+          <div key={`thumb-image-${i}`} className={cn(getGridClass(images.length, i), 'relative')}>
+            <Image src={image.url ?? image.preview_image_url} layout="fill" objectFit="cover" />
           </div>
         ))}
       </div>
