@@ -85,7 +85,7 @@ export default function DetailedCard({ card, onClose, isViewMode }: IDetailedCar
             name={author.name}
             url={url}
           />
-          <Twit>{text}</Twit>
+          <Twit twit={text} />
           {isHaveMedia && <Thumbnail author={author} type={mediaType} media={media} />}
         </article>
       </Modal>
