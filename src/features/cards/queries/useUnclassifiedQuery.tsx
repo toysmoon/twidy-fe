@@ -3,34 +3,30 @@ import { useQuery, useQueryClient } from 'react-query';
 import getUnclassifiedCards from '../api/getUnclassifiedCards';
 
 export function useUnclassifiedQuery() {
-  return useQuery(
-    ['cards', 'list', { unclassifed: true }],
-    getUnclassifiedCards,
-    {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  return useQuery(['cards', 'list', { unclassifed: true }], getUnclassifiedCards, {
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
 }
 
 export function useRefreshCardList() {
   const queryClient = useQueryClient();
 
-  return useCallback(
-    () =>
-      queryClient.invalidateQueries(['cards', 'list', { unclassifed: true }]),
-    [queryClient]
-  );
+  return useCallback(() => queryClient.invalidateQueries(['cards', 'list', { unclassifed: true }]), [queryClient]);
 }
 
 export function useSavedCardRemove() {
   const queryClient = useQueryClient();
-  const { data: cards } = useUnclassifiedQuery();
+  const { data: cards, refetch: refetchCards } = useUnclassifiedQuery();
 
   return useCallback(
     (tweetId: string) => {
-      const index = cards!.findIndex((c) => c.tweetId === tweetId);
+      if (cards!.length === 1) {
+        return refetchCards();
+      }
+
+      const index = cards!.findIndex(c => c.tweetId === tweetId);
       if (index === -1) {
         return;
       }
@@ -42,6 +38,6 @@ export function useSavedCardRemove() {
 
       queryClient.invalidateQueries(['collection']);
     },
-    [queryClient, cards]
+    [queryClient, cards, refetchCards]
   );
 }

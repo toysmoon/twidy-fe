@@ -1,11 +1,31 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-interface ITwitProps {}
+interface ITwitProps {
+  twit: string;
+}
 
-const Twit: FC<ITwitProps> = ({ children }) => (
-  <div className="mt-2 overflow-hidden">
-    <span className="leading-5 text-black whitespace-pre-wrap">{children}</span>
-  </div>
-);
+const Twit = ({ twit }: ITwitProps) => {
+  return (
+    <div className="mt-2 overflow-hidden">
+      <p className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: renderTwit(twit) }} />
+    </div>
+  );
+};
 
 export default React.memo(Twit);
+
+const renderTwit = (twit: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const hashtagRegex = /(#[^\s]+)/g;
+
+  return twit
+    .replace(urlRegex, url => `<a href=${url} target="_blank" class="underline text-blue-200">${url}</a>`)
+    .replace(
+      hashtagRegex,
+      hashtag => `<a href="${getHashtagUrl(hashtag)}" target="_blank" class="underline text-blue-200">${hashtag}</a>`
+    );
+};
+
+function getHashtagUrl(hashtag: string) {
+  return `https://twitter.com/hashtag/${hashtag.substring(1)}`;
+}

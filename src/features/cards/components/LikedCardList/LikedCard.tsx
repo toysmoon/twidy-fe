@@ -29,7 +29,7 @@ export default function LikedCard({ card, onClick }: ICardProps) {
     <div className="p-5 my-3 mx-4 relative bg-white rounded-2xl">
       <article>
         <TwitterUser profileImage={author.profile_image_url} twitterId={author.username} name={author.name} url={url} />
-        <Twit>{text}</Twit>
+        <Twit twit={text} />
         {isHaveMedia && <CardThumbnail images={media} tweetUrl={card.url} />}
       </article>
       <div className="flex justify-between items-center mt-5">

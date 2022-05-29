@@ -62,7 +62,7 @@ function getContent(type: MEDIA_TYPE, author: Author) {
   }
 }
 
-function getGridClass(totalCount: number, index: number) {
+export function getGridClass(totalCount: number, index: number) {
   if (totalCount === 1) {
     return 'col-span-2 row-span-2';
   }

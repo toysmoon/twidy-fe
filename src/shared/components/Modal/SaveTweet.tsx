@@ -15,13 +15,7 @@ export interface ISaveTweetProps {
   onClose: () => void;
 }
 
-const SaveTweet: FC<ISaveTweetProps> = ({
-  isOpen,
-  card,
-  collection,
-  onSave,
-  onClose,
-}) => {
+const SaveTweet: FC<ISaveTweetProps> = ({ isOpen, card, collection, onSave, onClose }) => {
   if (!card || !collection) {
     return null;
   }
@@ -38,13 +32,11 @@ const SaveTweet: FC<ISaveTweetProps> = ({
     <Modal isOpen={isOpen} useMinHeight onClose={handleClose}>
       <Modal.Header.TypeC
         left={
-          <div className="flex gap-1 items-center">
-            <div
-              className={`w-6 h-6 bg-${color} rounded-full flex items-center justify-center`}
-            >
+          <div className="flex gap-1 items-center overflow-hidden">
+            <div className={`w-6 h-6 bg-${color} rounded-full flex items-center justify-center shrink-0`}>
               <TwitterEmoji value={emoji} size={14} />
             </div>
-            <p className="font-bold text-lg">{collection.name}</p>
+            <p className="font-bold text-lg overflow-hidden text-ellipsis whitespace-nowrap mx-1">{collection.name}</p>
           </div>
         }
         right="Save"
@@ -52,12 +44,7 @@ const SaveTweet: FC<ISaveTweetProps> = ({
         onCancel={handleClose}
       />
       <div className="px-5 flex flex-col gap-4 pb-10">
-        <Input
-          value={title}
-          onChange={setTitle}
-          placeholder="Add title to this tweet"
-          maxLength={50}
-        />
+        <Input value={title} onChange={setTitle} placeholder="Add title to this tweet" maxLength={50} />
         <QuotedCard card={card} />
       </div>
     </Modal>

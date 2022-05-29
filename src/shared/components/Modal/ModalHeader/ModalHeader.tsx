@@ -22,16 +22,11 @@ interface ModalHeaderTypeBProps {
   onClick?: () => void;
 }
 
-ModalHeader.TypeB = function ({
-  left,
-  right,
-  loading,
-  onClick = () => {},
-}: ModalHeaderTypeBProps) {
+ModalHeader.TypeB = function ({ left, right, loading, onClick = () => {} }: ModalHeaderTypeBProps) {
   return (
     <div className={cn(headerClass, 'justify-between')}>
       {typeof left === 'string' ? (
-        <p className="font-bold text-lg">{left}</p>
+        <p className="font-bold text-lg overflow-hidden text-ellipsis whitespace-nowrap">{left}</p>
       ) : (
         left
       )}
@@ -48,18 +43,14 @@ interface ModalHeaderTypeCProps {
   onClick?: () => void;
 }
 
-ModalHeader.TypeC = function ({
-  left,
-  onCancel,
-  ...props
-}: ModalHeaderTypeCProps) {
+ModalHeader.TypeC = function ({ left, onCancel, ...props }: ModalHeaderTypeCProps) {
   return (
     <ModalHeader.TypeB
       left={
-        <div className="flex gap-1 items-center">
+        <div className="flex gap-1 items-center overflow-hidden">
           <ArrowBack onClick={onCancel} />
           {typeof left === 'string' ? (
-            <p className="font-bold text-lg">{left}</p>
+            <p className="font-bold text-lg overflow-hidden text-ellipsis whitespace-nowrap">{left}</p>
           ) : (
             left
           )}
@@ -81,7 +72,8 @@ const headerClass = cn(
   'items-center',
   'relative',
   'rounded-t-2xl',
-  'border-none'
+  'border-none',
+  'overflow-hidden'
 );
 
 const titleClass = cn('font-pretendard', 'font-bold text-base');
