@@ -1,9 +1,10 @@
 import Thumbnail from 'features/cards/components/Thumbnail';
-import useUpdateCardMutation, {
+import type Card from 'features/cards/types/Card';
+import {
   useDeleteCardMutation,
   useMoveCardMutation,
-} from 'features/cards/queries/useUpdateCardMutation';
-import type Card from 'features/cards/types/Card';
+  useUpdateCardMutation,
+} from 'features/collections/queries/useCardMutations';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
