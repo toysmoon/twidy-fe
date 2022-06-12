@@ -14,7 +14,7 @@ export default function useInfiniteCardsQuery(collectionId?: number) {
     enabled: collectionId !== undefined,
     getNextPageParam: (_, pages) => {
       const lastPage = pages[pages.length - 1];
-      return lastPage.length === 0 ? pages.length : undefined;
+      return lastPage.length === 0 ? undefined : pages.length;
     },
   });
 }
