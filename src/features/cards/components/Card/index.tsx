@@ -1,9 +1,10 @@
 import useGlobalCard from 'features/cards/hooks/useGlobalCard';
-import useUpdateCardMutation, {
+import type Card from 'features/cards/types/Card';
+import {
   useDeleteCardMutation,
   useMoveCardMutation,
-} from 'features/cards/queries/useUpdateCardMutation';
-import type Card from 'features/cards/types/Card';
+  useUpdateCardMutation,
+} from 'features/collections/queries/useCardMutations';
 import { useRouter } from 'next/router';
 import React, { MouseEvent, useCallback, useState } from 'react';
 import useToast from 'shared/hooks/useToast';

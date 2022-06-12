@@ -16,9 +16,9 @@ export type CardResponse = {
   title: string;
 };
 
-export default async function getCards(collectionId: number) {
+export default async function getCards(collectionId: number, props: any = {}) {
   const response = await client.get<CardResponse[]>('/card', {
-    params: { collectionId },
+    params: { collectionId, ...props },
   });
 
   const data = response.data.map(({ author, media, ...card }) => ({
