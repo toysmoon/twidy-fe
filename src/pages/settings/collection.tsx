@@ -68,7 +68,7 @@ export default function Folders() {
   if (isLoading) {
     return (
       <EmptyLayout>
-        <div className="fixed top-1/3 w-full flex flex-col justify-center items-center">
+        <div className="fixed top-1/3 w-full flex flex-col justify-center items-center animate-spin">
           <LoadingIcon />
         </div>
       </EmptyLayout>
