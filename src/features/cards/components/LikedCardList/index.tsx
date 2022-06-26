@@ -12,10 +12,6 @@ interface LikedCardListProps {
 export default function LikedCardList({ onClickCard }: LikedCardListProps) {
   const { data: cards, isRefetching } = useUnclassifiedQuery();
 
-  if (isRefetching) {
-    return <CardListsSkeleton />;
-  }
-
   if (cards!.length === 0) {
     return (
       <div className="mt-20">
@@ -24,9 +20,7 @@ export default function LikedCardList({ onClickCard }: LikedCardListProps) {
           <br />
           any Tweets yet
         </p>
-        <p className="mt-3 text-center text-white opacity-30">
-          When you do, we’ll show you here
-        </p>
+        <p className="mt-3 text-center text-white opacity-30">When you do, we’ll show you here</p>
       </div>
     );
   }
@@ -36,7 +30,8 @@ export default function LikedCardList({ onClickCard }: LikedCardListProps) {
       {cards!.map((item, i) => (
         <LikedCard key={i} card={item} onClick={onClickCard} />
       ))}
-      {cards!.length < 16 && <LoadNewTweets />}
+      {isRefetching && <CardListsSkeleton />}
+      {<LoadNewTweets />}
     </>
   );
 }
