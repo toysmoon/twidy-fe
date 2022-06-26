@@ -1,7 +1,5 @@
 import getSetting from 'features/users/api/getSetting';
-import useUserQuery, {
-  useMutateUpdateProfile,
-} from 'features/users/queries/useUserQuery';
+import useUserQuery, { useMutateUpdateProfile } from 'features/users/queries/useUserQuery';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Boundary from 'shared/components/Boundary';
@@ -19,9 +17,7 @@ function CheckUser() {
   const user = useUserQuery();
   const userId = user?.userId;
   const { mutateAsync: patchProfile } = useMutateUpdateProfile();
-  const { data: setting, isLoading } = useQuery(['setting', userId], () =>
-    userId ? getSetting(userId) : null
-  );
+  const { data: setting, isLoading } = useQuery(['setting', userId], () => (userId ? getSetting(userId) : null));
 
   useEffect(() => {
     if (isLoading) {
@@ -45,7 +41,7 @@ function Loading() {
   );
 }
 
-function LoadingIcon() {
+export function LoadingIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
