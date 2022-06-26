@@ -52,9 +52,9 @@ type ProfileMetaProps = {
   image: string;
 };
 
-function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
+function ProfileMeta({ name }: ProfileMetaProps) {
   const title = `${name}'s Twidy`;
-  const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${encodeURIComponent(image)}`;
+  // const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${encodeURIComponent(image)}`;
 
   return (
     <Head>
@@ -62,7 +62,7 @@ function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
       <meta name="description" content={title} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="article" />
-      <meta property="og:image" content={imageUrl} key="image" />
+      {/* <meta property="og:image" content={imageUrl} key="image" /> */}
     </Head>
   );
 }

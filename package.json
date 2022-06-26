@@ -13,7 +13,6 @@
   "dependencies": {
     "@next/bundle-analyzer": "^12.0.7",
     "axios": "^0.21.1",
-    "chrome-aws-lambda": "^10.1.0",
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "emoji-mart": "^3.0.1",
@@ -23,7 +22,6 @@
     "nodemon": "^2.0.12",
     "normalize.css": "^8.0.1",
     "playwright": "^1.17.1",
-    "puppeteer-core": "^12.0.1",
     "react": "^18.0.0-rc.0",
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
