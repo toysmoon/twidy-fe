@@ -31,7 +31,7 @@ export default function LikedCardList({ onClickCard }: LikedCardListProps) {
         <LikedCard key={i} card={item} onClick={onClickCard} />
       ))}
       {isRefetching && <CardListsSkeleton />}
-      {<LoadNewTweets />}
+      {cards!.length < 16 && <LoadNewTweets />}
     </>
   );
 }
