@@ -21,6 +21,11 @@ const menus = [
   },
   { title: 'Change theme', path: '/settings/theme', emoji: '🎨' },
   { title: 'My account', path: '/settings', emoji: '👤' },
+  {
+    title: 'About Twidy',
+    path: 'https://www.notion.so/sungjungjo/About-Twidy-7c5c2a6b765c421ebb7137d4e8a70362',
+    emoji: '👋',
+  },
 ];
 
 export default function UserMenu({ onClose }: IUserMenu) {
@@ -50,7 +55,7 @@ export default function UserMenu({ onClose }: IUserMenu) {
       return;
     }
 
-    router.push(path);
+    router.push(path, {});
   };
 
   return (
