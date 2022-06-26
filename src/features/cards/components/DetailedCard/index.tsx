@@ -6,10 +6,11 @@ import {
   useUpdateCardMutation,
 } from 'features/collections/queries/useCardMutations';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
 import Modal from 'shared/components/Modal';
 import useToast from 'shared/hooks/useToast';
+import ReferDetail from '../LikedCardList/ReferDetail';
 import Twit from '../LikedCardList/Twit';
 import TwitterUser from '../LikedCardList/TwitterUser';
 import MoreMenu from '../MoreMenu';
@@ -71,8 +72,9 @@ export default function DetailedCard({ card, onClose, isViewMode }: IDetailedCar
     );
   }
 
-  const { media, author, text, url } = card;
+  const { media, author, refers, text, url } = card;
   const isHaveMedia = media && media.length > 0;
+  const isHaveRefer = refers && refers.length > 0;
   const mediaType = media?.[0]?.type ?? MEDIA_TYPE.photo;
 
   return (
@@ -88,6 +90,11 @@ export default function DetailedCard({ card, onClose, isViewMode }: IDetailedCar
           />
           <Twit twit={text} />
           {isHaveMedia && <Thumbnail author={author} type={mediaType} media={media} />}
+          {isHaveRefer && (
+            <Suspense fallback={null}>
+              <ReferDetail refer={refers[0]} />
+            </Suspense>
+          )}
         </article>
       </Modal>
     </>

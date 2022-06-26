@@ -1,4 +1,4 @@
-import { Author, Media } from 'shared/api/types';
+import { Author, Media, Refer } from 'shared/api/types';
 
 type Card = {
   tweetId: string;
@@ -6,6 +6,7 @@ type Card = {
   url: string;
   author: Author;
   media?: Media[];
+  refers?: Refer[];
   status: string;
   regDttm: string;
   modDttm: string;

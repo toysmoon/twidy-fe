@@ -9,14 +9,10 @@ interface ITwitterUserProps {
   name: string;
   twitterId: string;
   url: string;
+  hideLogo?: boolean;
 }
 
-const TwitterUser: FC<ITwitterUserProps> = ({
-  profileImage,
-  twitterId,
-  name,
-  url,
-}) => {
+const TwitterUser: FC<ITwitterUserProps> = ({ profileImage, twitterId, name, url, hideLogo = false }) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex">
@@ -26,9 +22,11 @@ const TwitterUser: FC<ITwitterUserProps> = ({
           <Id id={twitterId} />
         </div>
       </div>
-      <a href={url} target="_blank">
-        <Twitter color="#1DA1F2" />
-      </a>
+      {!hideLogo && (
+        <a href={url} target="_blank">
+          <Twitter color="#1DA1F2" />
+        </a>
+      )}
     </div>
   );
 };
