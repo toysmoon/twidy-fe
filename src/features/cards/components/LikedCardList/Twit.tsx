@@ -2,12 +2,15 @@ import React from 'react';
 
 interface ITwitProps {
   twit: string;
+  useMaxLine?: boolean;
 }
 
-const Twit = ({ twit }: ITwitProps) => {
+const Twit = ({ twit, useMaxLine = false }: ITwitProps) => {
+  const maxLineClass = useMaxLine ? 'max-line-4' : '';
+
   return (
-    <div className="mt-2 overflow-hidden">
-      <p className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: renderTwit(twit) }} />
+    <div className={`mt-2 overflow-hidden ${maxLineClass}`}>
+      <p className="whitespace-pre-wrap " dangerouslySetInnerHTML={{ __html: renderTwit(twit) }} />
     </div>
   );
 };

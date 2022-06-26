@@ -85,7 +85,7 @@ export default function CollectionTweet({ card, isViewMode = false }: ITweetProp
           </div>
           {!isViewMode && <MoreButton onClick={handleMoreButton} classNames="block" />}
         </div>
-        <div className="bg-gray6 w-full h-1px my-3" />
+        <div className="bg-gray6 w-full h-1px mt-3" />
         <Content text={text} media={media} />
       </div>
 
