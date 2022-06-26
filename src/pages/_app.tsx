@@ -99,13 +99,11 @@ function TwidyMeta() {
       <meta name="description" content="Tidy up your liked tweets!" />
       <meta property="og:title" content="Twidy" />
       <meta property="og:image" content="/images/og.png" key="image" />
-
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@twidy_official" />
       <meta name="twitter:title" content="Twidy" />
       <meta name="twitter:description" content="Tidy up your liked tweets!" />
-      <meta name="twitter:image" content="https://twidy.app/images/og.png" />
-
+      <meta name="twitter:image:src" content="https://twidy.app/images/og.png" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
