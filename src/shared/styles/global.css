@@ -107,3 +107,7 @@ h4 {
 svg {
   flex-shrink: 0;
 }
+
+.min-h-200 {
+  min-height: 200rem;
+}
