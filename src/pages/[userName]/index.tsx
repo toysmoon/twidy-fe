@@ -7,7 +7,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { redirectUser } from 'pages/_app';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { User } from 'shared/api/types';
 import Boundary from 'shared/components/Boundary';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
@@ -68,10 +68,15 @@ function ProfileMeta({ name }: ProfileMetaProps) {
 }
 
 function TwidyFooter() {
+  const router = useRouter();
+  const handleClick = useCallback(() => {
+    router.push('/');
+  }, [router]);
+
   return (
     <div className="w-full flex justify-center items-center flex-col py-10">
       <p className="text-white font-bold">This page is made by</p>
-      <div className="flex items-center pt-2">
+      <div className="flex items-center pt-2" onClick={handleClick}>
         <FooterIcon />
         <FooterText />
       </div>
