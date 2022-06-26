@@ -1,19 +1,9 @@
 import { FC } from 'react';
 import { IIconProps } from '.';
 
-const ArrowCircle: FC<IIconProps> = ({
-  width = 24,
-  height = 24,
-  color = '#6E6E73',
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
-    viewBox="0 0 24 24"
-    fill="none"
-  >
-    <g clip-path="url(#clip0_1758_25890)">
+const ArrowCircle: FC<IIconProps> = ({ width = 24, height = 24, color = '#6E6E73' }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none">
+    <g clipPath="url(#clip0_1758_25890)">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
