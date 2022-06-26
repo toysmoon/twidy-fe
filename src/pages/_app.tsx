@@ -30,6 +30,7 @@ const queryClient = new QueryClient({
 });
 
 function Maeum({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   const { theme, ...nextPageProps }: { theme?: string } = pageProps ?? {};
 
   const initializeState = useCallback(
@@ -51,7 +52,7 @@ function Maeum({ Component, pageProps }: AppProps) {
         </Boundary>
         <GlobalTweet />
         <Toast />
-        <GoogleForm />
+        {router.pathname !== '/about' && <GoogleForm />}
       </RecoilRoot>
     </QueryClientProvider>
   );
@@ -85,14 +86,8 @@ function TwidyMeta() {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap"
-        rel="stylesheet"
-      />
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet" />
       <link
         rel="stylesheet"
         type="text/css"
@@ -106,9 +101,7 @@ const noLoginPages = ['/about', '/_error', '/[userName]', '/thumbnail'];
 Maeum.getInitialProps = async (appContext: AppContext) => {
   const { ctx } = appContext;
   const { pathname } = ctx;
-  const isNeedToLoginPage = noLoginPages
-    .map((url) => pathname.includes(url))
-    .every((isInclude) => !isInclude);
+  const isNeedToLoginPage = noLoginPages.map(url => pathname.includes(url)).every(isInclude => !isInclude);
 
   const appProps = await App.getInitialProps(appContext);
   if (!appContext.ctx.req || !isNeedToLoginPage) {
@@ -121,10 +114,7 @@ Maeum.getInitialProps = async (appContext: AppContext) => {
   return { ...appProps };
 };
 
-export function redirectUser(
-  ctx: NextPageContext | GetServerSidePropsContext,
-  location: string
-) {
+export function redirectUser(ctx: NextPageContext | GetServerSidePropsContext, location: string) {
   try {
     if (ctx.req) {
       ctx.res?.writeHead(302, { Location: location });

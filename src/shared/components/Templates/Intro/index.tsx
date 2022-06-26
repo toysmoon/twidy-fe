@@ -21,12 +21,9 @@ export default function Intro() {
   }, [router]);
 
   return (
-    <div className="fixed top-0 bottom-0 max-w-xl w-full overflow-scroll bg-gray1">
+    <div className="fixed top-0 bottom-0 max-w-xl w-full overflow-scroll bg-gray1 hide-scrollbar">
       <Header onClick={handleClick} />
-      <Title
-        title={'Tidy up\nliked tweets!'}
-        detail="Search, categorize and share your liked tweets through Twidy!"
-      />
+      <Title title={'Tidy up\nliked tweets!'} detail="Search, categorize and share your liked tweets through Twidy!" />
       <Button onClick={handleClick} />
       <AppImage />
       <CardList cards={cardList} />
