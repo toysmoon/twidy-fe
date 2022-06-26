@@ -14,7 +14,7 @@ export default function Thumbnail({ media }: IMediaProps) {
   const isMultiMedia = !isNotImage && media.length > 1;
 
   return (
-    <div className="shrink-0 relative w-24 h-24 rounded-xl overflow-hidden thumbnail-filter">
+    <div className="shrink-0 relative w-24 h-24 rounded-xl overflow-hidden thumbnail-shadow">
       <Image src={url ?? preview_image_url ?? ''} layout="fill" objectFit="cover" />
       {isMultiMedia && (
         <div
