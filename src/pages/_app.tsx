@@ -52,10 +52,26 @@ function Maeum({ Component, pageProps }: AppProps) {
         </Boundary>
         <GlobalTweet />
         <Toast />
-        {router.pathname !== '/about' && <GoogleForm />}
+        {shouldDisplayForm(router.pathname) && <GoogleForm />}
       </RecoilRoot>
     </QueryClientProvider>
   );
+}
+
+function shouldDisplayForm(pathname: string): boolean {
+  if (pathname === '/about') {
+    return false;
+  }
+
+  if (pathname === '/login') {
+    return false;
+  }
+
+  if (pathname === '/login/register') {
+    return false;
+  }
+
+  return true;
 }
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {

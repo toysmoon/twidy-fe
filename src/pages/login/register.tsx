@@ -1,68 +1,52 @@
 import { useMutateSetting } from 'features/settings/queries/useSettingQuery';
 import registerUser from 'features/users/api/registerUser';
 import { useRouter } from 'next/router';
-import React, { useCallback, useState } from 'react';
-import Toggle from 'shared/components/Form/Toggle';
+import React, { useCallback } from 'react';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
 export default function LoadingPage() {
   const router = useRouter();
-  const [isChecked, setChecked] = useState(true);
   const { mutateAsync: postSetting } = useMutateSetting();
 
-  const handleClick = useCallback(async () => {
-    try {
-      const user = await registerUser();
-      await postSetting({
-        userId: user.data.userId,
-        language: 'en',
-        theme: 'black',
-        autoDelete: isChecked,
-        status: 'Y',
-      });
-    } catch (e) {
-      console.log(e);
-    } finally {
-      router.replace('/');
-    }
-  }, [isChecked, router, postSetting]);
+  const handleClick = useCallback(
+    async (isChecked: boolean) => {
+      try {
+        const user = await registerUser();
+        await postSetting({
+          userId: user.data.userId,
+          language: 'en',
+          theme: 'black',
+          autoDelete: isChecked,
+          status: 'Y',
+        });
+      } catch (e) {
+        console.log(e);
+      } finally {
+        router.replace('/');
+      }
+    },
+    [router, postSetting]
+  );
 
   return (
     <EmptyLayout>
       <div className="fixed inset-0 flex flex-col justify-between items-center">
-        <h1 className="mt-16 text-white text-center text-2xl font-bold">
-          Let’s organize your <br /> liked tweets with Twidy!
-        </h1>
-        <div>
-          <TwidyIcon />
-        </div>
-        <div className="w-full p-4 flex flex-col justify-center items-center">
-          <div className="px-2 w-full flex justify-between">
-            <div>
-              <p className="text-sm text-white">Sync twidy with Twitter</p>
-              <a
-                href="https://sungjungjo.notion.site/About-Twidy-7c5c2a6b765c421ebb7137d4e8a70362"
-                target="_blank"
-              >
-                <p className="text-xs text-white opacity-50">
-                  What is synchronization?
-                </p>
-              </a>
-            </div>
-            <Toggle
-              isChecked={isChecked}
-              onClick={() => setChecked(!isChecked)}
-            />
+        <div className="h-full flex justify-center items-center flex-col">
+          <div className="h-16 flex justify-center items-center">
+            <img src="/images/intro/sync_twitter.png" alt="explain sync" className="h-16" />
           </div>
-          <button
-            onClick={handleClick}
-            className="w-full h-16 bg-white rounded-full mt-6 mb-4 font-bold"
-          >
-            Get to start
-          </button>
-          <p className="text-white opacity-50 text-xs pb-4">
-            By logging in you accept the Privacy and Terms.
+          <h1 className="mt-8 text-white text-center text-2xl font-bold whitespace-pre-line">{`Do you want to sync\ntwitter and twidy?`}</h1>
+          <p className="font-pretendard text-base leading-5 text-white pt-2 px-12 text-center opacity-60">
+            When you sync, all twidy activity will be reflected in your twitter account.
           </p>
+        </div>
+        <div className="w-full p-4 flex justify-center items-center gap-4 pb-10">
+          <button onClick={() => handleClick(false)} className="w-full h-12 bg-black rounded-full font-bold text-white">
+            No, thanks
+          </button>
+          <button onClick={() => handleClick(true)} className="w-full h-12 bg-white rounded-full font-bold">
+            Continue
+          </button>
         </div>
       </div>
     </EmptyLayout>
@@ -71,13 +55,7 @@ export default function LoadingPage() {
 
 function TwidyIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="148"
-      height="138"
-      viewBox="0 0 148 138"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="148" height="138" viewBox="0 0 148 138" fill="none">
       <rect
         x="61.3779"
         y="23.8423"
@@ -105,14 +83,7 @@ function TwidyIcon() {
         transform="rotate(6 32.6753 29.1113)"
         fill="#FF508F"
       />
-      <rect
-        x="21.5894"
-        y="29.4741"
-        width="97.2182"
-        height="77.7183"
-        rx="20.2743"
-        fill="#745AFF"
-      />
+      <rect x="21.5894" y="29.4741" width="97.2182" height="77.7183" rx="20.2743" fill="#745AFF" />
       <rect
         x="29.9727"
         y="42.2446"

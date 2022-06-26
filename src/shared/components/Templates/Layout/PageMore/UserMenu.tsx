@@ -23,7 +23,7 @@ const menus = [
   { title: 'My account', path: '/settings', emoji: '👤' },
   {
     title: 'About Twidy',
-    path: 'https://www.notion.so/sungjungjo/About-Twidy-7c5c2a6b765c421ebb7137d4e8a70362',
+    path: 'https://sungjungjo.notion.site/About-Twidy-7c5c2a6b765c421ebb7137d4e8a70362',
     emoji: '👋',
   },
 ];
