@@ -17,18 +17,19 @@ export type CardResponse = {
   ref: string;
 };
 
-export default async function getCards(collectionId: number, props: any = {}) {
-  const response = await client.get<CardResponse[]>('/card', {
-    params: { collectionId, ...props },
-  });
+export default async function getTweet(tweetId: string) {
+  const response = await client.get<CardResponse>(`/tweet/${tweetId}`);
+  if (!response.data) {
+    return null;
+  }
 
-  const data = response.data.map(({ author, media, ref, ...card }) => ({
+  const { author, media, ref, ...card } = response.data;
+
+  return {
     author: JSON.parse(author) as Author,
     media: JSON.parse(media) as Media[],
     refers: JSON.parse(ref) as Refer[],
     isSaved: true,
     ...card,
-  }));
-
-  return data;
+  };
 }

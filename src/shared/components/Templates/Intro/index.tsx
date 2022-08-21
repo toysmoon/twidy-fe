@@ -5,6 +5,7 @@ import AppImage from './AppImage';
 import Button from './Button';
 import CardList from './CardList';
 import Header from './Header';
+import SubTitle from './SubTitle';
 import Terms from './Terms';
 import Title from './Title';
 
@@ -21,14 +22,12 @@ export default function Intro() {
   }, [router]);
 
   return (
-    <div className="fixed top-0 bottom-0 max-w-xl w-full overflow-scroll bg-gray1">
+    <div className="fixed top-0 bottom-0 max-w-xl w-full overflow-scroll bg-gray1 hide-scrollbar">
       <Header onClick={handleClick} />
-      <Title
-        title={'Tidy up\nliked tweets!'}
-        detail="Search, categorize and share your liked tweets through Twidy!"
-      />
+      <Title title={'Tidy up\nliked tweets!'} detail="Search, categorize and share your liked tweets through Twidy!" />
       <Button onClick={handleClick} />
       <AppImage />
+      <SubTitle title="Here's how" detail="Twidy's main features would make your Twitter life more enjoyable." />
       <CardList cards={cardList} />
       <Terms />
     </div>
@@ -43,15 +42,15 @@ const cardList = [
     color: 'bg-twitter',
   },
   {
-    title: 'Search',
-    detail: 'Easily search your liked or collected tweets.',
-    icon: '/images/intro/search.png',
-    color: 'bg-orange',
-  },
-  {
     title: 'Share',
     detail: 'Share your own collection to your followers.',
     icon: '/images/intro/share.png',
     color: 'bg-mint',
+  },
+  {
+    title: 'Search (coming soon)',
+    detail: 'Easily search your liked or collected tweets.',
+    icon: '/images/intro/search.png',
+    color: 'bg-orange',
   },
 ];

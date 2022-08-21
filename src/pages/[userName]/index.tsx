@@ -7,14 +7,12 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { redirectUser } from 'pages/_app';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { User } from 'shared/api/types';
 import Boundary from 'shared/components/Boundary';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
-export default function UserPage({
-  data: initialData,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function UserPage({ data: initialData }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const user = initialData.user as User;
   const setting = initialData.setting as Setting;
@@ -26,24 +24,17 @@ export default function UserPage({
 
   return (
     <EmptyLayout color={setting.theme}>
-      <ProfileMeta
-        name={user.name}
-        theme={setting.theme}
-        image={user.profileImageUrl}
-      />
-      <ProfileView user={user} />
+      <ProfileMeta name={user.name} theme={setting.theme} image={user.profileImageUrl} />
+      <ProfileView user={user} isViewMode />
       <Boundary pending={<CollectionListSkeleton />}>
-        <CollectionList
-          userId={userId}
-          onClickCollection={handleClickCollection}
-        />
+        <CollectionList userId={userId} onClickCollection={handleClickCollection} />
       </Boundary>
       <TwidyFooter />
     </EmptyLayout>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const userName = ctx.query.userName as string;
   const user = await getProfileByUserName(userName);
   if (!user) {
@@ -61,11 +52,9 @@ type ProfileMetaProps = {
   image: string;
 };
 
-function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
+function ProfileMeta({ name }: ProfileMetaProps) {
   const title = `${name}'s Twidy`;
-  const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${encodeURIComponent(
-    image
-  )}`;
+  // const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${encodeURIComponent(image)}`;
 
   return (
     <Head>
@@ -73,16 +62,21 @@ function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
       <meta name="description" content={title} />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="article" />
-      <meta property="og:image" content={imageUrl} key="image" />
+      {/* <meta property="og:image" content={imageUrl} key="image" /> */}
     </Head>
   );
 }
 
 function TwidyFooter() {
+  const router = useRouter();
+  const handleClick = useCallback(() => {
+    router.push('/');
+  }, [router]);
+
   return (
     <div className="w-full flex justify-center items-center flex-col py-10">
       <p className="text-white font-bold">This page is made by</p>
-      <div className="flex items-center pt-2">
+      <div className="flex items-center pt-2" onClick={handleClick}>
         <FooterIcon />
         <FooterText />
       </div>
@@ -92,13 +86,7 @@ function TwidyFooter() {
 
 function FooterIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -111,14 +99,7 @@ function FooterIcon() {
 
 function FooterText() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="59"
-      height="20"
-      viewBox="0 0 59 20"
-      fill="none"
-      className="pl-2"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="59" height="20" viewBox="0 0 59 20" fill="none" className="pl-2">
       <path
         d="M7.47339 13.4212C8.38773 13.4761 8.8449 13.888 8.8449 14.6569C8.8449 15.1374 8.66067 15.4944 8.2922 15.7278C7.92374 15.9612 7.39834 16.0574 6.716 16.0162L6.14283 15.975C4.91462 15.8789 3.97981 15.5082 3.33841 14.8628C2.71066 14.2038 2.39678 13.2908 2.39678 12.1237V8.47841H1.80314C0.7114 8.47841 0.165527 8.02532 0.165527 7.11915C0.165527 6.2267 0.7114 5.78048 1.80314 5.78048H2.39678V4.4418C2.39678 3.92006 2.56054 3.50816 2.88807 3.20611C3.21559 2.89032 3.65911 2.73242 4.21863 2.73242C4.77815 2.73242 5.22167 2.89032 5.54919 3.20611C5.87672 3.50816 6.04048 3.92006 6.04048 4.4418V5.78048H7.16634C8.25809 5.78048 8.80396 6.2267 8.80396 7.11915C8.80396 8.02532 8.25809 8.47841 7.16634 8.47841H6.04048V12.4326C6.04048 12.6935 6.11554 12.9132 6.26565 13.0917C6.42941 13.2702 6.63412 13.3663 6.87976 13.38L7.47339 13.4212Z"
         fill="white"

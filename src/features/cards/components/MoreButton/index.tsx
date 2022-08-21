@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import cn from 'classnames';
 
 interface IMoreProps {
-  onClick: () => void;
+  onClick: (e: MouseEvent) => void;
   classNames?: string;
 }
 
-export default function MoreButton({
-  onClick,
-  classNames,
-  ...props
-}: IMoreProps) {
+export default function MoreButton({ onClick, classNames, ...props }: IMoreProps) {
   const defaultClass = 'flex justify-center items-center gap-0.5';
   const wrapperClassNames = cn(defaultClass, classNames);
 

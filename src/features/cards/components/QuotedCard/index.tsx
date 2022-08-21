@@ -1,4 +1,5 @@
 import Card from 'features/cards/types/Card';
+import Twit from '../LikedCardList/Twit';
 import Avatar from '../LikedCardList/TwitterUser/Avatar';
 
 interface Props {
@@ -13,7 +14,7 @@ export default function QuotedCard({ card }: Props) {
         <p className="pl-2 font-bold text-sm">{card.author.name}</p>
         <p className="pl-1 text-xs text-gray3">{`@${card.author.username}`}</p>
       </div>
-      <p className="text-base leading-5 whitespace-pre-wrap">{card.text}</p>
+      <Twit twit={card.text} />
     </div>
   );
 }

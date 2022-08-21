@@ -74,3 +74,5 @@ export type Error = {
   msg: string;
   data: string;
 };
+
+export type Refer = { type: 'quoted'; id: string };

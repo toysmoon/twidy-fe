@@ -11,33 +11,23 @@ interface ICollection {
   onClickCollection?: (collectionId: number) => void;
 }
 
-export default function CollectionItem({
-  data,
-  isDragging,
-  onClickCollection,
-}: ICollection) {
+export default function CollectionItem({ data, isDragging, onClickCollection }: ICollection) {
   const router = useRouter();
   const { collectionId, name } = data;
   const handleClick = useCallback(
-    () =>
-      onClickCollection
-        ? onClickCollection(collectionId)
-        : router.push(`/collections/${collectionId}`),
+    () => (onClickCollection ? onClickCollection(collectionId) : router.push(`/collections/${collectionId}`)),
     [router, collectionId, onClickCollection]
   );
 
-  const containerClass = classNames(
-    containerDefaultClass,
-    isDragging ? 'opacity-50' : 'opacity-100'
-  );
+  const containerClass = classNames(containerDefaultClass, isDragging ? 'opacity-50' : 'opacity-100');
 
   const count = data.count ?? 0;
 
   return (
     <div className={containerClass} onClick={handleClick}>
       <CollectionIcon collections={data} />
-      <div className="px-3 w-full">
-        <p className="font-pretendard font-bold text-lg leading-5 m-0">
+      <div className="px-3 w-full overflow-hidden">
+        <p className="font-pretendard font-bold text-lg leading-5 m-0 overflow-hidden text-ellipsis whitespace-nowrap">
           {name}
         </p>
         <p className="font-pretendard text-sm leading-4 text-gray3 m-0">{`${count} tweets`}</p>
@@ -47,12 +37,4 @@ export default function CollectionItem({
   );
 }
 
-export const containerDefaultClass = [
-  'w-full',
-  'h-20',
-  'bg-white',
-  'rounded-2xl',
-  'flex',
-  'items-center',
-  'p-4',
-];
+export const containerDefaultClass = ['w-full', 'h-20', 'bg-white', 'rounded-2xl', 'flex', 'items-center', 'p-4'];

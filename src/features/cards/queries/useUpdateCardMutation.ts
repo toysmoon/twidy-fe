@@ -10,11 +10,8 @@ export default function useUpdateCardMutation(collectionId?: number) {
 
   return useMutation((card: Card) => updateCard(card), {
     onSuccess: (_, card) => {
-      const i = cards.findIndex((c) => c.cardId === card.cardId);
-      queryClient.setQueryData(
-        ['cards', collectionId],
-        [...cards.slice(0, i), card, ...cards.slice(i + 1)]
-      );
+      const i = cards.findIndex(c => c.cardId === card.cardId);
+      queryClient.setQueryData(['cards', collectionId], [...cards.slice(0, i), card, ...cards.slice(i + 1)]);
     },
   });
 }
@@ -25,11 +22,8 @@ export function useMoveCardMutation(collectionId?: number) {
 
   return useMutation((card: Card) => updateCard(card), {
     onSuccess: (_, card) => {
-      const i = cards.findIndex((c) => c.cardId === card.cardId);
-      queryClient.setQueryData(
-        ['cards', collectionId],
-        [...cards.slice(0, i), ...cards.slice(i + 1)]
-      );
+      const i = cards.findIndex(c => c.cardId === card.cardId);
+      queryClient.setQueryData(['cards', collectionId], [...cards.slice(0, i), ...cards.slice(i + 1)]);
       queryClient.invalidateQueries(['collection']);
     },
   });
@@ -41,11 +35,8 @@ export function useDeleteCardMutation(collectionId?: number) {
 
   return useMutation((cardId: number) => deleteCard(cardId), {
     onSuccess: (_, cardId) => {
-      const i = cards.findIndex((c) => c.cardId === cardId);
-      queryClient.setQueryData(
-        ['cards', collectionId],
-        [...cards.slice(0, i), ...cards.slice(i + 1)]
-      );
+      const i = cards.findIndex(c => c.cardId === cardId);
+      queryClient.setQueryData(['cards', collectionId], [...cards.slice(0, i), ...cards.slice(i + 1)]);
       queryClient.invalidateQueries(['collection']);
     },
   });

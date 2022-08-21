@@ -7,9 +7,10 @@ import Name from '../Profile/Name';
 
 interface ProfileProps {
   user?: User;
+  isViewMode?: boolean;
 }
 
-const ProfileView: FC<ProfileProps> = ({ user }) => {
+const ProfileView: FC<ProfileProps> = ({ user, isViewMode = false }) => {
   const toast = useToast();
   const url = `twidy.app/${user?.userName}`;
 
@@ -21,21 +22,17 @@ const ProfileView: FC<ProfileProps> = ({ user }) => {
   }, [toast]);
 
   return (
-    <div className="flex flex-col items-center py-10">
+    <div className="flex flex-col gap-4 items-center pt-16 pb-6">
       <Avatar
-        src={
-          user?.profileImageUrl ??
-          'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-        }
+        src={user?.profileImageUrl ?? 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'}
       />
       <Name>{`${user?.name}'s Likes`}</Name>
-      <div
-        onClick={handleCopy}
-        className="flex justify-center items-center opacity-50"
-      >
-        <p className=" text-base text-white mr-1">{url}</p>
-        <Copy />
-      </div>
+      {!isViewMode && (
+        <div onClick={handleCopy} className="flex justify-center items-center opacity-80 -mt-4">
+          <p className=" text-base text-white mr-1">{url}</p>
+          <Copy />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,4 @@
-import ColorPicker, {
-  COLLECTION_COLOR,
-} from 'features/cards/components/ColorPicker';
+import ColorPicker, { COLLECTION_COLOR } from 'features/cards/components/ColorPicker';
 import SelectIcon from 'features/collections/components/SelectIcon';
 import { Collection, PostCollection } from 'features/collections/types';
 import React, { FC, useCallback, useState } from 'react';
@@ -15,22 +13,14 @@ interface ICreateFolder extends IModalProps {
   onSubmit: (pc: PostCollection) => void;
 }
 
-const EditCollection: FC<ICreateFolder> = ({
-  isOpen,
-  isLoading,
-  onClose,
-  collection,
-  onSubmit,
-}) => {
+const EditCollection: FC<ICreateFolder> = ({ isOpen, isLoading, onClose, collection, onSubmit }) => {
   useDim(isOpen);
   const [icon, setIcon] = useState(collection.emoji);
   const [name, setName] = useState(collection.name);
-  const [color, setColor] = useState<COLLECTION_COLOR>(
-    collection.color as COLLECTION_COLOR
-  );
+  const [color, setColor] = useState<COLLECTION_COLOR>(collection.color as COLLECTION_COLOR);
   const [isPrivate, setPrivate] = useState(false);
 
-  const handleSumbit = useCallback(() => {
+  const handleSubmit = useCallback(() => {
     onSubmit({ name: name, color, emoji: icon, isPrivate });
   }, [icon, color, isPrivate, name]);
 
@@ -44,11 +34,7 @@ const EditCollection: FC<ICreateFolder> = ({
       <div className="w-full h-52 relative">
         <div className="w-full h-1px bg-gray6" />
         <PrivateInput isPrivate={isPrivate} onChange={setPrivate} />
-        <ModalButton
-          onClick={handleSumbit}
-          label="Save collection"
-          isLoading={isLoading}
-        />
+        <ModalButton onClick={handleSubmit} label="Save collection" isLoading={isLoading} />
       </div>
     </Modal>
   );

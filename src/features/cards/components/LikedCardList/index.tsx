@@ -51,7 +51,8 @@ function Resolved({ onClickCard }: LikedCardListProps) {
       {cards!.map((item, i) => (
         <LikedCard key={i} card={item} onClick={onClickCard} />
       ))}
-      {cards!.length < 16 && <LoadNewTweets />}
+      {isRefetching && <CardListsSkeleton />}
+      {cards!.length < 16 && !isRefetching && <LoadNewTweets />}
     </>
   );
 }

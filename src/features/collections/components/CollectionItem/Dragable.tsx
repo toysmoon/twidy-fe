@@ -14,13 +14,7 @@ interface ICollection {
   remove: (deleteIndex: number) => void;
 }
 
-export default function Dragable({
-  data,
-  id,
-  index,
-  move,
-  remove,
-}: ICollection) {
+export default function Dragable({ data, id, index, move, remove }: ICollection) {
   const { name } = data;
   const { ref, isDragging, handlerId } = useDragable({
     id,
@@ -34,10 +28,7 @@ export default function Dragable({
     }
   }, [remove, index]);
 
-  const containerClass = classNames(
-    containerDefaultClass,
-    isDragging ? 'opacity-50' : 'opacity-100'
-  );
+  const containerClass = classNames(containerDefaultClass, isDragging ? 'opacity-50' : 'opacity-100');
 
   const count = data.count ?? 0;
   const iconClass = 'h-6 shrink-0 ml-4';
@@ -52,7 +43,7 @@ export default function Dragable({
       <div onClick={handleDelete} className={iconClass}>
         <Delete />
       </div>
-      <div onClick={handleDelete} className={iconClass}>
+      <div className={iconClass}>
         <Menu />
       </div>
     </div>

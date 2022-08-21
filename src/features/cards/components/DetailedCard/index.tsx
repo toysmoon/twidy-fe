@@ -1,19 +1,22 @@
 import Thumbnail from 'features/cards/components/Thumbnail';
-import useUpdateCardMutation, {
+import type Card from 'features/cards/types/Card';
+import {
   useDeleteCardMutation,
   useMoveCardMutation,
-} from 'features/cards/queries/useUpdateCardMutation';
-import type Card from 'features/cards/types/Card';
+  useUpdateCardMutation,
+} from 'features/collections/queries/useCardMutations';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { MEDIA_TYPE } from 'shared/api/types';
 import Modal from 'shared/components/Modal';
 import useToast from 'shared/hooks/useToast';
+import ReferDetail from '../LikedCardList/ReferDetail';
+import Twit from '../LikedCardList/Twit';
+import TwitterUser from '../LikedCardList/TwitterUser';
 import MoreMenu from '../MoreMenu';
 import ChangeTitle from './ChangeTittle';
 import Header from './Header';
 import MoveTweet from './MoveTweet';
-import ViewTweet from './ViewTweet';
 
 export interface IDetailedCard {
   card?: Card;
@@ -21,11 +24,7 @@ export interface IDetailedCard {
   isViewMode?: boolean;
 }
 
-export default function DetailedCard({
-  card,
-  onClose,
-  isViewMode,
-}: IDetailedCard) {
+export default function DetailedCard({ card, onClose, isViewMode }: IDetailedCard) {
   const toast = useToast();
   const router = useRouter();
   const collectionId = Number(router.query.collectionId);
@@ -45,13 +44,7 @@ export default function DetailedCard({
       onClose();
     };
 
-    return (
-      <MoreMenu
-        onClose={() => setStep(1)}
-        onClick={setStep}
-        onDelete={handleDelete}
-      />
-    );
+    return <MoreMenu onClose={() => setStep(1)} onClick={setStep} onDelete={handleDelete} />;
   }
 
   if (step === 3) {
@@ -62,16 +55,14 @@ export default function DetailedCard({
       onClose();
     };
 
-    return (
-      <ChangeTitle card={card} onSave={handleSubmit} onClose={handleClose} />
-    );
+    return <ChangeTitle card={card} onSave={handleSubmit} onClose={handleClose} />;
   }
 
   if (step === 4) {
     return (
       <MoveTweet
         collectionId={collectionId}
-        onSubmit={async (cId) => {
+        onSubmit={async cId => {
           await moveCard({ ...card, collectionId: cId });
           toast('Your changes have been applied!');
           onClose();
@@ -81,29 +72,30 @@ export default function DetailedCard({
     );
   }
 
-  const { media, author, text, url } = card;
+  const { media, author, refers, text, url } = card;
   const isHaveMedia = media && media.length > 0;
+  const isHaveRefer = refers && refers.length > 0;
   const mediaType = media?.[0]?.type ?? MEDIA_TYPE.photo;
 
   return (
     <>
       <Modal isOpen={true} onClose={onClose}>
-        <Header
-          card={card}
-          onClick={() => setStep(2)}
-          isViewMode={isViewMode}
-        />
-        <div className={'p-5 pt-0'}>
-          {isHaveMedia && (
-            <Thumbnail author={author} type={mediaType} media={media} />
+        <Header card={card} onClick={() => setStep(2)} isViewMode={isViewMode} />
+        <article className={'m-5 mt-0 p-4 border rounded-xl border-gray6'}>
+          <TwitterUser
+            profileImage={author.profile_image_url}
+            twitterId={author.username}
+            name={author.name}
+            url={url}
+          />
+          <Twit twit={text} />
+          {isHaveMedia && <Thumbnail author={author} type={mediaType} media={media} />}
+          {isHaveRefer && (
+            <Suspense fallback={null}>
+              <ReferDetail refer={refers[0]} />
+            </Suspense>
           )}
-          <p className={'pt-5 font-pretendard text-lg leading-7 text-black'}>
-            {text}
-          </p>
-          <div className={'flex justify-end'}>
-            <ViewTweet link={url} />
-          </div>
-        </div>
+        </article>
       </Modal>
     </>
   );

@@ -5,9 +5,11 @@ import Layout from 'shared/components/Templates/Layout';
 
 const About: NextPage = () => {
   return (
-    <Layout>
-      <Intro />
-    </Layout>
+    <div className="bg-gray1 fixed inset-0">
+      <Layout>
+        <Intro />
+      </Layout>
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
-import CardListInCollection from 'features/collections/components/CardListInCollection';
+import Card from 'features/cards/components/Card';
+import useInfiniteCardsQuery from 'features/cards/queries/useInfiniteCardsQuery';
 import CollectionTitle from 'features/collections/components/CollectionTitle';
 import { useUpdateCollection } from 'features/collections/queries/useCollectionQuery';
 import { PostCollection } from 'features/collections/types';
 import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
+import Impression from 'shared/components/Impression';
 import EditCollection from 'shared/components/Modal/EditCollection';
 import HeaderButton from 'shared/components/Templates/Layout/HeaderButton';
 import LowLayout from 'shared/components/Templates/Layout/LowLayout';
@@ -13,19 +15,24 @@ import useToast from 'shared/hooks/useToast';
 export default function CollectionPage() {
   const router = useRouter();
   const collectionId = Number(router.query.collectionId);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toast = useToast();
   const collection = useCollection(collectionId);
-  const { mutateAsync: updateCollection, isLoading: isUpdating } =
-    useUpdateCollection();
+  const {
+    data: cardPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteCardsQuery(collection?.collectionId);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpen = useCallback(() => setIsModalOpen(true), [setIsModalOpen]);
   const handleClose = useCallback(
     () => setIsModalOpen(false),
     [setIsModalOpen]
   );
-
+  const { mutateAsync: updateCollection, isLoading: isUpdating } =
+    useUpdateCollection();
   const handleSubmit = useCallback(
     async (pc: PostCollection) => {
       await updateCollection({ ...collection!, ...pc });
@@ -40,10 +47,18 @@ export default function CollectionPage() {
     [router, handleOpen]
   );
 
+  const handleNextPage = useCallback(
+    () => !isFetchingNextPage && fetchNextPage(),
+    [isFetchingNextPage, fetchNextPage]
+  );
+
   return (
     <LowLayout RightButton={RightButton}>
       <CollectionTitle collection={collection!} />
-      <CardListInCollection collectionId={collectionId} />
+      {cardPage?.pages.map((cards) =>
+        cards.map((card) => <Card key={card.tweetId} card={card} />)
+      )}
+      <Impression onDisplay={handleNextPage} />
       <EditCollection
         isOpen={isModalOpen}
         isLoading={isUpdating}
