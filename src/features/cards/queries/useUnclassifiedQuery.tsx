@@ -24,6 +24,11 @@ export function useRefreshCardList() {
   );
 }
 
+export function useIsLastCard() {
+  const query = useUnclassifiedQuery();
+  return query.data?.length === 1;
+}
+
 export function useSavedCardRemove() {
   const queryClient = useQueryClient();
   const { data: cards } = useUnclassifiedQuery();

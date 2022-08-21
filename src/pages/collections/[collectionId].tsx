@@ -1,5 +1,4 @@
-import Card from 'features/cards/components/Card';
-import useCardsQuery from 'features/cards/queries/useCardsQuery';
+import CardListInCollection from 'features/collections/components/CardListInCollection';
 import CollectionTitle from 'features/collections/components/CollectionTitle';
 import { useUpdateCollection } from 'features/collections/queries/useCollectionQuery';
 import { PostCollection } from 'features/collections/types';
@@ -18,7 +17,6 @@ export default function CollectionPage() {
 
   const toast = useToast();
   const collection = useCollection(collectionId);
-  const { cards } = useCardsQuery(collection?.collectionId);
   const { mutateAsync: updateCollection, isLoading: isUpdating } =
     useUpdateCollection();
 
@@ -45,9 +43,7 @@ export default function CollectionPage() {
   return (
     <LowLayout RightButton={RightButton}>
       <CollectionTitle collection={collection!} />
-      {cards.map((card, i) => (
-        <Card key={i} card={card} />
-      ))}
+      <CardListInCollection collectionId={collectionId} />
       <EditCollection
         isOpen={isModalOpen}
         isLoading={isUpdating}

@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Spinner } from '../Icons';
 
 interface IButtonProps {
   type?: 'basic' | 'ghost' | 'disabled';
   label: string;
   loading?: boolean;
+  disabled?: boolean;
   onClick: () => void;
 }
 
@@ -12,12 +13,18 @@ const Button: FC<IButtonProps> = ({
   type = 'basic',
   label,
   onClick,
+  disabled = false,
   loading = false,
 }) => {
+  const handleClick = useCallback(() => {
+    console.log('clicked');
+    onClick();
+  }, [onClick]);
+
   if (loading) {
     return (
       <button
-        onClick={onClick}
+        disabled={disabled}
         className={`px-5 py-2 h-9 rounded-full text-white font-nunito font-extrabold text-base ${buttonColor[type]}`}
       >
         <div className="animate-spin">
@@ -29,8 +36,11 @@ const Button: FC<IButtonProps> = ({
 
   return (
     <button
-      onClick={onClick}
-      className={`px-5 py-2 h-9 rounded-full text-white font-nunito font-extrabold text-base ${buttonColor[type]}`}
+      onClick={handleClick}
+      disabled={disabled}
+      className={`px-5 py-2 h-9 rounded-full text-white font-nunito font-extrabold text-base ${
+        disabled ? buttonColor.disabled : buttonColor[type]
+      }`}
     >
       {label}
     </button>

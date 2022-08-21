@@ -1,6 +1,10 @@
 import dislikeTweet from 'features/cards/api/dislikeTweet';
 import postCard from 'features/cards/api/postCard';
-import { useSavedCardRemove } from 'features/cards/queries/useUnclassifiedQuery';
+import {
+  useIsLastCard,
+  useRefreshCardList,
+  useSavedCardRemove,
+} from 'features/cards/queries/useUnclassifiedQuery';
 import type Card from 'features/cards/types/Card';
 import CollectionList from 'features/collections/components/Modal/CollectionList';
 import addCollectionMutation from 'features/collections/queries/addCollectionMutation';
@@ -34,6 +38,9 @@ enum HOME_MODAL_STEP {
 }
 
 const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
+  const isLastCard = useIsLastCard();
+  const handleRefetchCards = useRefreshCardList();
+
   const user = useUserQuery();
   const { data: setting } = useSettingQuery(user!.userId);
   const toast = useToast();
@@ -86,8 +93,12 @@ const HomeModals: FC<IHomeModals> = ({ card, onClose }) => {
       removeCardFromList(card.tweetId);
       onClose();
       setStep(HOME_MODAL_STEP.NONE);
+
+      if (isLastCard) {
+        handleRefetchCards();
+      }
     },
-    [user, setting, onClose, removeCardFromList]
+    [user, setting, onClose, removeCardFromList, isLastCard, handleRefetchCards]
   );
 
   if (step === HOME_MODAL_STEP.NONE) {

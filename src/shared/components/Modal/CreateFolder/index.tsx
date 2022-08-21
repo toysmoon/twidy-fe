@@ -53,6 +53,7 @@ const CreateFolder: FC<ICreateFolder> = ({
       <Modal.Header.TypeC
         left="New Collection"
         right="Create"
+        disabled={folderName.length === 0}
         loading={isLoading}
         onClick={handleSumbit}
         onCancel={handleClose}

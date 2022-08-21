@@ -18,6 +18,7 @@ export default function ModalHeader({ title }: ModalTypeAProps) {
 interface ModalHeaderTypeBProps {
   left: string | ReactNode;
   right?: string;
+  disabled?: boolean;
   loading?: boolean;
   onClick?: () => void;
 }
@@ -26,6 +27,7 @@ ModalHeader.TypeB = function ({
   left,
   right,
   loading,
+  disabled = false,
   onClick = () => {},
 }: ModalHeaderTypeBProps) {
   return (
@@ -35,7 +37,14 @@ ModalHeader.TypeB = function ({
       ) : (
         left
       )}
-      {right && <Button loading={loading} label={right} onClick={onClick} />}
+      {right && (
+        <Button
+          loading={loading}
+          label={right}
+          disabled={disabled}
+          onClick={onClick}
+        />
+      )}
     </div>
   );
 };
@@ -43,6 +52,7 @@ ModalHeader.TypeB = function ({
 interface ModalHeaderTypeCProps {
   left: string | ReactNode;
   right?: string;
+  disabled?: boolean;
   loading?: boolean;
   onCancel: () => void;
   onClick?: () => void;

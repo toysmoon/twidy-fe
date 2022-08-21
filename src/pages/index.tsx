@@ -1,6 +1,4 @@
-import LikedCardList, {
-  CardListsSkeleton,
-} from 'features/cards/components/LikedCardList';
+import LikedCardList from 'features/cards/components/LikedCardList';
 import CardType from 'features/cards/types/Card';
 import Profile from 'features/users/components/Profile';
 import ProfileSkeleton from 'features/users/components/Profile/ProfileSkeleton';
@@ -20,9 +18,7 @@ const Page: NextPage<{}> = () => {
         <Profile />
       </Suspense>
       <LikeTab />
-      <Suspense fallback={<CardListsSkeleton />}>
-        <LikedCardList onClickCard={setCard} />
-      </Suspense>
+      <LikedCardList onClickCard={setCard} />
       <Suspense fallback={<div />}>
         <HomeModals card={card} onClose={closeModal} />
       </Suspense>
