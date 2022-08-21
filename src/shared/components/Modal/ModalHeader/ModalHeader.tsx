@@ -27,6 +27,7 @@ ModalHeader.TypeB = function ({
   left,
   right,
   loading,
+  disabled,
   onClick = () => {},
 }: ModalHeaderTypeBProps) {
   return (
