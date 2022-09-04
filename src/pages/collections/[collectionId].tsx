@@ -18,11 +18,6 @@ export default function CollectionPage() {
 
   const toast = useToast();
   const collection = useCollection(collectionId);
-  const {
-    data: cardPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteCardsQuery(collection?.collectionId);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -47,18 +42,10 @@ export default function CollectionPage() {
     [router, handleOpen]
   );
 
-  const handleNextPage = useCallback(
-    () => !isFetchingNextPage && fetchNextPage(),
-    [isFetchingNextPage, fetchNextPage]
-  );
-
   return (
     <LowLayout RightButton={RightButton}>
       <CollectionTitle collection={collection!} />
-      {cardPage?.pages.map((cards) =>
-        cards.map((card) => <Card key={card.tweetId} card={card} />)
-      )}
-      <Impression onDisplay={handleNextPage} />
+      <CollectionCardList />
       <EditCollection
         isOpen={isModalOpen}
         isLoading={isUpdating}
@@ -67,5 +54,35 @@ export default function CollectionPage() {
         collection={collection!}
       />
     </LowLayout>
+  );
+}
+
+function CollectionCardList() {
+  const router = useRouter();
+  const collectionId = Number(router.query.collectionId);
+  const collection = useCollection(collectionId);
+
+  const {
+    data: cardPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteCardsQuery(collection?.collectionId);
+
+  const handleNextPage = useCallback(
+    () => !isFetchingNextPage && fetchNextPage(),
+    [isFetchingNextPage, fetchNextPage]
+  );
+
+  if (cardPage?.pages?.length === 0) {
+    return <div></div>;
+  }
+
+  return (
+    <>
+      {cardPage?.pages.map((cards) =>
+        cards.map((card) => <Card key={card.tweetId} card={card} />)
+      )}
+      <Impression onDisplay={handleNextPage} />
+    </>
   );
 }

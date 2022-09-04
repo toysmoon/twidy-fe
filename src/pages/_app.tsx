@@ -5,13 +5,13 @@ import App from 'next/app';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import 'normalize.css';
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { FallbackProps } from 'react-error-boundary';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { MutableSnapshot, RecoilRoot } from 'recoil';
 import Boundary from 'shared/components/Boundary';
+import ExtraButton from 'shared/components/ExtraButton';
 import GlobalTweet from 'shared/components/GlobalTweet';
-import GoogleForm from 'shared/components/GoogleForm';
 import Toast from 'shared/components/Toast';
 import { themeState } from 'shared/states/themeState';
 import 'shared/styles/global.css';
@@ -52,13 +52,13 @@ function Maeum({ Component, pageProps }: AppProps) {
         </Boundary>
         <GlobalTweet />
         <Toast />
-        {shouldDisplayForm(router.pathname) && <GoogleForm />}
+        {shouldDisplayExtraButton(router.pathname) && <ExtraButton />}
       </RecoilRoot>
     </QueryClientProvider>
   );
 }
 
-function shouldDisplayForm(pathname: string): boolean {
+function shouldDisplayExtraButton(pathname: string): boolean {
   if (pathname === '/about') {
     return false;
   }

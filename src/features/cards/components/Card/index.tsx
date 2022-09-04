@@ -27,7 +27,10 @@ enum STEP {
   MOVE_TWEET,
 }
 
-export default function CollectionTweet({ card, isViewMode = false }: ITweetProps) {
+export default function CollectionTweet({
+  card,
+  isViewMode = false,
+}: ITweetProps) {
   const {
     query: { collectionId },
   } = useRouter();
@@ -39,7 +42,9 @@ export default function CollectionTweet({ card, isViewMode = false }: ITweetProp
 
   const { mutateAsync: updateCard } = useUpdateCardMutation(card?.collectionId);
   const { mutateAsync: moveCard } = useMoveCardMutation(Number(collectionId));
-  const { mutateAsync: deleteCard } = useDeleteCardMutation(Number(collectionId));
+  const { mutateAsync: deleteCard } = useDeleteCardMutation(
+    Number(collectionId)
+  );
 
   const handleMoreButton = useCallback((e: MouseEvent) => {
     setStep(STEP.MORE_MENU);
@@ -77,24 +82,45 @@ export default function CollectionTweet({ card, isViewMode = false }: ITweetProp
 
   return (
     <>
-      <div onClick={open} className="bg-white rounded-3xl p-5 m-4 box-border relative">
+      <div
+        onClick={open}
+        className="bg-white rounded-3xl p-5 m-4 my-2 box-border relative"
+      >
         <div className="flex justify-between items-center">
           <div className="flex flex-col">
-            <span className="text-xs text-gray4">{getDisplayDate(regDttm)}</span>
+            <span className="text-xs text-gray4">
+              {getDisplayDate(regDttm)}
+            </span>
             <span className="text-black text-sm font-bold">{title ?? ''}</span>
           </div>
-          {!isViewMode && <MoreButton onClick={handleMoreButton} classNames="block" />}
+          {!isViewMode && (
+            <MoreButton onClick={handleMoreButton} classNames="block" />
+          )}
         </div>
         <div className="bg-gray6 w-full h-1px mt-3" />
         <Content text={text} media={media} />
       </div>
 
       {step === STEP.MORE_MENU && (
-        <MoreMenu onClose={setStepDefault} onClick={handleMoreButtonClick} onDelete={handleDelete} />
+        <MoreMenu
+          onClose={setStepDefault}
+          onClick={handleMoreButtonClick}
+          onDelete={handleDelete}
+        />
       )}
-      {step === STEP.CHANGE_TITLE && <ChangeTitle card={card} onSave={handleChangeSubmit} onClose={handleClose} />}
+      {step === STEP.CHANGE_TITLE && (
+        <ChangeTitle
+          card={card}
+          onSave={handleChangeSubmit}
+          onClose={handleClose}
+        />
+      )}
       {step === STEP.MOVE_TWEET && (
-        <MoveTweet collectionId={Number(collectionId as string)} onSubmit={handleMoveSubmit} onClose={handleClose} />
+        <MoveTweet
+          collectionId={Number(collectionId as string)}
+          onSubmit={handleMoveSubmit}
+          onClose={handleClose}
+        />
       )}
     </>
   );

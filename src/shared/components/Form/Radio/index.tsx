@@ -11,7 +11,7 @@ interface IRadioProps extends IRadioElemnt {
 
 const Radio: FC<IRadioProps> = ({ checked, onChange }) => {
   const checkedStyle = checked
-    ? 'bg-twitter justify-end'
+    ? 'bg-gray1 justify-end'
     : 'bg-gray5 justify-start';
 
   const wrapperClass = classNames(

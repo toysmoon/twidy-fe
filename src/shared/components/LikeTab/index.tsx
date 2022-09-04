@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import LINK from 'shared/constants/link';
 
 export enum TAB_ITEM {
-  MY_LIKES = 'MY LIKES',
-  SAVED = 'SAVED',
+  MY_LIKES = 'My likes',
+  SAVED = 'Collection',
 }
 
 export const tabItemByLInk = {
@@ -37,7 +37,7 @@ export default function LikeTab({ isCollections }: ILikeTab) {
             onClick={() => router.replace(linkByTabItem[tab])}
             className={classNames(
               selectedTab === tab ? 'bg-white' : 'bg-transparent',
-              'w-36 h-8 flex justify-center items-center rounded-full font-extrabold text-base leading-5 text-primary'
+              'w-28 h-8 flex justify-center items-center rounded-full text-h4'
             )}
           >
             {tab}

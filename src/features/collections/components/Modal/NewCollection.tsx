@@ -13,7 +13,7 @@ export default function NewCollection({ onClick }: { onClick: () => void }) {
           <PlusIcon />
         </div>
         <p className="font-bold text-base leading-5 text-gray4 ml-2 mr-1">
-          New Folder
+          New Collection
         </p>
       </div>
     </div>

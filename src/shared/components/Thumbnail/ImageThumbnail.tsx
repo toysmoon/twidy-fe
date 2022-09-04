@@ -7,7 +7,7 @@ interface ICardThumbProps {
 
 const ImageThumbnail: FC<ICardThumbProps> = ({ image }) => {
   return (
-    <div className=" relative pt-50-percent bg-white rounded-2xl overflow-hidden">
+    <div className="relative pt-50-percent bg-white rounded-2xl overflow-hidden">
       <div className="absolute inset-0">
         <Image src={image} layout="fill" objectFit="cover" />
       </div>

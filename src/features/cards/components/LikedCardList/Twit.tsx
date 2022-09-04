@@ -10,7 +10,10 @@ const Twit = ({ twit, useMaxLine = false }: ITwitProps) => {
 
   return (
     <div className={`mt-2 overflow-hidden ${maxLineClass}`}>
-      <p className="whitespace-pre-wrap " dangerouslySetInnerHTML={{ __html: renderTwit(twit) }} />
+      <p
+        className="whitespace-pre-wrap"
+        dangerouslySetInnerHTML={{ __html: renderTwit(twit) }}
+      />
     </div>
   );
 };
@@ -22,10 +25,17 @@ const renderTwit = (twit: string) => {
   const hashtagRegex = /(#[^\s]+)/g;
 
   return twit
-    .replace(urlRegex, url => `<a href=${url} target="_blank" class="underline text-blue-200">${url}</a>`)
+    .replace(
+      urlRegex,
+      (url) =>
+        `<a href=${url} target="_blank" class="underline text-blue-200">${url}</a>`
+    )
     .replace(
       hashtagRegex,
-      hashtag => `<a href="${getHashtagUrl(hashtag)}" target="_blank" class="underline text-blue-200">${hashtag}</a>`
+      (hashtag) =>
+        `<a href="${getHashtagUrl(
+          hashtag
+        )}" target="_blank" class="underline text-blue-200">${hashtag}</a>`
     );
 };
 

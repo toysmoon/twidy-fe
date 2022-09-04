@@ -30,7 +30,12 @@ export default function LikedCard({ card, onClick }: ICardProps) {
   return (
     <div className="p-5 my-3 mx-4 relative bg-white rounded-2xl">
       <article>
-        <TwitterUser profileImage={author.profile_image_url} twitterId={author.username} name={author.name} url={url} />
+        <TwitterUser
+          profileImage={author.profile_image_url}
+          twitterId={author.username}
+          name={author.name}
+          url={url}
+        />
         <Twit twit={text} />
         {isHaveMedia && <CardThumbnail images={media} tweetUrl={card.url} />}
         {isHaveRefer && (
@@ -41,7 +46,7 @@ export default function LikedCard({ card, onClick }: ICardProps) {
       </article>
       <div className="flex justify-between items-center mt-5">
         <Skip onClick={handleSkip} />
-        <Button label="SAVE" onClick={handleClick} />
+        <Button label="SAVE" onClick={handleClick} type="confirm" />
       </div>
     </div>
   );

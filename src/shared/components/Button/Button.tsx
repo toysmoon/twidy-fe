@@ -2,7 +2,7 @@ import { FC, useCallback } from 'react';
 import { Spinner } from '../Icons';
 
 interface IButtonProps {
-  type?: 'basic' | 'ghost' | 'disabled';
+  type?: 'basic' | 'ghost' | 'disabled' | 'confirm';
   label: string;
   loading?: boolean;
   disabled?: boolean;
@@ -49,6 +49,7 @@ const Button: FC<IButtonProps> = ({
 
 const buttonColor = {
   basic: 'bg-primary',
+  confirm: 'bg-gray1',
   ghost: 'bg-white opacity-20',
   disabled: 'bg-gray5',
 };

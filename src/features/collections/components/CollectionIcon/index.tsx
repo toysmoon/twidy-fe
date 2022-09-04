@@ -26,7 +26,7 @@ export default function CollectionIcon({
       'justify-center',
     ],
     `bg-${color}`,
-    hasBorder && 'border border-white'
+    hasBorder && 'border-white border-3'
   );
 
   return (

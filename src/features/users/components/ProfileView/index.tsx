@@ -22,13 +22,19 @@ const ProfileView: FC<ProfileProps> = ({ user, isViewMode = false }) => {
   }, [toast]);
 
   return (
-    <div className="flex flex-col gap-4 items-center pt-16 pb-6">
+    <div className="flex flex-col gap-4 items-center pt-7 pb-6">
       <Avatar
-        src={user?.profileImageUrl ?? 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'}
+        src={
+          user?.profileImageUrl ??
+          'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
+        }
       />
-      <Name>{`${user?.name}'s Likes`}</Name>
+      <Name>{`${user?.name}'s Twidy`}</Name>
       {!isViewMode && (
-        <div onClick={handleCopy} className="flex justify-center items-center opacity-80 -mt-4">
+        <div
+          onClick={handleCopy}
+          className="flex justify-center items-center opacity-80 -mt-4"
+        >
           <p className=" text-base text-white mr-1">{url}</p>
           <Copy />
         </div>
