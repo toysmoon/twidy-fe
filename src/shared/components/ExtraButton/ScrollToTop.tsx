@@ -1,5 +1,3 @@
-import ArrowBack from '../Icons/ArrowBack';
-
 export default function ScrollToTop() {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
