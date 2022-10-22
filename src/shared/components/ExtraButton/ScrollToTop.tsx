@@ -15,7 +15,7 @@ export default function ScrollToTop() {
         viewBox="0 0 29 29"
         fill="none"
       >
-        <g clip-path="url(#clip0_2136_34446)">
+        <g clipPath="url(#clip0_2136_34446)">
           <path
             d="M14.1421 22.9809V5.30326M14.1421 5.30326L20.3293 11.4904M14.1421 5.30326L7.95493 11.4904"
             stroke="#1D1D1F"

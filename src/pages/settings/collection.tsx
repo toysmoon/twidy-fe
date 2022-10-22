@@ -25,7 +25,8 @@ export default function Folders() {
 
   const initialCollections = useCollecitonQuery();
   const [removedCollection, setRemovedCollections] = useState<Collection[]>([]);
-  const [collections, setCollections] = useState<Collection[]>(initialCollections);
+  const [collections, setCollections] =
+    useState<Collection[]>(initialCollections);
 
   useEffect(() => {
     setCollections(initialCollections);
@@ -34,9 +35,16 @@ export default function Folders() {
   const moveCollection = useCallback(
     (dragIndex: number, hoverIndex: number) => {
       const collection = collections[dragIndex];
-      const except = [...collections.slice(0, dragIndex), ...collections.slice(dragIndex + 1)];
+      const except = [
+        ...collections.slice(0, dragIndex),
+        ...collections.slice(dragIndex + 1),
+      ];
 
-      setCollections([...except.slice(0, hoverIndex), collection, ...except.slice(hoverIndex)]);
+      setCollections([
+        ...except.slice(0, hoverIndex),
+        collection,
+        ...except.slice(hoverIndex),
+      ]);
     },
     [collections]
   );
@@ -44,7 +52,10 @@ export default function Folders() {
   const removeCollection = useCallback(
     (removeIndex: number) => {
       setRemovedCollections([...removedCollection, collections[removeIndex]]);
-      setCollections([...collections.slice(0, removeIndex), ...collections.slice(removeIndex + 1)]);
+      setCollections([
+        ...collections.slice(0, removeIndex),
+        ...collections.slice(removeIndex + 1),
+      ]);
     },
     [collections, removedCollection]
   );
@@ -52,9 +63,11 @@ export default function Folders() {
   const onApply = useCallback(async () => {
     setIsLoading(true);
 
-    const collectionIds = removedCollection.map(({ collectionId }) => collectionId);
+    const collectionIds = removedCollection.map(
+      ({ collectionId }) => collectionId
+    );
 
-    await deleteCollections(collectionIds);
+    collectionIds.length > 0 && (await deleteCollections(collectionIds));
     await updateOrder(collections);
 
     router.back();

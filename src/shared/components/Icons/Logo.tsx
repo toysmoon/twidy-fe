@@ -30,7 +30,7 @@ export default function Logo({ onClick }: IIconProps) {
           width="33.6473"
           height="29.0027"
           filterUnits="userSpaceOnUse"
-          colorInterpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feColorMatrix

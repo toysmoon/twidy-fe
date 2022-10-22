@@ -55,7 +55,7 @@ export default function UserMenu({ onClose }: IUserMenu) {
       return;
     }
 
-    router.push(path, {});
+    router.push(path);
   };
 
   return (
@@ -73,7 +73,11 @@ export default function UserMenu({ onClose }: IUserMenu) {
           </li>
         ))}
       </ul>
-      <ChangeTheme onSubmit={handleApply} open={isThemeOpen} onClose={() => setThemeOpen(false)} />
+      <ChangeTheme
+        onSubmit={handleApply}
+        open={isThemeOpen}
+        onClose={() => setThemeOpen(false)}
+      />
     </>
   );
 }
