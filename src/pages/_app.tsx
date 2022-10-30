@@ -1,4 +1,3 @@
-import { OverlayProvider } from '@toss/use-overlay';
 import ThemeUpdater from 'features/settings/components/ThemeUpdater';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
 import type { AppContext, AppProps } from 'next/app';
@@ -42,22 +41,20 @@ function Maeum({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <OverlayProvider>
-      <QueryClientProvider client={queryClient}>
-        <TwidyMeta />
-        <RecoilRoot initializeState={initializeState}>
-          <Boundary pending={<div />} reject={ErrorFallback}>
-            <Component {...nextPageProps} />
-            <Boundary pending={<div />} reject={DefaultError}>
-              <ThemeUpdater />
-            </Boundary>
+    <QueryClientProvider client={queryClient}>
+      <TwidyMeta />
+      <RecoilRoot initializeState={initializeState}>
+        <Boundary pending={<div />} reject={ErrorFallback}>
+          <Component {...nextPageProps} />
+          <Boundary pending={<div />} reject={DefaultError}>
+            <ThemeUpdater />
           </Boundary>
-          <GlobalTweet />
-          <Toast />
-          {shouldDisplayExtraButton(router.pathname) && <ExtraButton />}
-        </RecoilRoot>
-      </QueryClientProvider>
-    </OverlayProvider>
+        </Boundary>
+        <GlobalTweet />
+        <Toast />
+        {shouldDisplayExtraButton(router.pathname) && <ExtraButton />}
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }
 

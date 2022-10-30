@@ -16,10 +16,16 @@ const ProfileView: FC<ProfileProps> = ({ user, isViewMode = false }) => {
 
   const handleCopy = useCallback(async () => {
     try {
+      navigator.share({
+        title: `Twidy`,
+        text: `${user?.name}'s Twidy`,
+        url: `https://${url}`,
+      });
+    } catch {
       await navigator.clipboard.writeText(`https://${url}`);
       toast('Copied to clipboard');
-    } catch {}
-  }, [toast]);
+    }
+  }, [user, toast]);
 
   return (
     <div className="flex flex-col gap-4 items-center pt-7 pb-6">

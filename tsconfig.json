@@ -21,7 +21,12 @@
     "strict": true,
     "target": "esnext",
     "baseUrl": "./src",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "exclude": [
     "node_modules"
@@ -29,6 +34,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "next.config.js"
+    "next.config.js",
+    ".next/types/**/*.ts"
   ]
 }

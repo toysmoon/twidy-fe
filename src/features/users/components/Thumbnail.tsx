@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
 import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
 
-export default function () {
-  const { query } = useRouter();
-  const name = query.name as string;
-  const theme = query.theme as string;
-  const image = decodeURIComponent(query.image as string);
+interface Props {
+  name: string;
+  theme: string;
+  image: string;
+}
 
+export default function Thumbnail({ name, theme, image }: Props) {
   return (
     <EmptyLayout color={theme}>
       <div className="flex flex-col fixed inset-0 justify-center items-center gap-10">
