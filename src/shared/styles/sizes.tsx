@@ -1,6 +1,6 @@
 const sizes = {
-  twitterAvatar: '32px',
-  profileAvatar: '64px',
+  twitterAvatar: '32',
+  profileAvatar: '64',
 };
 
 export default sizes;

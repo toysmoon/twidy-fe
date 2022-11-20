@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { User } from 'shared/api/types';
 import { Copy } from 'shared/components/Icons';
+import Spacer from 'shared/components/Spacer';
 import useToast from 'shared/hooks/useToast';
 import Avatar from '../Profile/Avatar';
 import Name from '../Profile/Name';
@@ -28,20 +29,16 @@ const ProfileView: FC<ProfileProps> = ({ user, isViewMode = false }) => {
   }, [user, toast]);
 
   return (
-    <div className="flex flex-col gap-4 items-center pt-7 pb-6">
+    <div className="p-4">
       <Avatar
-        src={
-          user?.profileImageUrl ??
-          'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'
-        }
+        src={user?.profileImageUrl ?? 'http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png'}
       />
+      <Spacer size={16} />
       <Name>{`${user?.name}'s Twidy`}</Name>
+      <Spacer size={2} />
       {!isViewMode && (
-        <div
-          onClick={handleCopy}
-          className="flex justify-center items-center opacity-80 -mt-4"
-        >
-          <p className=" text-base text-white mr-1">{url}</p>
+        <div onClick={handleCopy} className="flex items-center">
+          <p className="text-caption-tiny text-white mr-1">{url}</p>
           <Copy />
         </div>
       )}

@@ -80,11 +80,7 @@ div.emoji-mart-scroll {
 }
 
 .bg-tab {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.15) 50%
-  );
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 50%);
 }
 
 @keyframes rainbow-button {
@@ -133,6 +129,14 @@ svg {
   border-width: 3px;
 }
 
+.text-h1 {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 33px;
+}
+
 .text-h4 {
   font-family: 'Nunito';
   font-style: normal;
@@ -146,9 +150,8 @@ svg {
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
-  font-size: 11px;
-  line-height: 13px;
-  text-align: center;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .bg-gray1 {

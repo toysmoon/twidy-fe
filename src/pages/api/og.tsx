@@ -29,10 +29,7 @@ export default function (req: NextApiRequest) {
           >
             <img tw="w-52 h-52" src={image as string} />
           </div>
-          <h1
-            tw="font-nunito font-extrabold text-8xl"
-            style={{ color: '#F5F5F7' }}
-          >
+          <h1 tw="font-nunito font-extrabold text-8xl" style={{ color: '#F5F5F7' }}>
             {name}
           </h1>
         </div>

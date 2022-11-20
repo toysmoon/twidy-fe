@@ -21,20 +21,14 @@ export default function CardList({ cards }: { cards: ICard[] }) {
 function Card({ color, title, detail, icon }: ICard) {
   return (
     <div className={classNames('p-7 rounded-3xl bg-white', 'flex')}>
-      <div
-        className={`w-12 h-12 relative ${color} rounded-full p-3 mr-4 shrink-0`}
-      >
+      <div className={`w-12 h-12 relative ${color} rounded-full p-3 mr-4 shrink-0`}>
         <div className="relative w-full h-full">
-          <Image src={icon} layout={'fill'} quality={100} />
+          <Image src={icon} layout={'fill'} quality={100} width="100" height="100" />
         </div>
       </div>
       <div>
-        <p className="font-nunito font-extrabold text-xl leading-7 mb-1 text-gray1">
-          {title}
-        </p>
-        <p className="font-pretendard text-base text-gray3 leading-5">
-          {detail}
-        </p>
+        <p className="font-nunito font-extrabold text-xl leading-7 mb-1 text-gray1">{title}</p>
+        <p className="font-pretendard text-base text-gray3 leading-5">{detail}</p>
       </div>
     </div>
   );
