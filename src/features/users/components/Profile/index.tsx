@@ -32,7 +32,7 @@ const Profile: FC = () => {
       <Spacer size={16} />
       <Name>{`${user?.name}'s Twidy`}</Name>
       <Spacer size={2} />
-      <div onClick={handleCopy} className="flex items-center gap-1 opacity-50">
+      <div onClick={handleCopy} className="flex items-center gap-1 opacity-50 cursor-pointer">
         <Copy />
         <div className="flex gap-1 pt-1">
           <p className="text-caption-tiny text-white">Share link:</p>

@@ -9,14 +9,18 @@ type UserResponse = {
 };
 
 export default async function getUser(ctx?: NextPageContext): Promise<User> {
-  const cookie = ctx?.req?.headers?.cookie ?? {};
-  const { data: response } = await client.get<UserResponse>('/auth/user', {
-    headers: { cookie },
-  });
+  try {
+    const cookie = ctx?.req?.headers?.cookie ?? {};
+    const { data: response } = await client.get<UserResponse>('/auth/user', {
+      headers: { cookie },
+    });
 
-  if (typeof response.data === 'string') {
-    throw response;
+    if (typeof response.data === 'string') {
+      throw response;
+    }
+
+    return response.data;
+  } catch (e: any) {
+    throw e.response;
   }
-
-  return response.data;
 }

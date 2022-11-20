@@ -7,7 +7,7 @@ export default function MockTab() {
       <ul className="h-10 flex justify-center items-center rounded-full p-1 bg-tab">
         {tablist.map((tab, i) => (
           <li
-            key={`tabitem-${tab}`}
+            key={`tab-item-${tab}`}
             className={classNames(
               i === 0 ? 'bg-white' : 'bg-transparent',
               'w-36 h-8 flex justify-center items-center rounded-full font-extrabold text-base leading-5 text-primary'

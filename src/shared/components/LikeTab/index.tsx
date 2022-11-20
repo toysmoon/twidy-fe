@@ -33,7 +33,7 @@ export default function LikeTab({ isCollections }: ILikeTab) {
           <li
             key={`tab-item-${tab}`}
             onClick={() => router.replace(linkByTabItem[tab])}
-            className={classNames(selectedTab !== tab && 'opacity-50', 'text-h3 text-white')}
+            className={classNames(selectedTab !== tab && 'opacity-50', 'text-h3 text-white cursor-pointer')}
           >
             {tab}
             {selectedTab === tab && (

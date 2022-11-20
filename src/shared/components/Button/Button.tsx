@@ -9,15 +9,8 @@ interface IButtonProps {
   onClick: () => void;
 }
 
-const Button: FC<IButtonProps> = ({
-  type = 'basic',
-  label,
-  onClick,
-  disabled = false,
-  loading = false,
-}) => {
+const Button: FC<IButtonProps> = ({ type = 'basic', label, onClick, disabled = false, loading = false }) => {
   const handleClick = useCallback(() => {
-    console.log('clicked');
     onClick();
   }, [onClick]);
 

@@ -155,7 +155,6 @@ svg {
 }
 
 .text-caption-tiny {
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -163,7 +162,6 @@ svg {
 }
 
 .text-caption-bold {
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
   font-size: 13px;
@@ -171,7 +169,6 @@ svg {
 }
 
 .text-p2-reg {
-  font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;

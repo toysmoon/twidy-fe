@@ -78,9 +78,9 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   const e = error as any;
   const router = useRouter();
 
-  console.log(e);
   useEffect(() => {
-    if (e?.data?.code === -100 || e?.code === -100) {
+    const response = e.response;
+    if (response?.data?.code === -100) {
       router.replace('/about');
       resetErrorBoundary();
     }
@@ -104,43 +104,13 @@ function TwidyMeta() {
       <meta name="twitter:site" content="@twidy_official" />
       <meta name="twitter:title" content="Twidy" />
       <meta name="twitter:description" content="Tidy up your liked tweets!" />
-      <meta
-        name="twitter:image:src"
-        content="https://twidy.app/images/og.png"
-      />
+      <meta name="twitter:image:src" content="https://twidy.app/images/og.png" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
-      />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/apple-touch-icon.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="manifest" href="/site.webmanifest" />
     </Head>
   );
@@ -150,9 +120,7 @@ const noLoginPages = ['/about', '/_error', '/[userName]', '/thumbnail'];
 Maeum.getInitialProps = async (appContext: AppContext) => {
   const { ctx } = appContext;
   const { pathname } = ctx;
-  const isNeedToLoginPage = noLoginPages
-    .map((url) => pathname.includes(url))
-    .every((isInclude) => !isInclude);
+  const isNeedToLoginPage = noLoginPages.map(url => pathname.includes(url)).every(isInclude => !isInclude);
 
   const appProps = await App.getInitialProps(appContext);
   if (!appContext.ctx.req || !isNeedToLoginPage) {
@@ -165,10 +133,7 @@ Maeum.getInitialProps = async (appContext: AppContext) => {
   return { ...appProps };
 };
 
-export function redirectUser(
-  ctx: NextPageContext | GetServerSidePropsContext,
-  location: string
-) {
+export function redirectUser(ctx: NextPageContext | GetServerSidePropsContext, location: string) {
   try {
     if (ctx.req) {
       ctx.res?.writeHead(302, { Location: location });

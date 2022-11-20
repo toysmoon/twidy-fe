@@ -7,6 +7,10 @@ interface LoginResponse {
 }
 
 export default async function login() {
-  const response = await client.post<LoginResponse>('/auth/login');
-  return response.data;
+  try {
+    const response = await client.post<LoginResponse>('/auth/login');
+    return response.data;
+  } catch (e: any) {
+    return e.response.data;
+  }
 }
