@@ -137,6 +137,14 @@ svg {
   line-height: 33px;
 }
 
+.text-h3 {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 23px;
+}
+
 .text-h4 {
   font-family: 'Nunito';
   font-style: normal;
