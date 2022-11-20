@@ -6,12 +6,8 @@ interface IMoreProps {
   classNames?: string;
 }
 
-export default function MoreButton({
-  onClick,
-  classNames,
-  ...props
-}: IMoreProps) {
-  const defaultClass = 'flex justify-center items-center gap-0.5 py-2 pl-2';
+export default function MoreButton({ onClick, classNames, ...props }: IMoreProps) {
+  const defaultClass = 'flex col justify-center items-center gap-0.5 py-2 pl-2';
   const wrapperClassNames = cn(defaultClass, classNames);
 
   const dotClassNames = 'w-1 h-1 rounded-full bg-gray1';

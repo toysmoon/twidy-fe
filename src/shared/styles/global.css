@@ -162,6 +162,22 @@ svg {
   line-height: 16px;
 }
 
+.text-caption-bold {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.text-p2-reg {
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 21px;
+}
+
 .bg-gray1 {
   background-color: #1d1d1f;
 }

@@ -2,7 +2,7 @@ import Card from 'features/cards/components/Card';
 import { useGlobalCardViewMode } from 'features/cards/hooks/useGlobalCard';
 import useCardsQuery from 'features/cards/queries/useCardsQuery';
 import CollectionTitle from 'features/collections/components/CollectionTitle';
-import { useCollecitonQueryById } from 'features/collections/queries/useCollectionQuery';
+import { useCollectionQueryById } from 'features/collections/queries/useCollectionQuery';
 import { getProfileByUserName } from 'features/users/api/getProfile';
 import getSetting, { Setting } from 'features/users/api/getSetting';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -12,9 +12,7 @@ import React from 'react';
 import { User } from 'shared/api/types';
 import LowLayout from 'shared/components/Templates/Layout/LowLayout';
 
-export default function CollectionPage({
-  data: initialData,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function CollectionPage({ data: initialData }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   useGlobalCardViewMode();
 
   const router = useRouter();
@@ -24,8 +22,8 @@ export default function CollectionPage({
   const setting = initialData.setting as Setting;
   const userId = user.userId;
 
-  const collections = useCollecitonQueryById(userId);
-  const collection = collections?.find((c) => c.collectionId === collectionId);
+  const collections = useCollectionQueryById(userId);
+  const collection = collections?.find(c => c.collectionId === collectionId);
   const { cards } = useCardsQuery(collection?.collectionId);
 
   if (!collection) {
@@ -42,7 +40,7 @@ export default function CollectionPage({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
   const userName = ctx.query.userName as string;
   const user = await getProfileByUserName(userName);
   if (!user) {

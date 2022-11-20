@@ -13,6 +13,8 @@ import More from './More';
 import ArrowCircle from './ArrowCircle';
 import SkipIcon from './SkipIcon';
 import Spinner from './Spinner';
+import Eye from './Eye';
+import Export from './Export';
 
 export interface IIconProps {
   width?: number;
@@ -38,4 +40,6 @@ export {
   More,
   SkipIcon,
   Spinner,
+  Eye,
+  Export,
 };

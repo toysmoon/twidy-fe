@@ -1,69 +1,28 @@
 import CollectionList from 'features/collections/components/CollectionList';
 import CollectionListSkeleton from 'features/collections/components/CollectionListSkeleton';
-import { getProfileByUserName } from 'features/users/api/getProfile';
-import getSetting, { Setting } from 'features/users/api/getSetting';
 import ProfileView from 'features/users/components/ProfileView';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Head from 'next/head';
+import useUserQuery from 'features/users/queries/useUserQuery';
 import { useRouter } from 'next/router';
-import { redirectUser } from 'pages/_app';
 import { useCallback } from 'react';
-import { User } from 'shared/api/types';
 import Boundary from 'shared/components/Boundary';
-import EmptyLayout from 'shared/components/Templates/Layout/EmptyLayout';
+import LowLayout from 'shared/components/Templates/Layout/LowLayout';
 
-export default function UserPage({ data: initialData }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Preview() {
   const router = useRouter();
-  const user = initialData.user as User;
-  const setting = initialData.setting as Setting;
-  const userId = user.userId;
+  const user = useUserQuery();
 
   const handleClickCollection = (collectionId: number) => {
     router.push(`/${router.query.userName}/collections/${collectionId}`);
   };
 
   return (
-    <EmptyLayout color={setting.theme}>
-      <ProfileMeta name={user.name} theme={setting.theme} image={user.profileImageUrl} />
+    <LowLayout>
       <ProfileView user={user} />
       <Boundary pending={<CollectionListSkeleton />}>
-        <CollectionList userId={userId} onClickCollection={handleClickCollection} />
+        <CollectionList userId={user!.userId} onClickCollection={handleClickCollection} />
       </Boundary>
       <TwidyFooter />
-    </EmptyLayout>
-  );
-}
-
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const userName = ctx.query.userName as string;
-  const user = await getProfileByUserName(userName);
-  if (!user) {
-    redirectUser(ctx, '/404');
-    return { props: {} };
-  }
-
-  const setting = await getSetting(user.userId);
-  return { props: { data: { user, setting } } };
-};
-
-type ProfileMetaProps = {
-  name: string;
-  theme: string;
-  image: string;
-};
-
-function ProfileMeta({ name, theme, image }: ProfileMetaProps) {
-  const title = `${name}'s Twidy`;
-  const imageUrl = `/api/og?name=${name}&theme=${theme}&image=${encodeURIComponent(image)}`;
-
-  return (
-    <Head>
-      <title>{title}</title>
-      <meta name="description" content={title} />
-      <meta property="og:title" content={title} />
-      <meta property="og:type" content="article" />
-      <meta property="og:image" content={imageUrl} key="image" />
-    </Head>
+    </LowLayout>
   );
 }
 

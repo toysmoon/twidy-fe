@@ -25,12 +25,11 @@ export default function useCollecitonQuery() {
   }, [result.data]);
 }
 
-export function useCollecitonQueryById(userId: string) {
-  const result = useQuery<Collection[]>(
-    ['collection', userId],
-    () => getCollections(userId, false),
-    { staleTime: Infinity, cacheTime: Infinity }
-  );
+export function useCollectionQueryById(userId: string) {
+  const result = useQuery<Collection[]>(['collection', userId], () => getCollections(userId, false), {
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
 
   return useMemo(() => {
     if (!result.data) {
@@ -46,25 +45,16 @@ export function useDeleteCollectionsMutation() {
   const user = useUserQuery();
   const collections = useCollecitonQuery();
 
-  return useMutation(
-    ['collection', user?.userId],
-    (collectionIds: number[]) => deleteCollections(collectionIds),
-    {
-      onSuccess: (_, collectionIds) => {
-        const newCollections = collections.filter(
-          ({ collectionId }) => !collectionIds.some((id) => id === collectionId)
-        );
+  return useMutation(['collection', user?.userId], (collectionIds: number[]) => deleteCollections(collectionIds), {
+    onSuccess: (_, collectionIds) => {
+      const newCollections = collections.filter(({ collectionId }) => !collectionIds.some(id => id === collectionId));
 
-        queryClient.setQueryData(
-          ['collection', user?.userId],
-          [...newCollections]
-        );
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries(['collection', user?.userId]);
-      },
-    }
-  );
+      queryClient.setQueryData(['collection', user?.userId], [...newCollections]);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(['collection', user?.userId]);
+    },
+  });
 }
 
 export function useUpdateCollectionOrderMutation() {
@@ -75,16 +65,11 @@ export function useUpdateCollectionOrderMutation() {
     ['collection', user?.userId],
     (collections: Collection[]) =>
       putCollections(
-        collections
-          .map((c, i) => ({ ...c, ordVal: i + 1 }))
-          .filter((c, i) => c.ordVal !== collections[i].ordVal)
+        collections.map((c, i) => ({ ...c, ordVal: i + 1 })).filter((c, i) => c.ordVal !== collections[i].ordVal)
       ),
     {
       onSuccess: (_, collections) => {
-        queryClient.setQueryData(
-          ['collection', user?.userId],
-          [...collections]
-        );
+        queryClient.setQueryData(['collection', user?.userId], [...collections]);
       },
       onSettled: () => {
         queryClient.invalidateQueries(['collection', user?.userId]);
@@ -98,27 +83,17 @@ export function useUpdateCollection() {
   const queryClient = useQueryClient();
   const collections = useCollecitonQuery();
 
-  return useMutation(
-    ['collection', user?.userId],
-    (collection: Collection) => putCollections([collection]),
-    {
-      onSuccess: (_, collection) => {
-        const index = collections.findIndex(
-          (c) => c.collectionId === collection.collectionId
-        );
+  return useMutation(['collection', user?.userId], (collection: Collection) => putCollections([collection]), {
+    onSuccess: (_, collection) => {
+      const index = collections.findIndex(c => c.collectionId === collection.collectionId);
 
-        queryClient.setQueryData(
-          ['collection', user?.userId],
-          [
-            ...collections.slice(0, index),
-            collection,
-            ...collections.slice(index + 1),
-          ]
-        );
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries(['collection', user?.userId]);
-      },
-    }
-  );
+      queryClient.setQueryData(
+        ['collection', user?.userId],
+        [...collections.slice(0, index), collection, ...collections.slice(index + 1)]
+      );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(['collection', user?.userId]);
+    },
+  });
 }
