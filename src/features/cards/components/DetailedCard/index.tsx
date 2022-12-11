@@ -82,12 +82,7 @@ export default function DetailedCard({ card, onClose, isViewMode }: IDetailedCar
       <Modal isOpen={true} onClose={onClose}>
         <Header card={card} onClick={() => setStep(2)} isViewMode={isViewMode} />
         <article className={'m-5 mt-0 p-4 border rounded-xl border-gray6'}>
-          <TwitterUser
-            profileImage={author.profile_image_url}
-            twitterId={author.username}
-            name={author.name}
-            url={url}
-          />
+          <TwitterUser profileImage={author.profileImageUrl} twitterId={author.username} name={author.name} url={url} />
           <Twit twit={text} />
           {isHaveMedia && <Thumbnail author={author} type={mediaType} media={media} />}
           {isHaveRefer && (

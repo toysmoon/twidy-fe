@@ -24,7 +24,7 @@ export default function ReferDetail({ refer }: { refer: Refer }) {
     <div className="mt-3 p-4 relative bg-white rounded-2xl border">
       <article>
         <TwitterUser
-          profileImage={author.profile_image_url}
+          profileImage={author.profileImageUrl}
           twitterId={author.username}
           name={author.name}
           url={url}

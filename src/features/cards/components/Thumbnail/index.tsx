@@ -24,7 +24,7 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
         <style jsx>{`
           .bg-src {
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-              url(${media[0]?.url ?? media[0]?.preview_image_url ?? author.profile_image_url});
+              url(${media[0]?.url ?? media[0]?.preview_image_url ?? author.profileImageUrl});
             background-position: center;
             background-size: cover;
           }
