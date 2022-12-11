@@ -18,7 +18,7 @@ export type Author = {
   id: string;
   name: string;
   description: string;
-  profile_image_url: string;
+  profileImageUrl: string;
   username: string;
 };
 
