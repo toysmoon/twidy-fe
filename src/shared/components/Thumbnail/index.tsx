@@ -15,9 +15,9 @@ const CardThumbnail: FC<ICardThumbProps> = ({ images, tweetUrl }) => {
   if (image.type === MEDIA_TYPE.photo) {
     return <MultiImageThumbnail images={images} />;
   } else if (image.type === MEDIA_TYPE.video) {
-    return <VideoThumbnail image={image.preview_image_url} tweetUrl={tweetUrl} />;
-  } else if (image.preview_image_url) {
-    return <ImageThumbnail image={image.preview_image_url} />;
+    return <VideoThumbnail image={image.previewImageUrl} tweetUrl={tweetUrl} />;
+  } else if (image.previewImageUrl) {
+    return <ImageThumbnail image={image.previewImageUrl} />;
   }
 
   return null;

@@ -41,7 +41,7 @@ export default function Thumbnail({ type, author, media }: IThumbnailProps) {
       <div className="grid grid-cols-2 grid-rows-2 gap-0.5 absolute inset-0 rounded-md overflow-hidden">
         {images.map((image, i) => (
           <div key={`thumb-image-${i}`} className={cn(getGridClass(images.length, i), 'relative')}>
-            <Image src={image.url ?? image.preview_image_url} layout="fill" objectFit="cover" />
+            <Image src={image.url ?? image.previewImageUrl} layout="fill" objectFit="cover" />
           </div>
         ))}
       </div>
