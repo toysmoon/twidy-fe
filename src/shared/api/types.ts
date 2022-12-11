@@ -35,7 +35,7 @@ export type Media = {
   width: string;
   height: string;
   media_key: string;
-  preview_image_url?: string;
+  previewImageUrl?: string;
   type: MEDIA_TYPE;
   url: string;
 };
