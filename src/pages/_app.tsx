@@ -1,22 +1,22 @@
-import ThemeUpdater from 'features/settings/components/ThemeUpdater';
-import { GetServerSidePropsContext, NextPageContext } from 'next';
-import type { AppContext, AppProps } from 'next/app';
-import App from 'next/app';
-import Head from 'next/head';
-import Router, { useRouter } from 'next/router';
-import 'normalize.css';
-import { useCallback, useEffect } from 'react';
-import { FallbackProps } from 'react-error-boundary';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { MutableSnapshot, RecoilRoot } from 'recoil';
-import Boundary from 'shared/components/Boundary';
-import ExtraButton from 'shared/components/ExtraButton';
-import GlobalTweet from 'shared/components/GlobalTweet';
-import Toast from 'shared/components/Toast';
-import { themeState } from 'shared/states/themeState';
-import 'shared/styles/global.css';
-import { parseCookie } from 'shared/utils/cookie';
-import 'tailwindcss/tailwind.css';
+import ThemeUpdater from "features/settings/components/ThemeUpdater";
+import { GetServerSidePropsContext, NextPageContext } from "next";
+import type { AppContext, AppProps } from "next/app";
+import App from "next/app";
+import Head from "next/head";
+import Router, { useRouter } from "next/router";
+import "normalize.css";
+import { useCallback, useEffect } from "react";
+import { FallbackProps } from "react-error-boundary";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { MutableSnapshot, RecoilRoot } from "recoil";
+import Boundary from "shared/components/Boundary";
+import ExtraButton from "shared/components/ExtraButton";
+import GlobalTweet from "shared/components/GlobalTweet";
+import Toast from "shared/components/Toast";
+import { themeState } from "shared/states/themeState";
+import "shared/styles/global.css";
+import { parseCookie } from "shared/utils/cookie";
+import "tailwindcss/tailwind.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +35,7 @@ function Maeum({ Component, pageProps }: AppProps) {
 
   const initializeState = useCallback(
     ({ set }: MutableSnapshot): void => {
-      set(themeState, theme ?? 'black');
+      set(themeState, theme ?? "black");
     },
     [theme]
   );
@@ -59,15 +59,15 @@ function Maeum({ Component, pageProps }: AppProps) {
 }
 
 function shouldDisplayExtraButton(pathname: string): boolean {
-  if (pathname === '/about') {
+  if (pathname === "/about") {
     return false;
   }
 
-  if (pathname === '/login') {
+  if (pathname === "/login") {
     return false;
   }
 
-  if (pathname === '/login/register') {
+  if (pathname === "/login/register") {
     return false;
   }
 
@@ -81,7 +81,7 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   useEffect(() => {
     const response = e.response;
     if (response?.data?.code === -100) {
-      router.replace('/about');
+      router.replace("/about");
       resetErrorBoundary();
     }
   }, [error]);
@@ -104,17 +104,22 @@ function TwidyMeta() {
       <meta name="twitter:site" content="@twidy_official" />
       <meta name="twitter:title" content="Twidy" />
       <meta name="twitter:description" content="Tidy up your liked tweets!" />
-      <meta name="twitter:image:src" content="https://twidy.app/images/og.png" />
+      <meta
+        name="twitter:image:src"
+        content="https://twidy.app/images/og.png"
+      />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
   );
 }
 
-const noLoginPages = ['/about', '/_error', '/[userName]', '/thumbnail'];
+const noLoginPages = ["/about", "/_error", "/[userName]", "/thumbnail"];
 Maeum.getInitialProps = async (appContext: AppContext) => {
   const { ctx } = appContext;
   const { pathname } = ctx;
-  const isNeedToLoginPage = noLoginPages.map(url => pathname.includes(url)).every(isInclude => !isInclude);
+  const isNeedToLoginPage = noLoginPages
+    .map((url) => pathname.includes(url))
+    .every((isInclude) => !isInclude);
 
   const appProps = await App.getInitialProps(appContext);
   if (!appContext.ctx.req || !isNeedToLoginPage) {
@@ -127,7 +132,10 @@ Maeum.getInitialProps = async (appContext: AppContext) => {
   return { ...appProps };
 };
 
-export function redirectUser(ctx: NextPageContext | GetServerSidePropsContext, location: string) {
+export function redirectUser(
+  ctx: NextPageContext | GetServerSidePropsContext,
+  location: string
+) {
   try {
     if (ctx.req) {
       ctx.res?.writeHead(302, { Location: location });
