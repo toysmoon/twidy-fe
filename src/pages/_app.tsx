@@ -75,15 +75,11 @@ function shouldDisplayExtraButton(pathname: string): boolean {
 }
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
-  const e = error as any;
   const router = useRouter();
 
   useEffect(() => {
-    const response = e.response;
-    if (response?.data?.code === -100) {
-      router.replace("/about");
-      resetErrorBoundary();
-    }
+    router.replace("/about");
+    resetErrorBoundary();
   }, [error]);
 
   return <div></div>;
