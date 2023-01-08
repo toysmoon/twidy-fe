@@ -1,11 +1,8 @@
-import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import getUnclassifiedCards from "../api/getUnclassifiedCards";
 
 export function useUnclassifiedQuery() {
-  const router = useRouter();
-
   return useQuery(
     ["cards", "list", { unclassifed: true }],
     getUnclassifiedCards,
@@ -13,9 +10,6 @@ export function useUnclassifiedQuery() {
       staleTime: Infinity,
       cacheTime: Infinity,
       refetchOnWindowFocus: false,
-      onError: () => {
-        router.replace("/about");
-      },
     }
   );
 }
